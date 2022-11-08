@@ -1,9 +1,16 @@
+import arenas.Arena;
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
+import com.googlecode.lanterna.terminal.SimpleTerminalResizeListener;
 import com.googlecode.lanterna.terminal.Terminal;
+import com.googlecode.lanterna.terminal.TerminalResizeListener;
+
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
     Body of the game. Initialises arenas, draws all instances and checks user input.
@@ -11,6 +18,9 @@ import java.io.IOException;
 public class Game {
     private static Screen screen;
     private boolean runGame;
+    MainMenu mainMenu = new MainMenu();
+    List<Arena> allLevels = new ArrayList<Arena>();
+    int currentLevel = 0;
 
     public Game() {
         try {
@@ -20,16 +30,25 @@ public class Game {
             screen.startScreen();               // screens must be started
             screen.doResizeIfNecessary();       // resize screen if necessary
             runGame = true;
+            //to simplify rotation to the next level we create ordered list of all levels in the game.
+            createListOfAllLevels();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    private void createListOfAllLevels(){
+        allLevels.add(new Arena());
+        //allLevels.add(new Arena_1());
+    }
+
     private void draw() {
         try {
             screen.clear();
-            //future implements:
-            //arena.draw(screen.newTextGraphics());
+            //draw all instances on the level
+            allLevels.get(currentLevel).draw(screen.newTextGraphics());
+            System.out.println("cehck3\n");
+            //draw all global information (not implemented yet)
             //mainbar.draw(arena.score, screen.newTextGraphics());
             screen.refresh();
         }
@@ -40,6 +59,10 @@ public class Game {
 
     public void run() {
         try {
+            //if showMenu returns False - exit the game, if True - continue
+            if (!mainMenu.showMenu(screen))
+                runGame = false;
+
             while (runGame) {
                 draw();
                 KeyStroke key = screen.readInput();
