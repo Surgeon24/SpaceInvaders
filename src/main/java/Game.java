@@ -1,4 +1,5 @@
 import arenas.Arena;
+import arenas.Arena_1;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
@@ -38,8 +39,8 @@ public class Game {
     }
 
     private void createListOfAllLevels(){
-        allLevels.add(new Arena());
-        //allLevels.add(new Arena_1());
+        allLevels.add(new Arena_1());
+        //allLevels.add(new Arena_2());
     }
 
     private void draw() {
@@ -47,7 +48,6 @@ public class Game {
             screen.clear();
             //draw all instances on the level
             allLevels.get(currentLevel).draw(screen.newTextGraphics());
-            System.out.println("cehck3\n");
             //draw all global information (not implemented yet)
             //mainbar.draw(arena.score, screen.newTextGraphics());
             screen.refresh();

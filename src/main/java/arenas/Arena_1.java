@@ -13,6 +13,6 @@ public class Arena_1 extends Arena{
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(length, high), ' ');
         graphics.enableModifiers(SGR.BOLD);
         graphics.setForegroundColor(TextColor.Factory.fromString(fgColor));
-        graphics.putString(new TerminalPosition(28, 10), "there should be graphic for arena 1");
+        graphics.putString(new TerminalPosition(30, 10), "arena 1 is running");
     }
 }
