@@ -8,8 +8,8 @@ public class Instance {
     private String color;
 
     //constructor
-    Instance(int newX, int newY) {
-        position = new Position(newX, newY);
+    Instance(Position pos) {
+        position = pos;
     }
     //getters and setters
     public Position getPosition(){

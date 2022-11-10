@@ -34,8 +34,8 @@ public class PositionTest {
 
     @Test
     public void getY(){
-        final Instance inst = new Instance(0,2);
-        assertEquals(2,inst.getPosition().getY());
+        final Position pos = new Position(0,2);
+        assertEquals(2,pos.getY());
     }
 
     @Test

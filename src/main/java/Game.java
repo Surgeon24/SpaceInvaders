@@ -8,6 +8,7 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.SimpleTerminalResizeListener;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.TerminalResizeListener;
+import elements.Position;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -80,6 +81,13 @@ public class Game {
             case Character -> {
                 switch (key.getCharacter()){
                     case 'q' -> runGame = false;
+                    case 'a' -> { if (allLevels.get(currentLevel).hero.getX() > 1)
+                        allLevels.get(currentLevel).hero.setX(allLevels.get(currentLevel).hero.getX()-1);
+                    }
+                    case 'd' -> { if (allLevels.get(currentLevel).hero.getX() < 74)
+                        allLevels.get(currentLevel).hero.setX(allLevels.get(currentLevel).hero.getX()+1);
+                    }
+                    case ' ' -> allLevels.get(currentLevel).hero.shoot();
                 }
             }
         }
