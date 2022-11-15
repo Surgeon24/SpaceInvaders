@@ -22,6 +22,8 @@ public class Game {
     MainMenu mainMenu = new MainMenu();
     List<Arena> allLevels = new ArrayList<Arena>();
     int currentLevel = 0;
+    int FPS = 20;
+    int frameTime = 1000 / FPS;
 
     public Game() {
         try {
@@ -68,13 +70,29 @@ public class Game {
                 runGame = false;
 
             while (runGame) {
+                long startTime = System.currentTimeMillis();
                 draw();
-                KeyStroke key = screen.readInput();
+                KeyStroke key = screen.pollInput();
+                //KeyStroke key = screen.readInput();
                 processKey(key);
+
+                //crutch that removes delay in input, but forbid you to press two buttons simultaneously
+                /*
+                while (key != null){
+                    key = screen.pollInput();
+                }*/
+
                 allLevels.get(currentLevel).changePositions();
                 allLevels.get(currentLevel).checkCollisions();
                 if (allLevels.get(currentLevel).enemiesRichedFinish()){
                     System.out.println("GAME OVER!");
+                }
+
+                long elapsedTime = System.currentTimeMillis() - startTime;
+                long sleepTime = frameTime - elapsedTime;
+                try {
+                    if (sleepTime > 0) Thread.sleep(sleepTime);
+                } catch (InterruptedException e) {
                 }
             }
             screen.close();
@@ -84,18 +102,25 @@ public class Game {
     }
 
     private void processKey (KeyStroke key){
-        switch (key.getKeyType()){
-            case EOF -> runGame = false;
-            case Character -> {
-                switch (key.getCharacter()){
-                    case 'q' -> runGame = false;
-                    case 'a' -> { if (allLevels.get(currentLevel).hero.getX() > 1)
-                        allLevels.get(currentLevel).hero.setX(allLevels.get(currentLevel).hero.getX()-1);
+        if (key == null){
+            System.out.println("nothing pressed");
+        }
+        else {
+            switch (key.getKeyType()) {
+                case EOF -> runGame = false;
+                case Character -> {
+                    switch (key.getCharacter()) {
+                        case 'q' -> runGame = false;
+                        case 'a' -> {
+                            if (allLevels.get(currentLevel).hero.getX() > 1)
+                                allLevels.get(currentLevel).hero.setX(allLevels.get(currentLevel).hero.getX() - 1);
+                        }
+                        case 'd' -> {
+                            if (allLevels.get(currentLevel).hero.getX() < Globals.width - 6)
+                                allLevels.get(currentLevel).hero.setX(allLevels.get(currentLevel).hero.getX() + 1);
+                        }
+                        case ' ' -> allLevels.get(currentLevel).hero.shoot();
                     }
-                    case 'd' -> { if (allLevels.get(currentLevel).hero.getX() < Globals.width-6)
-                        allLevels.get(currentLevel).hero.setX(allLevels.get(currentLevel).hero.getX()+1);
-                    }
-                    case ' ' -> allLevels.get(currentLevel).hero.shoot();
                 }
             }
         }
