@@ -52,6 +52,7 @@ public class Game {
             screen.clear();
             //draw all instances on the level
             allLevels.get(currentLevel).draw(screen.newTextGraphics());
+
             //draw all global information (not implemented yet)
             //mainbar.draw(arena.score, screen.newTextGraphics());
             screen.refresh();
@@ -71,6 +72,8 @@ public class Game {
                 draw();
                 KeyStroke key = screen.readInput();
                 processKey(key);
+                allLevels.get(currentLevel).changePositions();
+                checkCollisions();
             }
             screen.close();
         } catch (IOException e) {
@@ -95,4 +98,9 @@ public class Game {
             }
         }
     }
+
+    private void checkCollisions(){
+
+    }
+
 }

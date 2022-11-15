@@ -10,7 +10,7 @@ and adapting it to modern realities.
 * design patterns
 * code smells
 
-* common.Game doesn't work in real time. It pauses and waits
+1)common.Game doesn't work in real time. It pauses and waits
 for user input in each frame.
 
 * unit tests

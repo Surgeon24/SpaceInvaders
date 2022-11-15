@@ -7,17 +7,19 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 
 public class Enemy extends Instance{
     String color = "#2daaff";
+    int vector = 1;
 
-    Enemy(Position pos) {
+    public Enemy(Position pos) {
         super(pos);
     }
 
+    public int getVector(){return vector;}
+    public void setVector(int newV){vector=newV;}
 
     public void draw(TextGraphics s){
         s.setBackgroundColor(TextColor.Factory.fromString(color));
         s.enableModifiers(SGR.BOLD);
         s.putString(new TerminalPosition(getX(), getY()), "   ");
-        s.putString(new TerminalPosition(getX()-1, getY()-1), "   ");
-        s.putString(new TerminalPosition(getX()-2,getY()-2)," ");
+        s.putString(new TerminalPosition(getX()+1,getY()+1)," ");
     }
 }
