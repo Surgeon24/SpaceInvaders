@@ -1,3 +1,5 @@
+import common.Game;
+
 public class Main {
 
     /*

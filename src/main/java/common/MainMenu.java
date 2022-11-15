@@ -1,3 +1,5 @@
+package common;
+
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
@@ -14,9 +16,6 @@ public class MainMenu {
     String bgColor       = "#112491";
     String selectedColor = "#ede9dd";
     String idleColor     = "#968e5a";
-    //default size of the window. Can't be changed
-    private int length = 80;
-    private int high = 24;
 
     public boolean showMenu(Screen screen) {
         try {
@@ -45,19 +44,19 @@ public class MainMenu {
 
     public void draw(TextGraphics graphics) {
         graphics.setBackgroundColor(TextColor.Factory.fromString(bgColor));
-        graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(length, high), ' ');
+        graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(Globals.width, Globals.height), ' ');
         graphics.enableModifiers(SGR.BOLD);
         graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
-        graphics.putString(new TerminalPosition(30, 10), "Space Invaders v0.1");
+        graphics.putString(new TerminalPosition(Globals.width/2-9, Globals.height/2-6), "Space Invaders v0.1");
         if (options == 0) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(35, 13), "START GAME");
+        graphics.putString(new TerminalPosition(Globals.width/2-5, Globals.height/2), "START GAME");
         if (options == 1) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(35, 16), "INSTRUCTIONS");
+        graphics.putString(new TerminalPosition(Globals.width/2-6, Globals.height/2+3), "INSTRUCTIONS");
         if (options == 2) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(35, 19), "EXIT");
+        graphics.putString(new TerminalPosition(Globals.width/2-2, Globals.height/2+6), "EXIT");
     }
 
     private void processKey(KeyStroke key) {

@@ -10,11 +10,7 @@ and adapting it to modern realities.
 * design patterns
 * code smells
 
-1) Couldn't find how to change the size of the screen, so for 
-now it 80x24. Also, we probably should use global variable 
-for the size of the screen. For now, it's duplicated in 
-every class.
-
-2) Game doesn't work in real time. It pauses and waits
+* common.Game doesn't work in real time. It pauses and waits
 for user input in each frame.
+
 * unit tests

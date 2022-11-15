@@ -1,5 +1,8 @@
+package common;
+
 import arenas.Arena;
 import arenas.Arena_1;
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
@@ -14,7 +17,6 @@ import java.util.List;
     Body of the game. Initialises arenas, draws all instances and checks user input.
  */
 public class Game {
-
     private static Screen screen;
     private boolean runGame;
     MainMenu mainMenu = new MainMenu();
@@ -23,7 +25,11 @@ public class Game {
 
     public Game() {
         try {
-            Terminal terminal = new DefaultTerminalFactory().createTerminal();
+            TerminalSize terminalSize = new TerminalSize(Globals.width, Globals.height);
+            DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
+            terminalFactory.setForceAWTOverSwing(true);
+            //terminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
+            Terminal terminal = terminalFactory.createTerminal(); //new DefaultTerminalFactory().createTerminal();
             screen = new TerminalScreen(terminal);
             screen.setCursorPosition(null);     // we don't need a cursor
             screen.startScreen();               // screens must be started
@@ -81,7 +87,7 @@ public class Game {
                     case 'a' -> { if (allLevels.get(currentLevel).hero.getX() > 1)
                         allLevels.get(currentLevel).hero.setX(allLevels.get(currentLevel).hero.getX()-1);
                     }
-                    case 'd' -> { if (allLevels.get(currentLevel).hero.getX() < 74)
+                    case 'd' -> { if (allLevels.get(currentLevel).hero.getX() < Globals.width-6)
                         allLevels.get(currentLevel).hero.setX(allLevels.get(currentLevel).hero.getX()+1);
                     }
                     case ' ' -> allLevels.get(currentLevel).hero.shoot();
