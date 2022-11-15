@@ -11,6 +11,9 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import elements.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Arena {
     int length = 80;
     int high   = 24;
@@ -20,9 +23,13 @@ public class Arena {
     Position pos = new Position(35,22);
     public Hero hero = new Hero(pos);
 
+    public List<Enemy> enemies = new ArrayList<Enemy>();
+
     public Arena(){
         //constructor
     }
+
+
 
     //if the draw function wouldn't be overridden, default graphic appears
     public void draw(TextGraphics graphics){

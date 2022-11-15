@@ -1,14 +1,10 @@
 import arenas.Arena;
 import arenas.Arena_1;
-import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.googlecode.lanterna.terminal.SimpleTerminalResizeListener;
 import com.googlecode.lanterna.terminal.Terminal;
-import com.googlecode.lanterna.terminal.TerminalResizeListener;
-import elements.Position;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,6 +14,7 @@ import java.util.List;
     Body of the game. Initialises arenas, draws all instances and checks user input.
  */
 public class Game {
+
     private static Screen screen;
     private boolean runGame;
     MainMenu mainMenu = new MainMenu();
