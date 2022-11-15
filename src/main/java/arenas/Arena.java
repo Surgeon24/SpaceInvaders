@@ -26,6 +26,8 @@ public class Arena {
     public Arena(){}
                                         //instances behaviour
     public void changePositions(){}
+    public void checkCollisions(){}
+    public boolean enemiesRichedFinish(){return false;}
 
     //if the draw function wouldn't be overridden, default graphic appears
     public void draw(TextGraphics graphics){

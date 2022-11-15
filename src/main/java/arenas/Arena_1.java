@@ -41,6 +41,31 @@ public class Arena_1 extends Arena{
     }
 
     @Override
+    public void checkCollisions(){
+        //check collisions hero's bullets with enemies
+        List<Enemy> tmp = new ArrayList<>();
+        for (Enemy enemy : enemies){
+            for (Bullet shot : hero.getShots()){
+                if (enemy.collide(shot.getPosition())){
+                    tmp.add(enemy);
+                }
+            }
+        }
+        for (Enemy enemy : tmp){
+            enemies.remove(enemy);
+        }
+        //check collisions enemy's bullets with hero
+    }
+    @Override
+    public boolean enemiesRichedFinish(){
+        for (Enemy enemy : enemies) {
+            if (enemy.getY() == Globals.height-10){
+                return true;
+            }
+        }
+        return false;
+    }
+    @Override
     public void draw(TextGraphics graphics) {
         graphics.setBackgroundColor(TextColor.Factory.fromString(bgColor));
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(Globals.width, Globals.height), ' ');

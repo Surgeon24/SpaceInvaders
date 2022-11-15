@@ -61,7 +61,6 @@ public class Game {
             e.printStackTrace();
         }
     }
-
     public void run() {
         try {
             //if showMenu returns False - exit the game, if True - continue
@@ -73,7 +72,10 @@ public class Game {
                 KeyStroke key = screen.readInput();
                 processKey(key);
                 allLevels.get(currentLevel).changePositions();
-                checkCollisions();
+                allLevels.get(currentLevel).checkCollisions();
+                if (allLevels.get(currentLevel).enemiesRichedFinish()){
+                    System.out.println("GAME OVER!");
+                }
             }
             screen.close();
         } catch (IOException e) {
@@ -98,9 +100,4 @@ public class Game {
             }
         }
     }
-
-    private void checkCollisions(){
-
-    }
-
 }

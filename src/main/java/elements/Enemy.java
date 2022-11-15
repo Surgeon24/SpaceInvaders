@@ -16,6 +16,15 @@ public class Enemy extends Instance{
     public int getVector(){return vector;}
     public void setVector(int newV){vector=newV;}
 
+    public boolean collide(Position object){
+        int obX = object.getX();
+        int obY = object.getY();
+        int enX = this.getX();
+        int enY = this.getY();
+        if ((enX <= obX && enX+2 >= obX) && (enY <= obY && enY+2 >= obY))
+            return true;
+        return false;
+    }
     public void draw(TextGraphics s){
         s.setBackgroundColor(TextColor.Factory.fromString(color));
         s.enableModifiers(SGR.BOLD);

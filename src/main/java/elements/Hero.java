@@ -15,6 +15,9 @@ public class Hero extends Instance {
         super(pos);
     }
 
+    public List<Bullet> getShots(){
+        return shots;
+    }
     public void shoot(){
         Position pos = new Position(getX()+2, getY()-3);
         Bullet newShot = new Bullet(pos, -1);
