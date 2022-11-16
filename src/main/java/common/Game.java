@@ -3,39 +3,57 @@ package common;
 import arenas.Arena;
 import arenas.Arena_1;
 import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-/*
+
+/***
     Body of the game. Initialises arenas, draws all instances and checks user input.
- */
+ ***/
+
 public class Game {
     private static Screen screen;
     private boolean runGame;
     MainMenu mainMenu = new MainMenu();
     List<Arena> allLevels = new ArrayList<Arena>();
     int currentLevel = 0;
-    int FPS = 20;
+    int FPS = 30;
     int frameTime = 1000 / FPS;
+
+    Set<Integer> pressedKeys = new HashSet<>();
+
+    enum ACTION {LEFT, RIGHT, QUIT, SHOOT}
 
     public Game() {
         try {
             TerminalSize terminalSize = new TerminalSize(Globals.width, Globals.height);
             DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
             terminalFactory.setForceAWTOverSwing(true);
-            //terminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
-            Terminal terminal = terminalFactory.createTerminal(); //new DefaultTerminalFactory().createTerminal();
+            Terminal terminal = terminalFactory.createTerminal();
             screen = new TerminalScreen(terminal);
             screen.setCursorPosition(null);     // we don't need a cursor
             screen.startScreen();               // screens must be started
             screen.doResizeIfNecessary();       // resize screen if necessary
+            //definition of a pressed button for work with input
+            ((AWTTerminalFrame)terminal).getComponent(0).addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    pressedKeys.add(e.getKeyCode());
+                }
+                @Override
+                public void keyReleased(KeyEvent e) {
+                    pressedKeys.remove(e.getKeyCode());
+                }
+            });
+
             runGame = true;
             //to simplify rotation to the next level we create ordered list of all levels in the game.
             createListOfAllLevels();
@@ -72,15 +90,8 @@ public class Game {
             while (runGame) {
                 long startTime = System.currentTimeMillis();
                 draw();
-                KeyStroke key = screen.pollInput();
-                //KeyStroke key = screen.readInput();
-                processKey(key);
-
-                //crutch that removes delay in input, but forbid you to press two buttons simultaneously
-                /*
-                while (key != null){
-                    key = screen.pollInput();
-                }*/
+                List<ACTION> actions = getNextActions();
+                processKeys(actions);
 
                 allLevels.get(currentLevel).changePositions();
                 allLevels.get(currentLevel).checkCollisions();
@@ -101,28 +112,36 @@ public class Game {
         }
     }
 
-    private void processKey (KeyStroke key){
-        if (key == null){
-            System.out.println("nothing pressed");
-        }
-        else {
-            switch (key.getKeyType()) {
-                case EOF -> runGame = false;
-                case Character -> {
-                    switch (key.getCharacter()) {
-                        case 'q' -> runGame = false;
-                        case 'a' -> {
-                            if (allLevels.get(currentLevel).hero.getX() > 1)
-                                allLevels.get(currentLevel).hero.setX(allLevels.get(currentLevel).hero.getX() - 1);
-                        }
-                        case 'd' -> {
-                            if (allLevels.get(currentLevel).hero.getX() < Globals.width - 6)
-                                allLevels.get(currentLevel).hero.setX(allLevels.get(currentLevel).hero.getX() + 1);
-                        }
-                        case ' ' -> allLevels.get(currentLevel).hero.shoot();
-                    }
+    private void processKeys (List<ACTION> actions){
+
+        for (ACTION action : actions) {
+            switch (action) {
+                case LEFT -> {
+                    if (allLevels.get(currentLevel).hero.getX() > 1)
+                        allLevels.get(currentLevel).hero.setX(allLevels.get(currentLevel).hero.getX() - 1);
                 }
+                case RIGHT -> {
+                    if (allLevels.get(currentLevel).hero.getX() < Globals.width - 6)
+                        allLevels.get(currentLevel).hero.setX(allLevels.get(currentLevel).hero.getX() + 1);
+                }
+                case SHOOT -> allLevels.get(currentLevel).hero.shoot();
+                case QUIT -> runGame = false;
             }
         }
     }
+
+    private List<ACTION> getNextActions (){
+        List<ACTION> actions = new LinkedList<>();
+
+        if (pressedKeys.contains(KeyEvent.VK_Q)) actions.add(ACTION.QUIT);
+        if (pressedKeys.contains(KeyEvent.VK_D)) actions.add(ACTION.RIGHT);
+        if (pressedKeys.contains(KeyEvent.VK_A)) actions.add(ACTION.LEFT);
+        if (pressedKeys.contains(KeyEvent.VK_SPACE)) actions.add(ACTION.SHOOT);
+
+        return actions;
+    }
+
+
+
+
 }
