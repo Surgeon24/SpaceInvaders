@@ -11,6 +11,7 @@ and adapting it to modern realities.
 * code smells
 
 1)common.Game doesn't work in real time. It pauses and waits
-for user input in each frame.
+for user input in each frame. There is implementation of timer in 
+branch realTime, but it still waits on user's input.
 
 * unit tests
