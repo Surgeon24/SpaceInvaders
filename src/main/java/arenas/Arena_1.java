@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Arena_1 extends Arena{
+    private long moveEnemyTimer;
+    private long moveEnemySpeed = 300;
                                 //constructors
     public Arena_1() {
         enemies = createEnemies();
@@ -28,15 +30,18 @@ public class Arena_1 extends Arena{
                                 //instances behaviour
     @Override
     public void changePositions(){
-        for (Enemy enemy : enemies){
-            if ((enemy.getX() > (2)) && (enemy.getX() < (Globals.width-6))){
-                enemy.setX(enemy.getX()+enemy.getVector());
+        long currentTime = System.currentTimeMillis();
+        if (currentTime > moveEnemyTimer + moveEnemySpeed) {
+            for (Enemy enemy : enemies) {
+                if ((enemy.getX() > (2)) && (enemy.getX() < (Globals.width - 6))) {
+                    enemy.setX(enemy.getX() + enemy.getVector());
+                } else {
+                    enemy.setY(enemy.getY() + 3);
+                    enemy.setVector(enemy.getVector() * (-1));
+                    enemy.setX(enemy.getX() + enemy.getVector());
+                }
             }
-            else {
-                enemy.setY(enemy.getY()+3);
-                enemy.setVector(enemy.getVector()*(-1));
-                enemy.setX(enemy.getX()+enemy.getVector());
-            }
+            moveEnemyTimer = System.currentTimeMillis();
         }
     }
 

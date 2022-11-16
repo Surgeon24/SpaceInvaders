@@ -11,6 +11,8 @@ import java.util.List;
 public class Hero extends Instance {
     String color = "#2d94cc";
     private List<Bullet> shots = new ArrayList<>();
+    private long gunTimer;
+    private long gunSpeed = 300;
     public Hero(Position pos) {
         super(pos);
     }
@@ -19,9 +21,13 @@ public class Hero extends Instance {
         return shots;
     }
     public void shoot(){
-        Position pos = new Position(getX()+2, getY()-3);
-        Bullet newShot = new Bullet(pos, -1);
-        shots.add(newShot);
+        long currentTime = System.currentTimeMillis();
+        if (currentTime > gunTimer + gunSpeed) {
+            Position pos = new Position(getX() + 2, getY() - 3);
+            Bullet newShot = new Bullet(pos, -1);
+            shots.add(newShot);
+            gunTimer = System.currentTimeMillis();
+        }
     }
     public void draw(TextGraphics s){
         s.setBackgroundColor(TextColor.Factory.fromString(color));
