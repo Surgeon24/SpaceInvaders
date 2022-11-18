@@ -17,6 +17,7 @@ public class Arena_1 extends Arena{
                                 //constructors
     public Arena_1() {
         enemies = createEnemies();
+        walls = createWalls();
     }
                                 //instances initialisations
     private List<Enemy> createEnemies(){
@@ -25,6 +26,12 @@ public class Arena_1 extends Arena{
             list.add(new Enemy(new Position(i, 6)));
             i += 10;
         }
+        return list;
+    }
+
+    private List<Wall> createWalls(){
+        List<Wall> list = new ArrayList<>();
+        list.add(new Wall(new Position(10,10)));
         return list;
     }
                                 //instances behaviour
@@ -48,18 +55,36 @@ public class Arena_1 extends Arena{
     @Override
     public void checkCollisions(){
         //check collisions hero's bullets with enemies
-        List<Enemy> tmp = new ArrayList<>();
-        for (Enemy enemy : enemies){
-            for (Bullet shot : hero.getShots()){
+        List<Enemy> deadEnemies = new ArrayList<>();
+        List<Bullet> goodShots = new ArrayList<>();
+        List<Wall> brokenWalls = new ArrayList<>();
+        for (Bullet shot : hero.getShots()){
+            for (Enemy enemy: enemies){
                 if (enemy.collide(shot.getPosition())){
-                    tmp.add(enemy);
+                    deadEnemies.add(enemy);
+                    goodShots.add(shot);
+                }
+            }
+            for (Wall wall : walls){
+                if (wall.collide(shot.getPosition())){
+                    if (wall.getStrength() == 0)
+                        brokenWalls.add(wall);
+                    goodShots.add(shot);
                 }
             }
         }
-        for (Enemy enemy : tmp){
+        for (Enemy enemy : deadEnemies){
             enemies.remove(enemy);
         }
-        //check collisions enemy's bullets with hero
+        for (Bullet shot : goodShots){
+            List<Bullet> tmp = hero.getShots();
+            tmp.remove(shot);
+            hero.setShots(tmp);
+        }
+        for (Wall wall : brokenWalls){
+            walls.remove(wall);
+        }
+        //check collisions enemy's bullets with hero (not implemented yet)
     }
     @Override
     public boolean enemiesRichedFinish(){
@@ -83,6 +108,9 @@ public class Arena_1 extends Arena{
         hero.draw(graphics);
         for (Enemy enemy : enemies){
             enemy.draw(graphics);
+        }
+        for (Wall wall : walls){
+            wall.draw(graphics);
         }
 
 

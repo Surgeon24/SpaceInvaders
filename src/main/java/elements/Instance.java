@@ -3,7 +3,7 @@ package elements;
 /*
     Generic instance
  */
-public class Instance {
+abstract class Instance {
     private Position position;
     private String color;
 

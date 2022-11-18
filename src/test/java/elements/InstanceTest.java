@@ -15,7 +15,7 @@ public class InstanceTest {
     @Test
     public void setPosition() throws NoSuchFieldException, IllegalAccessException{
         Position pos1 = new Position(0,0);
-        final Instance el = new Instance(pos1);
+        final Instance el = new Hero(pos1);
         Position pos2 = new Position(8,9);
         el.setPosition(pos2);
         final Field field = el.getClass().getDeclaredField("position");
@@ -26,7 +26,7 @@ public class InstanceTest {
     @Test
     public void setX() {
         Position pos = new Position(0,0);
-        final Instance el = new Instance(pos);
+        final Instance el = new Hero(pos);
         el.setX(10);
         assertEquals(10, el.getX());
     }
@@ -34,7 +34,7 @@ public class InstanceTest {
     @Test
     public void setY() {
         Position pos = new Position(0,0);
-        final Instance el = new Instance(pos);
+        final Instance el = new Hero(pos);
         el.setY(1);
         assertEquals(1, el.getY());
     }
@@ -42,7 +42,7 @@ public class InstanceTest {
     @Test
     public void getPosition() throws NoSuchFieldException, IllegalAccessException{
         Position pos1 = new Position(0,0);
-        final Instance el = new Instance(pos1);
+        final Instance el = new Hero(pos1);
         final Field field = el.getClass().getDeclaredField("position");
         field.setAccessible(true);
         Position pos2 = new Position(5,6);
@@ -54,7 +54,7 @@ public class InstanceTest {
     @Test
     public void getX() throws NoSuchFieldException, IllegalAccessException{
         Position pos1 = new Position(0,0);
-        final Instance el = new Instance(pos1);
+        final Instance el = new Hero(pos1);
         final Field field = el.getClass().getDeclaredField("position");
         field.setAccessible(true);
         Position pos2 = new Position(5,6);
@@ -66,7 +66,7 @@ public class InstanceTest {
     @Test
     public void getY() throws NoSuchFieldException, IllegalAccessException{
         Position pos1 = new Position(0,0);
-        final Instance el = new Instance(pos1);
+        final Instance el = new Hero(pos1);
         final Field field = el.getClass().getDeclaredField("position");
         field.setAccessible(true);
         Position pos2 = new Position(5,6);

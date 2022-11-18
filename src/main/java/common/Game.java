@@ -23,7 +23,7 @@ public class Game {
     private static Screen screen;
     private boolean runGame;
     MainMenu mainMenu = new MainMenu();
-    List<Arena> allLevels = new ArrayList<Arena>();
+    List<Arena> allLevels = new ArrayList<>();
     int currentLevel = 0;
     int FPS = 30;
     int frameTime = 1000 / FPS;

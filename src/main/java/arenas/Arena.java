@@ -22,6 +22,7 @@ public class Arena {
     public Hero hero = new Hero(new Position(Globals.width/2, Globals.height-2));
 
     public List<Enemy> enemies = new ArrayList<>();
+    public List<Wall> walls = new ArrayList<>();
                                         //constructors
     public Arena(){}
                                         //instances behaviour

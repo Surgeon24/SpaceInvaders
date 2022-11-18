@@ -20,6 +20,10 @@ public class Hero extends Instance {
     public List<Bullet> getShots(){
         return shots;
     }
+
+    public void setShots(List<Bullet> netList){
+        this.shots = netList;
+    }
     public void shoot(){
         long currentTime = System.currentTimeMillis();
         if (currentTime > gunTimer + gunSpeed) {
