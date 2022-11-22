@@ -22,16 +22,16 @@ public class Arena_1 extends Arena{
                                 //instances initialisations
     private List<Enemy> createEnemies(){
         List<Enemy> list = new ArrayList<>();
-        for (int i = 3; i < Globals.width;) {
-            list.add(new Enemy(new Position(i, 6)));
-            i += 10;
+        for (int i = 3; i < Globals.width; i+=10) {
+            list.add(new Enemy(new Position(i, 6),1));
         }
         return list;
     }
 
     private List<Wall> createWalls(){
         List<Wall> list = new ArrayList<>();
-        list.add(new Wall(new Position(10,10)));
+        for (int i = 5; i < Globals.width; i+=20)
+            list.add(new Wall(new Position(i,Globals.height - 8)));
         return list;
     }
                                 //instances behaviour
@@ -54,10 +54,10 @@ public class Arena_1 extends Arena{
 
     @Override
     public void checkCollisions(){
-        //check collisions hero's bullets with enemies
         List<Enemy> deadEnemies = new ArrayList<>();
         List<Bullet> goodShots = new ArrayList<>();
         List<Wall> brokenWalls = new ArrayList<>();
+            //check collisions hero's bullets with enemies and walls
         for (Bullet shot : hero.getShots()){
             for (Enemy enemy: enemies){
                 if (enemy.collide(shot.getPosition())){
@@ -89,7 +89,7 @@ public class Arena_1 extends Arena{
     @Override
     public boolean enemiesRichedFinish(){
         for (Enemy enemy : enemies) {
-            if (enemy.getY() == Globals.height-10){
+            if (enemy.getY() == Globals.height-8){
                 return true;
             }
         }

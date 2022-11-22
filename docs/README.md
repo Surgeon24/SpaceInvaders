@@ -17,7 +17,7 @@ left and right by pressing *A* and *D* buttons.
 - **Destroying walls** - When the bullet hits wall, bullet disappears
 and wall loses its strength. After losing all the strength wall 
 also disappears.
-
+![implemented features in mid delivery](/docs/images/midDeliveryImplemented.png "implemented features in mid delivery")
 ### PLANNED FEATURES
 
 - **Point Counter** - By killing invaders, player should gain points
@@ -26,7 +26,7 @@ that will show progress in the game.
 Enemy should also be able to shoot.
 - **Sometimes you lose** - If enemy reaches GC or shoots him
 the Game Over screen should appear.
-
+![planed features in mid delivery](/docs/images/midDeliveryPlaned.png "planed features in mid delivery")
 ------
 
 ### DESIGN

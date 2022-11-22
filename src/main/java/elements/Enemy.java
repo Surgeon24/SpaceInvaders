@@ -9,8 +9,9 @@ public class Enemy extends Instance{
     String color = "#2daaff";
     int vector = 1;
 
-    public Enemy(Position pos) {
+    public Enemy(Position pos, int vector) {
         super(pos);
+        this.vector = vector;
     }
 
     public int getVector(){return vector;}

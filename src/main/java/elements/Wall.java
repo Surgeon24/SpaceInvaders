@@ -15,8 +15,8 @@ public class Wall extends Instance{
     public int getStrength(){return strength;}
 
     public boolean collide(Position object){
-        if     ((getX() <= object.getX() && getX() + 2 >= object.getX()) &&
-                (getY() <= object.getY() && getY() + 2 >= object.getY())){
+        if     ((getX() <= object.getX() && getX() + 5 >= object.getX()) &&
+                getY() == object.getY()){
             strength --;
             return true;
         }
@@ -26,6 +26,6 @@ public class Wall extends Instance{
     public void draw(TextGraphics s){
         s.setBackgroundColor(TextColor.Factory.fromString(color));
         s.enableModifiers(SGR.BOLD);
-        s.putString(new TerminalPosition(getX(), getY()), "   ");
+        s.putString(new TerminalPosition(getX(), getY()), "     ");
     }
 }

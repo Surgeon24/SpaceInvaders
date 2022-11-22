@@ -2,6 +2,7 @@ package common;
 
 import arenas.Arena;
 import arenas.Arena_1;
+import arenas.Arena_2;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
@@ -64,7 +65,7 @@ public class Game {
 
     private void createListOfAllLevels(){
         allLevels.add(new Arena_1());
-        //allLevels.add(new Arena_2());
+        allLevels.add(new Arena_2());
     }
 
     private void draw() {
@@ -98,12 +99,19 @@ public class Game {
                 if (allLevels.get(currentLevel).enemiesRichedFinish()){
                     System.out.println("GAME OVER!");
                 }
+                if (allLevels.get(currentLevel).nextLevel()){
+                    if (currentLevel == 1)
+                        System.out.println("Congrats! You finished the game!");
+                    else
+                        currentLevel++;
+                }
 
                 long elapsedTime = System.currentTimeMillis() - startTime;
                 long sleepTime = frameTime - elapsedTime;
                 try {
                     if (sleepTime > 0) Thread.sleep(sleepTime);
                 } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
             screen.close();

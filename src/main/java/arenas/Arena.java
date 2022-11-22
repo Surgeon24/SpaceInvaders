@@ -14,6 +14,8 @@ import elements.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Collections.emptyList;
+
 public class Arena {
                                         //colors
     String bgColor = "#117491";
@@ -29,6 +31,10 @@ public class Arena {
     public void changePositions(){}
     public void checkCollisions(){}
     public boolean enemiesRichedFinish(){return false;}
+
+    public boolean nextLevel(){
+        return enemies.equals(emptyList());
+    }
 
     //if the draw function wouldn't be overridden, default graphic appears
     public void draw(TextGraphics graphics){
