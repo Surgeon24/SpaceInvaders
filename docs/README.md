@@ -27,6 +27,7 @@ Enemy should also be able to shoot.
 - **Sometimes you lose** - If enemy reaches GC or shoots him
 the Game Over screen should appear.
 
+------
 
 ### DESIGN
 
@@ -34,26 +35,26 @@ the Game Over screen should appear.
 **Problem in Context**
 
 As the project became more complex, more and more classes 
-began to appear that could be combined in one word - elements.
+began to appear that could be united by one concept - elements.
 To make it easier to work with these classes, and also to 
 ensure unification, we could use a generative design pattern.
 
 **The Pattern**
 
-We have applied the Prototype pattern.This prototype makes it 
-easier to create new elements.
+We have applied the Prototype pattern...
+(Description will be finished in a future updates)
 
 **Implementation**
+Instance -> Bullet,Hero,Enemy...
 
 **Consequences**
 
-----
 
 #### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
 1st code smell:
 
-before:
+code before:
 
 public boolean collide(Position object){
     int obX = object.getX();
@@ -65,7 +66,7 @@ public boolean collide(Position object){
     return false;
 }
 
-after:
+code after:
 
 public boolean collide(Position object){
     return  (getX() <= object.getX() && getX() + 2 >= object.getX()) &&
