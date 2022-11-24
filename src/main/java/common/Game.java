@@ -96,7 +96,7 @@ public class Game {
 
                 allLevels.get(currentLevel).changePositions();
                 allLevels.get(currentLevel).checkCollisions();
-                if (allLevels.get(currentLevel).enemiesRichedFinish()){
+                if (allLevels.get(currentLevel).enemiesReachedFinish()){
                     System.out.println("GAME OVER!");
                 }
                 if (allLevels.get(currentLevel).nextLevel()){

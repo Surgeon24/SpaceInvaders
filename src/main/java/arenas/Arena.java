@@ -30,7 +30,7 @@ public class Arena {
                                         //instances behaviour
     public void changePositions(){}
     public void checkCollisions(){}
-    public boolean enemiesRichedFinish(){return false;}
+    public boolean enemiesReachedFinish(){return false;}
 
     public boolean nextLevel(){
         return enemies.equals(emptyList());

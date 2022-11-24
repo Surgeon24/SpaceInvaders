@@ -87,7 +87,7 @@ public class Arena_1 extends Arena{
         //check collisions enemy's bullets with hero (not implemented yet)
     }
     @Override
-    public boolean enemiesRichedFinish(){
+    public boolean enemiesReachedFinish(){
         for (Enemy enemy : enemies) {
             if (enemy.getY() == Globals.height-8){
                 return true;

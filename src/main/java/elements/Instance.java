@@ -1,5 +1,7 @@
 package elements;
 
+import com.googlecode.lanterna.graphics.TextGraphics;
+
 /*
     Generic instance
  */
@@ -29,4 +31,6 @@ abstract class Instance {
     public void setY(int newY) {
         position.setY(newY);
     }
+
+    public void draw(TextGraphics graphics){}
 }

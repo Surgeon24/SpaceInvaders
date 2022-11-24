@@ -33,6 +33,7 @@ public class Hero extends Instance {
             gunTimer = System.currentTimeMillis();
         }
     }
+    @Override
     public void draw(TextGraphics s){
         s.setBackgroundColor(TextColor.Factory.fromString(color));
         s.enableModifiers(SGR.BOLD);

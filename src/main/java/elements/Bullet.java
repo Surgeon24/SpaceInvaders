@@ -13,7 +13,7 @@ public class Bullet extends Instance {
         super(pos);
         this.direction = direction;
     }
-
+@Override
     public void draw(TextGraphics s){
         s.setBackgroundColor(TextColor.Factory.fromString(bg));
         s.setForegroundColor(TextColor.Factory.fromString(color));

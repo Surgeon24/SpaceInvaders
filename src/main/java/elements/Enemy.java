@@ -22,7 +22,7 @@ public class Enemy extends Instance{
                 (getY() <= object.getY() && getY() + 2 >= object.getY());
     }
 
-
+@Override
     public void draw(TextGraphics s){
         s.setBackgroundColor(TextColor.Factory.fromString(color));
         s.enableModifiers(SGR.BOLD);
