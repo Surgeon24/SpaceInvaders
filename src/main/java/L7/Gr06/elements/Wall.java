@@ -1,4 +1,4 @@
-package elements;
+package L7.Gr06.elements;
 
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;

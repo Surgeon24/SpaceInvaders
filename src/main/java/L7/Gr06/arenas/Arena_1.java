@@ -1,24 +1,25 @@
-package arenas;
+package L7.Gr06.arenas;
 
+import L7.Gr06.elements.Bullet;
+import L7.Gr06.elements.Enemy;
+import L7.Gr06.elements.Position;
+import L7.Gr06.elements.Wall;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import common.Globals;
-import elements.Bullet;
-import elements.Enemy;
-import elements.Position;
-import elements.Wall;
+import L7.Gr06.common.Globals;
+import L7.Gr06.elements.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Arena_2 extends Arena{
+public class Arena_1 extends Arena{
     private long moveEnemyTimer;
     private long moveEnemySpeed = 300;
                                 //constructors
-    public Arena_2() {
+    public Arena_1() {
         enemies = createEnemies();
         walls = createWalls();
     }
@@ -27,7 +28,6 @@ public class Arena_2 extends Arena{
         List<Enemy> list = new ArrayList<>();
         for (int i = 3; i < Globals.width; i+=10) {
             list.add(new Enemy(new Position(i, 6),1));
-            list.add(new Enemy(new Position(i, 9),-1));
         }
         return list;
     }
@@ -106,7 +106,9 @@ public class Arena_2 extends Arena{
         graphics.enableModifiers(SGR.BOLD);
 
         graphics.setForegroundColor(TextColor.Factory.fromString(fgColor));
-        graphics.putString(new TerminalPosition(Globals.width/2-7, 1), "~('w')~ Arena 2");
+        graphics.putString(new TerminalPosition(Globals.width/2-7, 1), "~('w')~ Arena 1");
+        graphics.putString(new TerminalPosition(Globals.width/2-14, 2), "A and D to go LEFT and RIGHT");
+        graphics.putString(new TerminalPosition(Globals.width/2-17, 3), "SPACE to shoot. Q to exit the game");
         hero.draw(graphics);
         for (Enemy enemy : enemies){
             enemy.draw(graphics);

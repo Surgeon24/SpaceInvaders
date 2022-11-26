@@ -1,4 +1,4 @@
-package elements;
+package L7.Gr06.elements;
 
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
@@ -16,6 +16,7 @@ public class Enemy extends Instance{
 
     public int getVector(){return vector;}
     public void setVector(int newV){vector=newV;}
+
 
     public boolean collide(Position object){
         return  (getX() <= object.getX() && getX() + 2 >= object.getX()) &&

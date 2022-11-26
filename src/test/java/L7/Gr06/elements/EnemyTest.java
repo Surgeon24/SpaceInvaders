@@ -1,5 +1,7 @@
-package elements;
+package L7.Gr06.elements;
 
+import L7.Gr06.elements.Enemy;
+import L7.Gr06.elements.Position;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

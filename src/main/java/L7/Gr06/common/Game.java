@@ -1,8 +1,8 @@
-package common;
+package L7.Gr06.common;
 
-import arenas.Arena;
-import arenas.Arena_1;
-import arenas.Arena_2;
+import L7.Gr06.arenas.Arena;
+import L7.Gr06.arenas.Arena_1;
+import L7.Gr06.arenas.Arena_2;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;

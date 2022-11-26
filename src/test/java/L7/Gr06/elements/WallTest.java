@@ -1,5 +1,7 @@
-package elements;
+package L7.Gr06.elements;
 
+import L7.Gr06.elements.Position;
+import L7.Gr06.elements.Wall;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -13,9 +15,11 @@ public class WallTest {
         Position b2 = new Position(4,4);
         Position b3 = new Position(6,5);
         Position b4 = new Position(5,8);
+        Position b5 = new Position(5,5);
         assertFalse(wall.collide(b1));
-        assertTrue(wall.collide(b2));
+        assertFalse(wall.collide(b2));
         assertTrue(wall.collide(b3));
         assertFalse(wall.collide(b4));
+        assertTrue(wall.collide(b5));
     }
 }

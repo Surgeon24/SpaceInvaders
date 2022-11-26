@@ -1,4 +1,6 @@
-import common.Game;
+package L7.Gr06;
+
+import L7.Gr06.common.Game;
 
 public class Main {
 

@@ -44,46 +44,54 @@ ensure unification, we could use a generative design pattern.
 
 **The Pattern**
 
-We have applied the Prototype pattern...
-(Description will be finished in a future updates)
+We have applied the Prototype pattern, which is used when we have an instance 
+of the class (prototype) and we'd like to create new objects by just copying 
+the prototype.
 
 **Implementation**
-Instance -> Bullet,Hero,Enemy...
+
+UML, that was represented above shows dependencies between Prototype (Instance)
+and its objects (Enemy, Hero, Wall..)\
+These classes can be found in the following files:
+- [Instance](src/main/java/L7/Gr06/elements/Instance.java)
+- [Hero](src/main/java/L7/Gr06/elements/Hero.java)
+- [Enemy](src/main/java/L7/Gr06/elements/Enemy.java)
 
 **Consequences**
 
+The use of the Prototype Pattern in the current design allows the following benefits:
+- We don't need to create plenty of methods, that saves our time.
+- We use one code in many places, witch is a better way to write code
+- We make program more stable, by overriding prototype's methods,  
+also allowing testing our program without forcing to implement those methods.
 
 #### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
 1st code smell:
 
+Checking collision of two objects in a 2D game shouldn't be a hard function.\
+Creating a lot of temporary variables helped to avoid confusion in syntax while 
+creating a function, but now it looks too messy.\
 code before:
-
-public boolean collide(Position object){
-    int obX = object.getX();
-    int obY = object.getY();
-    int enX = this.getX();
-    int enY = this.getY();
-    if ((enX <= obX && enX+2 >= obX) && (enY <= obY && enY+2 >= obY))
-        return true;
-    return false;
-}
+![codeSmell1a](/docs/images/codeSmell1a.jpg "1st code smell (before)")
 
 code after:
-
-public boolean collide(Position object){
-    return  (getX() <= object.getX() && getX() + 2 >= object.getX()) &&
-        (getY() <= object.getY() && getY() + 2 >= object.getY());
-}
+![codeSmell1b](/docs/images/codeSmell1b.jpg "1st code smell (after)")
 
 
 ### TESTING
 
-- Screenshot of coverage report.
-- Link to mutation testing report.
+Testing with coverage shows us weak results, mostly because
+there are many primitive getters and setters that weren't tested,
+also as constructors.\
+(more tests will be implemented in future updates, 
+also TDD methodology will be represented)
+![Test coverage](/docs/images/coverage.jpg "Test with coverage")
+
+
 
 ### SELF-EVALUATION
 
-- Mikhail Ermolaev: %
-- David Burchakov: %
+- Mikhail Ermolaev: still in progress%
+- David Burchakov:  still in progress%
 

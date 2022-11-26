@@ -1,5 +1,11 @@
 plugins {
     id 'java'
+    id 'info.solidsoft.pitest' version '1.6.0'
+}
+
+pitest {
+    targetClasses = ['src.main.java.*']
+    junit5PluginVersion = '0.12'
 }
 
 group 'L7.Gr06'

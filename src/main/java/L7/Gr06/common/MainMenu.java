@@ -1,4 +1,4 @@
-package common;
+package L7.Gr06.common;
 
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;

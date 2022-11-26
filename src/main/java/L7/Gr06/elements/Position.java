@@ -1,4 +1,4 @@
-package elements;
+package L7.Gr06.elements;
 
 public class Position {
     private int x;
