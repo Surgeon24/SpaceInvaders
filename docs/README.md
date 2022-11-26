@@ -53,9 +53,9 @@ the prototype.
 UML, that was represented above shows dependencies between Prototype (Instance)
 and its objects (Enemy, Hero, Wall..)\
 These classes can be found in the following files:
-- [Instance](src/main/java/L7/Gr06/elements/Instance.java)
-- [Hero](src/main/java/L7/Gr06/elements/Hero.java)
-- [Enemy](src/main/java/L7/Gr06/elements/Enemy.java)
+- [Instance](https://github.com/FEUP-LDTS-2022/project-l07gr06/blob/master/src/main/java/L7/Gr06/elements/Instance.java)
+- [Hero](https://github.com/FEUP-LDTS-2022/project-l07gr06/blob/master/src/main/java/L7/Gr06/elements/Hero.java)
+- [Enemy](https://github.com/FEUP-LDTS-2022/project-l07gr06/blob/master/src/main/java/L7/Gr06/elements/Enemy.java)
 
 **Consequences**
 
@@ -73,10 +73,10 @@ Checking collision of two objects in a 2D game shouldn't be a hard function.\
 Creating a lot of temporary variables helped to avoid confusion in syntax while 
 creating a function, but now it looks too messy.\
 code before:
-![codeSmell1a](/docs/images/codeSmell1a.jpg "1st code smell (before)")
+![codeSmell1a](/docs/images/codeSmell1a.png "1st code smell (before)")
 
 code after:
-![codeSmell1b](/docs/images/codeSmell1b.jpg "1st code smell (after)")
+![codeSmell1b](/docs/images/codeSmell1b.png "1st code smell (after)")
 
 
 ### TESTING
@@ -86,7 +86,7 @@ there are many primitive getters and setters that weren't tested,
 also as constructors.\
 (more tests will be implemented in future updates, 
 also TDD methodology will be represented)
-![Test coverage](/docs/images/coverage.jpg "Test with coverage")
+![Test coverage](/docs/images/coverage.png "Test with coverage")
 
 
 
