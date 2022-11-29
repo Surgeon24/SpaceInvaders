@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Hero extends Instance {
-    String color = "#2d94cc";
+    String color = "#117491";
     private List<Bullet> shots = new ArrayList<>();
     private long gunTimer;
     private long gunSpeed = 300;
@@ -27,7 +27,7 @@ public class Hero extends Instance {
     public void shoot(){
         long currentTime = System.currentTimeMillis();
         if (currentTime > gunTimer + gunSpeed) {
-            Position pos = new Position(getX() + 2, getY() - 3);
+            Position pos = new Position(getX() + 1, getY() - 2);
             Bullet newShot = new Bullet(pos, -1);
             shots.add(newShot);
             gunTimer = System.currentTimeMillis();
@@ -37,9 +37,8 @@ public class Hero extends Instance {
     public void draw(TextGraphics s){
         s.setBackgroundColor(TextColor.Factory.fromString(color));
         s.enableModifiers(SGR.BOLD);
-        s.putString(new TerminalPosition(getX(), getY()), "     ");
-        s.putString(new TerminalPosition(getX()+1, getY()-1), "   ");
-        s.putString(new TerminalPosition(getX()+2,getY()-2)," ");
+        s.putString(new TerminalPosition(getX(), getY()), "ef");
+        s.putString(new TerminalPosition(getX(), getY()+1), "gh");
         if (!shots.isEmpty()){
             for (Bullet shot : shots){
                 shot.draw(s);

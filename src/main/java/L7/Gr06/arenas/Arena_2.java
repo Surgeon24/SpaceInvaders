@@ -106,7 +106,7 @@ public class Arena_2 extends Arena{
         graphics.enableModifiers(SGR.BOLD);
 
         graphics.setForegroundColor(TextColor.Factory.fromString(fgColor));
-        graphics.putString(new TerminalPosition(Globals.width/2-7, 1), "~('w')~ Arena 2");
+        graphics.putString(new TerminalPosition(Globals.width/2-7, 1), "~('w')~ ARENA 2");
         hero.draw(graphics);
         for (Enemy enemy : enemies){
             enemy.draw(graphics);

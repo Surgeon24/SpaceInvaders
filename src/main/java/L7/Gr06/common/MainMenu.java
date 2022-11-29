@@ -11,6 +11,9 @@ import com.googlecode.lanterna.screen.Screen;
 import java.io.IOException;
 
 public class MainMenu {
+
+
+
     private Boolean check = true;
     private int options = 0;
     String bgColor       = "#112491";
@@ -47,7 +50,10 @@ public class MainMenu {
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(Globals.width, Globals.height), ' ');
         graphics.enableModifiers(SGR.BOLD);
         graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
-        graphics.putString(new TerminalPosition(Globals.width/2-9, Globals.height/2-6), "Space Invaders v0.1");
+        graphics.putString(new TerminalPosition(Globals.width/5, Globals.height/2), "ab  ef");
+        graphics.putString(new TerminalPosition(Globals.width/5, Globals.height/2+1), "cd  gh");
+
+        graphics.putString(new TerminalPosition(Globals.width/2-9, Globals.height/2-6), "SPACE INVADERS V0.1");
         if (options == 0) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
         graphics.putString(new TerminalPosition(Globals.width/2-5, Globals.height/2), "START GAME");

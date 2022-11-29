@@ -14,7 +14,6 @@ public class Main {
     public static void main(String[] args) throws IOException, FontFormatException, URISyntaxException {
 
         new Game().run();
-
         System.out.println("application has been closed!");
     }
 
