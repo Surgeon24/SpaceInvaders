@@ -3,17 +3,12 @@ package L7.Gr06.common;
 import L7.Gr06.arenas.Arena;
 import L7.Gr06.arenas.Arena_1;
 import L7.Gr06.arenas.Arena_2;
-import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.screen.TerminalScreen;
-import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.googlecode.lanterna.terminal.Terminal;
-import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.*;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.*;
+import java.util.List;
 
 
 /***
@@ -21,7 +16,7 @@ import java.util.*;
  ***/
 
 public class Game {
-    private static Screen screen;
+    private final GUI gui;
     private boolean runGame;
     MainMenu mainMenu = new MainMenu();
     List<Arena> allLevels = new ArrayList<>();
@@ -29,38 +24,15 @@ public class Game {
     int FPS = 30;
     int frameTime = 1000 / FPS;
 
-    Set<Integer> pressedKeys = new HashSet<>();
+
 
     enum ACTION {LEFT, RIGHT, QUIT, SHOOT}
 
-    public Game() {
-        try {
-            TerminalSize terminalSize = new TerminalSize(Globals.width, Globals.height);
-            DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
-            terminalFactory.setForceAWTOverSwing(true);
-            Terminal terminal = terminalFactory.createTerminal();
-            screen = new TerminalScreen(terminal);
-            screen.setCursorPosition(null);     // we don't need a cursor
-            screen.startScreen();               // screens must be started
-            screen.doResizeIfNecessary();       // resize screen if necessary
-            //definition of a pressed button for work with input
-            ((AWTTerminalFrame)terminal).getComponent(0).addKeyListener(new KeyAdapter() {
-                @Override
-                public void keyPressed(KeyEvent e) {
-                    pressedKeys.add(e.getKeyCode());
-                }
-                @Override
-                public void keyReleased(KeyEvent e) {
-                    pressedKeys.remove(e.getKeyCode());
-                }
-            });
-
-            runGame = true;
-            //to simplify rotation to the next level we create ordered list of all levels in the game.
-            createListOfAllLevels();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public Game() throws FontFormatException, IOException, URISyntaxException {
+        this.gui = new GUI(Globals.width, Globals.height);
+        runGame = true;
+        //to simplify rotation to the next level we create ordered list of all levels in the game.
+        createListOfAllLevels();
     }
 
     private void createListOfAllLevels(){
@@ -70,13 +42,13 @@ public class Game {
 
     private void draw() {
         try {
-            screen.clear();
+            gui.screen.clear();
             //draw all instances on the level
-            allLevels.get(currentLevel).draw(screen.newTextGraphics());
+            allLevels.get(currentLevel).draw(gui.screen.newTextGraphics());
 
             //draw all global information (not implemented yet)
             //mainbar.draw(arena.score, screen.newTextGraphics());
-            screen.refresh();
+            gui.screen.refresh();
         }
         catch (IOException e){
             e.printStackTrace();
@@ -85,13 +57,14 @@ public class Game {
     public void run() {
         try {
             //if showMenu returns False - exit the game, if True - continue
-            if (!mainMenu.showMenu(screen))
+            if (!mainMenu.showMenu(gui.screen))
                 runGame = false;
+
 
             while (runGame) {
                 long startTime = System.currentTimeMillis();
                 draw();
-                List<ACTION> actions = getNextActions();
+                List<ACTION> actions = gui.getNextActions();
                 processKeys(actions);
 
                 allLevels.get(currentLevel).changePositions();
@@ -114,7 +87,7 @@ public class Game {
                     e.printStackTrace();
                 }
             }
-            screen.close();
+            gui.screen.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -138,16 +111,6 @@ public class Game {
         }
     }
 
-    private List<ACTION> getNextActions (){
-        List<ACTION> actions = new LinkedList<>();
-
-        if (pressedKeys.contains(KeyEvent.VK_Q)) actions.add(ACTION.QUIT);
-        if (pressedKeys.contains(KeyEvent.VK_D)) actions.add(ACTION.RIGHT);
-        if (pressedKeys.contains(KeyEvent.VK_A)) actions.add(ACTION.LEFT);
-        if (pressedKeys.contains(KeyEvent.VK_SPACE)) actions.add(ACTION.SHOOT);
-
-        return actions;
-    }
 
 
 
