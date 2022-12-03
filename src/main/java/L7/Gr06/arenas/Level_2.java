@@ -16,7 +16,7 @@ import java.util.List;
 
 public class Level_2 extends Arena{
     private long moveEnemyTimer;
-    private long moveEnemySpeed = 700;
+    private long moveEnemySpeed = 100;
                                 //constructors
     public Level_2() {
         enemies = createEnemies();
@@ -94,7 +94,7 @@ public class Level_2 extends Arena{
     @Override
     public boolean enemiesReachedFinish(){
         for (Enemy enemy : enemies) {
-            if (enemy.getY() == Globals.height-8){
+            if (enemy.getY() > Globals.height-8){
                 return true;
             }
         }

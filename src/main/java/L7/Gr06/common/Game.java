@@ -5,6 +5,7 @@ import L7.Gr06.arenas.Level_1;
 import L7.Gr06.arenas.Level_2;
 import L7.Gr06.elements.MenuBar;
 import L7.Gr06.elements.Position;
+import com.googlecode.lanterna.TerminalPosition;
 
 import java.awt.*;
 import java.io.IOException;
@@ -61,11 +62,15 @@ public class Game {
         }
     }
     public void run() {
+        if (!mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("START")))
+            runGame = false;
+        gamePaused = false;
+
         try {
             while (runGame) {
                 //if showMenu returns False - exit the game, if True - continue
                 if (gamePaused) {
-                    if (!mainMenu.showMenu(gui.screen))
+                    if (!mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("RESUME")))
                         runGame = false;
                     gamePaused = false;
                 }
@@ -77,6 +82,17 @@ public class Game {
                 allLevels.get(currentLevel).changePositions();
                 allLevels.get(currentLevel).checkCollisions();
                 if (allLevels.get(currentLevel).enemiesReachedFinish()){
+                    try {
+                        gui.screen.newTextGraphics().putString(new TerminalPosition(Globals.width/2-4, Globals.height/2), "GAME OVER!");
+                        currentLevel = 0;
+                        totalScore = 0;
+                        Thread.sleep(2000);
+                        runGame = mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("GAMEOVER"));
+                        allLevels.clear();
+                        createListOfAllLevels();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     System.out.println("GAME OVER!");
                 }
                 if (allLevels.get(currentLevel).nextLevel()){

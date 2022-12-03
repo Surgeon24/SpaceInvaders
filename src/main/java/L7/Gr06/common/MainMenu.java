@@ -18,15 +18,14 @@ public class MainMenu {
     private int options = 0;
     String selectedColor = "#ede9dd";
     String idleColor     = "#968e5a";
+    enum STATUS {START, RESUME, GAMEOVER}
 
-    private boolean inGame = false;
-
-    public boolean showMenu(Screen screen) {
+    public boolean showMenu(Screen screen, STATUS status) {
         About about = new About();
         try {
             while (true) {
                 screen.clear();
-                draw(screen.newTextGraphics());
+                draw(screen.newTextGraphics(), status);
                 screen.refresh();
                     // warning - key refresh should be implemented to avoid blinking of the screen
                 KeyStroke key = screen.readInput();
@@ -34,7 +33,6 @@ public class MainMenu {
                 if (buttonPressed){
                     buttonPressed = false;
                     if (options == 0){
-                        inGame = true;
                         return true;
                     } else if (options == 1) {
                         about.showAbout(screen);
@@ -53,7 +51,7 @@ public class MainMenu {
     }
 
 
-    public void draw(TextGraphics graphics) {
+    public void draw(TextGraphics graphics, STATUS status) {
         graphics.setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(Globals.width, Globals.height), ' ');
         graphics.enableModifiers(SGR.BOLD);
@@ -62,12 +60,14 @@ public class MainMenu {
         graphics.putString(new TerminalPosition(2, 3), "cd  gh");
 
         graphics.putString(new TerminalPosition(Globals.width/2-9, Globals.height/2-6), "SPACE INVADERS V0.1");
+        if (status == STATUS.GAMEOVER)
+            graphics.putString(new TerminalPosition(Globals.width/2-5, Globals.height/2-4), "GAME OVER!");
         if (options == 0) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        if (inGame)
+        if (status == STATUS.RESUME)
             graphics.putString(new TerminalPosition(Globals.width/2-5, Globals.height/2), "RESUME GAME");
         else
-            graphics.putString(new TerminalPosition(Globals.width/2-5, Globals.height/2), "START GAME");
+            graphics.putString(new TerminalPosition(Globals.width/2-7, Globals.height/2), "START NEW GAME");
 
         if (options == 1) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
