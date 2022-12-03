@@ -59,7 +59,7 @@ public class GUI {
         return screen;
     }
     private AWTTerminalFontConfiguration loadSquareFont() throws URISyntaxException, FontFormatException, IOException {
-        URL resource = getClass().getClassLoader().getResource("Square2more.otf");
+        URL resource = getClass().getClassLoader().getResource("Invaders3.otf");
         File fontFile = new File(resource.toURI());
         Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
 
@@ -74,7 +74,7 @@ public class GUI {
     public java.util.List<Game.ACTION> getNextActions (){
         List<Game.ACTION> actions = new LinkedList<>();
 
-        if (pressedKeys.contains(KeyEvent.VK_Q)) actions.add(Game.ACTION.QUIT);
+        if (pressedKeys.contains(KeyEvent.VK_Q)) actions.add(Game.ACTION.PAUSE);
         if (pressedKeys.contains(KeyEvent.VK_D)) actions.add(Game.ACTION.RIGHT);
         if (pressedKeys.contains(KeyEvent.VK_A)) actions.add(Game.ACTION.LEFT);
         if (pressedKeys.contains(KeyEvent.VK_SPACE)) actions.add(Game.ACTION.SHOOT);

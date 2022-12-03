@@ -1,5 +1,7 @@
 package L7.Gr06.arenas;
 
+import L7.Gr06.elements.Bullet;
+import L7.Gr06.elements.Enemy;
 import L7.Gr06.elements.Position;
 import L7.Gr06.elements.Wall;
 import com.googlecode.lanterna.SGR;
@@ -8,17 +10,15 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import L7.Gr06.common.Globals;
-import L7.Gr06.elements.Bullet;
-import L7.Gr06.elements.Enemy;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Arena_2 extends Arena{
+public class Level_1 extends Arena{
     private long moveEnemyTimer;
-    private long moveEnemySpeed = 300;
+    private long moveEnemySpeed = 800;
                                 //constructors
-    public Arena_2() {
+    public Level_1() {
         enemies = createEnemies();
         walls = createWalls();
     }
@@ -27,7 +27,6 @@ public class Arena_2 extends Arena{
         List<Enemy> list = new ArrayList<>();
         for (int i = 3; i < Globals.width; i+=10) {
             list.add(new Enemy(new Position(i, 6),1));
-            list.add(new Enemy(new Position(i, 9),-1));
         }
         return list;
     }
@@ -44,7 +43,7 @@ public class Arena_2 extends Arena{
         long currentTime = System.currentTimeMillis();
         if (currentTime > moveEnemyTimer + moveEnemySpeed) {
             for (Enemy enemy : enemies) {
-                if ((enemy.getX() > (2)) && (enemy.getX() < (Globals.width - 6))) {
+                if ((enemy.getX() > (1)) && (enemy.getX() < (Globals.width - 3))) {
                     enemy.setX(enemy.getX() + enemy.getVector());
                 } else {
                     enemy.setY(enemy.getY() + 3);
@@ -61,12 +60,12 @@ public class Arena_2 extends Arena{
         List<Enemy> deadEnemies = new ArrayList<>();
         List<Bullet> goodShots = new ArrayList<>();
         List<Wall> brokenWalls = new ArrayList<>();
-            //check collisions hero's bullets with enemies and walls
         for (Bullet shot : hero.getShots()){
             for (Enemy enemy: enemies){
                 if (enemy.collide(shot.getPosition())){
                     deadEnemies.add(enemy);
                     goodShots.add(shot);
+                    score += 10;
                 }
             }
             for (Wall wall : walls){
@@ -88,7 +87,6 @@ public class Arena_2 extends Arena{
         for (Wall wall : brokenWalls){
             walls.remove(wall);
         }
-        //check collisions enemy's bullets with hero (not implemented yet)
     }
     @Override
     public boolean enemiesReachedFinish(){
@@ -101,12 +99,12 @@ public class Arena_2 extends Arena{
     }
     @Override
     public void draw(TextGraphics graphics) {
-        graphics.setBackgroundColor(TextColor.Factory.fromString(bgColor));
+        graphics.setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(Globals.width, Globals.height), ' ');
         graphics.enableModifiers(SGR.BOLD);
 
-        graphics.setForegroundColor(TextColor.Factory.fromString(fgColor));
-        graphics.putString(new TerminalPosition(Globals.width/2-7, 1), "~('w')~ ARENA 2");
+        graphics.setForegroundColor(TextColor.Factory.fromString(Globals.textColor));
+        graphics.putString(new TerminalPosition(Globals.width/2-4, 3), "WORM UP!");
         hero.draw(graphics);
         for (Enemy enemy : enemies){
             enemy.draw(graphics);

@@ -6,7 +6,7 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 
 public class Wall extends Instance{
-    String color = "#2dccff";
+    String color = "#8c92ac";
     private int strength = 3;
     public Wall(Position pos) {
         super(pos);
@@ -15,7 +15,7 @@ public class Wall extends Instance{
     public int getStrength(){return strength;}
 
     public boolean collide(Position object){
-        if     ((getX() <= object.getX() && getX() + 5 >= object.getX()) &&
+        if     ((getX() <= object.getX() && getX() + 4 >= object.getX()) &&
                 getY() == object.getY()){
             strength --;
             return true;

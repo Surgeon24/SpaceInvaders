@@ -1,8 +1,10 @@
 package L7.Gr06.common;
 
 import L7.Gr06.arenas.Arena;
-import L7.Gr06.arenas.Arena_1;
-import L7.Gr06.arenas.Arena_2;
+import L7.Gr06.arenas.Level_1;
+import L7.Gr06.arenas.Level_2;
+import L7.Gr06.elements.MenuBar;
+import L7.Gr06.elements.Position;
 
 import java.awt.*;
 import java.io.IOException;
@@ -19,15 +21,18 @@ import java.util.List;
 public class Game {
     private final GUI gui;
     private boolean runGame;
+    private boolean gamePaused = true;
     MainMenu mainMenu = new MainMenu();
     List<Arena> allLevels = new ArrayList<>();
+    MenuBar menuBar = new MenuBar(new Position(0,0));
     int currentLevel = 0;
-    int FPS = 30;
+    int FPS = 20;
     int frameTime = 1000 / FPS;
+    Integer totalScore = 0;
 
 
 
-    enum ACTION {LEFT, RIGHT, QUIT, SHOOT}
+    enum ACTION {LEFT, RIGHT, PAUSE, SHOOT}
 
     public Game() throws FontFormatException, IOException, URISyntaxException {
         this.gui = new GUI(Globals.width, Globals.height);
@@ -37,8 +42,8 @@ public class Game {
     }
 
     private void createListOfAllLevels(){
-        allLevels.add(new Arena_1());
-        allLevels.add(new Arena_2());
+        allLevels.add(new Level_1());
+        allLevels.add(new Level_2());
     }
 
     private void draw() {
@@ -48,7 +53,7 @@ public class Game {
             allLevels.get(currentLevel).draw(gui.screen.newTextGraphics());
 
             //draw all global information (not implemented yet)
-            //mainbar.draw(arena.score, screen.newTextGraphics());
+            menuBar.draw(gui.screen.newTextGraphics(), totalScore+allLevels.get(currentLevel).getScore(), currentLevel);
             gui.screen.refresh();
         }
         catch (IOException e){
@@ -57,12 +62,13 @@ public class Game {
     }
     public void run() {
         try {
-            //if showMenu returns False - exit the game, if True - continue
-            if (!mainMenu.showMenu(gui.screen))
-                runGame = false;
-
-
             while (runGame) {
+                //if showMenu returns False - exit the game, if True - continue
+                if (gamePaused) {
+                    if (!mainMenu.showMenu(gui.screen))
+                        runGame = false;
+                    gamePaused = false;
+                }
                 long startTime = System.currentTimeMillis();
                 draw();
                 List<ACTION> actions = gui.getNextActions();
@@ -77,6 +83,7 @@ public class Game {
                     if (currentLevel == 1)
                         System.out.println("Congrats! You finished the game!");
                     else
+                        totalScore += allLevels.get(currentLevel).getScore();
                         currentLevel++;
                 }
 
@@ -103,11 +110,11 @@ public class Game {
                         allLevels.get(currentLevel).hero.setX(allLevels.get(currentLevel).hero.getX() - 1);
                 }
                 case RIGHT -> {
-                    if (allLevels.get(currentLevel).hero.getX() < Globals.width - 6)
+                    if (allLevels.get(currentLevel).hero.getX() < Globals.width - 2)
                         allLevels.get(currentLevel).hero.setX(allLevels.get(currentLevel).hero.getX() + 1);
                 }
                 case SHOOT -> allLevels.get(currentLevel).hero.shoot();
-                case QUIT -> runGame = false;
+                case PAUSE -> gamePaused = true;
             }
         }
     }
