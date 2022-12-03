@@ -27,6 +27,7 @@ public class Level_1 extends Arena{
         List<Enemy> list = new ArrayList<>();
         for (int i = 3; i < Globals.width; i+=10) {
             list.add(new Enemy(new Position(i, 6),1));
+            list.add(new Enemy(new Position(i-1, 9),-1));
         }
         return list;
     }
