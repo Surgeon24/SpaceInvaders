@@ -8,7 +8,7 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 
 public class Bullet extends Instance {
     int direction;
-    Bullet(Position pos, int direction) {
+    public Bullet(Position pos, int direction) {
         super(pos);
         this.direction = direction;
     }

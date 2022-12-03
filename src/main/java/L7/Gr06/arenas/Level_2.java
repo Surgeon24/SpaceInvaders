@@ -1,5 +1,6 @@
 package L7.Gr06.arenas;
 
+import L7.Gr06.elements.Enemies.Enemy;
 import L7.Gr06.elements.Position;
 import L7.Gr06.elements.Wall;
 import com.googlecode.lanterna.SGR;
@@ -9,7 +10,7 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import L7.Gr06.common.Globals;
 import L7.Gr06.elements.Bullet;
-import L7.Gr06.elements.Enemy;
+import L7.Gr06.elements.Enemies.EnemyAlfa;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +27,9 @@ public class Level_2 extends Arena{
     private List<Enemy> createEnemies(){
         List<Enemy> list = new ArrayList<>();
         for (int i = 3; i < Globals.width; i+=10) {
-            list.add(new Enemy(new Position(i, 6),1));
-            list.add(new Enemy(new Position(i-1, 9),-1));
-            list.add(new Enemy(new Position(i, 12),1));
+            list.add(new EnemyAlfa(new Position(i, 6),1));
+            list.add(new EnemyAlfa(new Position(i-1, 9),-1));
+            list.add(new EnemyAlfa(new Position(i, 12),1));
         }
         return list;
     }

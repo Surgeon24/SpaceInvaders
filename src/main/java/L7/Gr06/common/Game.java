@@ -96,7 +96,7 @@ public class Game {
                     System.out.println("GAME OVER!");
                 }
                 if (allLevels.get(currentLevel).nextLevel()){
-                    if (currentLevel == 1)
+                    if (currentLevel == 2)
                         System.out.println("Congrats! You finished the game!");
                     else
                         totalScore += allLevels.get(currentLevel).getScore();
