@@ -31,6 +31,8 @@ public abstract class Instance {
     public void setY(int newY) {
         position.setY(newY);
     }
-
+    public boolean collide(Position object){
+        return  (getX() == object.getX() && getY() == object.getY());
+    }
     public void draw(TextGraphics graphics){}
 }

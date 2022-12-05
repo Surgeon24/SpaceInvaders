@@ -14,12 +14,14 @@ import java.util.Random;
 
 public class EnemyBeta extends Enemy {
     int vector = 1;
+    Integer value = 20;
     Random rand = new Random();
 
     public EnemyBeta(Position pos, int vector) {
         super(pos, vector);
     }
-
+    @Override
+    public Integer getValue() { return value;}
     public boolean collide(Position object){
         return  (getX() <= object.getX() && getX() + 2 >= object.getX()) &&
                 (getY() <= object.getY() && getY() + 2 >= object.getY());

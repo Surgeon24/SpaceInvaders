@@ -3,8 +3,12 @@ package L7.Gr06.common;
 import L7.Gr06.arena.Arena;
 import L7.Gr06.arena.Level_1;
 import L7.Gr06.arena.Level_2;
+import L7.Gr06.arena.Level_3;
+import L7.Gr06.elements.Bullet;
+import L7.Gr06.elements.Enemies.Enemy;
 import L7.Gr06.elements.MenuBar;
 import L7.Gr06.elements.Position;
+import L7.Gr06.elements.Wall;
 import com.googlecode.lanterna.TerminalPosition;
 
 import java.awt.*;
@@ -27,6 +31,7 @@ public class Game {
     List<Arena> allLevels = new ArrayList<>();
     MenuBar menuBar = new MenuBar(new Position(0,0));
     int currentLevel = 0;
+    int lastLevel = 2;
     int FPS = 20;
     int frameTime = 1000 / FPS;
     Integer totalScore = 0;
@@ -45,16 +50,14 @@ public class Game {
     private void createListOfAllLevels(){
         allLevels.add(new Level_1());
         allLevels.add(new Level_2());
+        allLevels.add(new Level_3());
     }
 
     private void draw() {
         try {
             gui.screen.clear();
-            //draw all instances on the level
             allLevels.get(currentLevel).draw(gui.screen.newTextGraphics());
-
-            //draw all global information (not implemented yet)
-            menuBar.draw(gui.screen.newTextGraphics(), totalScore+allLevels.get(currentLevel).getScore(), currentLevel);
+            menuBar.draw(gui.screen.newTextGraphics(), allLevels.get(currentLevel).hero.getLives(),totalScore+allLevels.get(currentLevel).getScore(), currentLevel);
             gui.screen.refresh();
         }
         catch (IOException e){
@@ -68,7 +71,6 @@ public class Game {
 
         try {
             while (runGame) {
-                //if showMenu returns False - exit the game, if True - continue
                 if (gamePaused) {
                     if (!mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("RESUME")))
                         runGame = false;
@@ -81,7 +83,9 @@ public class Game {
 
                 allLevels.get(currentLevel).changePositions();
                 allLevels.get(currentLevel).checkCollisions();
-                if (allLevels.get(currentLevel).enemiesReachedFinish()){
+                if (allLevels.get(currentLevel).enemiesReachedFinish()
+                        || allLevels.get(currentLevel).hero.getLives() < 1
+                        || (allLevels.get(currentLevel).nextLevel() && lastLevel == currentLevel) ){
                     try {
                         gui.screen.newTextGraphics().putString(new TerminalPosition(Globals.width/2-4, Globals.height/2), "GAME OVER!");
                         currentLevel = 0;
@@ -93,14 +97,10 @@ public class Game {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    System.out.println("GAME OVER!");
                 }
                 if (allLevels.get(currentLevel).nextLevel()){
-                    if (currentLevel == 2)
-                        System.out.println("Congrats! You finished the game!");
-                    else
-                        totalScore += allLevels.get(currentLevel).getScore();
-                        currentLevel++;
+                    totalScore += allLevels.get(currentLevel).getScore();
+                    currentLevel++;
                 }
 
                 long elapsedTime = System.currentTimeMillis() - startTime;
@@ -134,9 +134,4 @@ public class Game {
             }
         }
     }
-
-
-
-
-
 }

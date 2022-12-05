@@ -1,6 +1,7 @@
 package L7.Gr06.arena;
 
 import L7.Gr06.elements.Enemies.Enemy;
+import L7.Gr06.elements.Enemies.EnemyBeta;
 import L7.Gr06.elements.Position;
 import L7.Gr06.elements.Wall;
 import com.googlecode.lanterna.SGR;
@@ -17,7 +18,7 @@ import java.util.List;
 
 public class Level_2 extends Arena{
     private long moveEnemyTimer;
-    private long moveEnemySpeed = 700;
+    private long moveEnemySpeed = 600;
     public Level_2() {
         enemies = createEnemies();
         walls = createWalls();
@@ -27,7 +28,7 @@ public class Level_2 extends Arena{
         for (int i = 3; i < Globals.width; i+=10) {
             list.add(new EnemyAlfa(new Position(i, 6),1));
             list.add(new EnemyAlfa(new Position(i-1, 9),-1));
-            list.add(new EnemyAlfa(new Position(i, 12),1));
+            list.add(new EnemyBeta(new Position(i, 12),1));
         }
         return list;
     }
@@ -51,66 +52,17 @@ public class Level_2 extends Arena{
                     enemy.setVector(enemy.getVector() * (-1));
                     enemy.setX(enemy.getX() + enemy.getVector());
                 }
+                enemy.shoot();
             }
             moveEnemyTimer = System.currentTimeMillis();
         }
-    }
-
-    @Override
-    public void checkCollisions(){
-        List<Enemy> deadEnemies = new ArrayList<>();
-        List<Bullet> goodShots = new ArrayList<>();
-        List<Wall> brokenWalls = new ArrayList<>();
-            //check collisions hero's bullets with enemies and walls
-        for (Bullet shot : hero.getShots()){
-            for (Enemy enemy: enemies){
-                if (enemy.collide(shot.getPosition())){
-                    deadEnemies.add(enemy);
-                    goodShots.add(shot);
-                    score += 10;
-                }
-            }
-            for (Wall wall : walls){
-                if (wall.collide(shot.getPosition())){
-                    if (wall.getStrength() == 0)
-                        brokenWalls.add(wall);
-                    goodShots.add(shot);
-                }
-            }
-        }
-        for (Enemy enemy : deadEnemies){
-            enemies.remove(enemy);
-        }
-        for (Bullet shot : goodShots){
-            List<Bullet> tmp = hero.getShots();
-            tmp.remove(shot);
-            hero.setShots(tmp);
-        }
-        for (Wall wall : brokenWalls){
-            walls.remove(wall);
-        }
-        //check collisions enemy's bullets with hero (not implemented yet)
-        for(Enemy enemy : enemies){
-
-        }
-    }
-    @Override
-    public boolean enemiesReachedFinish(){
-        for (Enemy enemy : enemies) {
-            if (enemy.getY() > Globals.height-8){
-                return true;
-            }
-        }
-        return false;
     }
     @Override
     public void draw(TextGraphics graphics) {
         graphics.setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(Globals.width, Globals.height), ' ');
         graphics.enableModifiers(SGR.BOLD);
-
         graphics.setForegroundColor(TextColor.Factory.fromString(Globals.textColor));
-        graphics.putString(new TerminalPosition(Globals.width/2-1, 3), "---");
         hero.draw(graphics);
         for (Enemy enemy : enemies){
             enemy.draw(graphics);
@@ -118,7 +70,5 @@ public class Level_2 extends Arena{
         for (Wall wall : walls){
             wall.draw(graphics);
         }
-
-
     }
 }

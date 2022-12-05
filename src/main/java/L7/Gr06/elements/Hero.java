@@ -11,8 +11,10 @@ import java.util.List;
 
 public class Hero extends Instance {
     private List<Bullet> shots = new ArrayList<>();
+
+    private Integer lives = Globals.lives;
     private long gunTimer;
-    private long gunSpeed = 600;
+    private long gunSpeed = 800;
     public Hero(Position pos) {
         super(pos);
     }
@@ -21,6 +23,7 @@ public class Hero extends Instance {
         return shots;
     }
 
+    public Integer getLives(){ return lives;}
     public void setShots(List<Bullet> netList){
         this.shots = netList;
     }
@@ -32,6 +35,15 @@ public class Hero extends Instance {
             shots.add(newShot);
             gunTimer = System.currentTimeMillis();
         }
+    }
+    @Override
+    public boolean collide(Position object){
+        return  (getX() <= object.getX() && getX() + 1 >= object.getX()) &&
+                (getY() <= object.getY() && getY() + 1 >= object.getY());
+    }
+
+    public void subtractLive(){
+        lives --;
     }
     @Override
     public void draw(TextGraphics s){

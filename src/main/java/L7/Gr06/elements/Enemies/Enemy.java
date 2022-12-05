@@ -10,6 +10,7 @@ import java.util.List;
 
 public abstract class Enemy extends Instance {
     int vector = 1;
+    Integer value = 10;
     private List<Bullet> shots = new ArrayList<>();
 
     public Enemy(Position pos, int vector) {
@@ -20,10 +21,11 @@ public abstract class Enemy extends Instance {
     public int getVector(){return vector;}
     public void setVector(int newV){vector=newV;}
 
-
+    public  Integer getValue() { return value;}
+@Override
     public boolean collide(Position object){
-        return  (getX() <= object.getX() && getX() + 2 >= object.getX()) &&
-                (getY() <= object.getY() && getY() + 2 >= object.getY());
+        return  (getX() <= object.getX() && getX() + 1 >= object.getX()) &&
+                (getY() <= object.getY() && getY() + 1 >= object.getY());
     }
 
     public void shoot(){}

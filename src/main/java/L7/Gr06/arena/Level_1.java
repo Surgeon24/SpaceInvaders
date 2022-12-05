@@ -18,7 +18,7 @@ import java.util.List;
 
 public class Level_1 extends Arena{
     private long moveEnemyTimer;
-    private long moveEnemySpeed = 800;
+    private long moveEnemySpeed = 700;
     public Level_1() {
         enemies = createEnemies();
         walls = createWalls();
@@ -27,8 +27,8 @@ public class Level_1 extends Arena{
         List<Enemy> list = new ArrayList<>();
         for (int i = 3; i < Globals.width; i+=10) {
             list.add(new EnemyAlfa(new Position(i, 6),1));
-            //list.add(new EnemyAlfa(new Position(i-1, 9),-1));
-            list.add(new EnemyBeta(new Position(i-1, 9),-1));
+            list.add(new EnemyAlfa(new Position(i-1, 9),-1));
+            //list.add(new EnemyBeta(new Position(i-1, 9),-1));
         }
         return list;
     }
@@ -57,49 +57,6 @@ public class Level_1 extends Arena{
             moveEnemyTimer = System.currentTimeMillis();
         }
     }
-
-    @Override
-    public void checkCollisions(){
-        List<Enemy> deadEnemies = new ArrayList<>();
-        List<Bullet> goodShots = new ArrayList<>();
-        List<Wall> brokenWalls = new ArrayList<>();
-        for (Bullet shot : hero.getShots()){
-            for (Enemy enemy: enemies){
-                if (enemy.collide(shot.getPosition())){
-                    deadEnemies.add(enemy);
-                    goodShots.add(shot);
-                    score += 10;
-                }
-            }
-            for (Wall wall : walls){
-                if (wall.collide(shot.getPosition())){
-                    if (wall.getStrength() == 0)
-                        brokenWalls.add(wall);
-                    goodShots.add(shot);
-                }
-            }
-        }
-        for (Enemy enemy : deadEnemies){
-            enemies.remove(enemy);
-        }
-        for (Bullet shot : goodShots){
-            List<Bullet> tmp = hero.getShots();
-            tmp.remove(shot);
-            hero.setShots(tmp);
-        }
-        for (Wall wall : brokenWalls){
-            walls.remove(wall);
-        }
-    }
-    @Override
-    public boolean enemiesReachedFinish(){
-        for (Enemy enemy : enemies) {
-            if (enemy.getY() == Globals.height-8){
-                return true;
-            }
-        }
-        return false;
-    }
     @Override
     public void draw(TextGraphics graphics) {
         graphics.setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));
@@ -107,7 +64,6 @@ public class Level_1 extends Arena{
         graphics.enableModifiers(SGR.BOLD);
 
         graphics.setForegroundColor(TextColor.Factory.fromString(Globals.textColor));
-        graphics.putString(new TerminalPosition(Globals.width/2-4, 3), "WORM UP!");
         hero.draw(graphics);
         for (Enemy enemy : enemies){
             enemy.draw(graphics);

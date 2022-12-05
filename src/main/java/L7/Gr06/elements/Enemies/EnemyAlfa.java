@@ -11,7 +11,6 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 public class EnemyAlfa extends Enemy {
     int vector = 1;
 
-
     public EnemyAlfa(Position pos, int vector) {
         super(pos, vector);
     }
@@ -23,7 +22,6 @@ public class EnemyAlfa extends Enemy {
 
 @Override
     public void draw(TextGraphics s){
-        //NEW VERSION
         s.setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));
         s.setForegroundColor(TextColor.Factory.fromString(Globals.textColor));
         s.putString(new TerminalPosition(getX(), getY()), "ab");
