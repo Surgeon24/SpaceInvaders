@@ -1,14 +1,8 @@
 package L7.Gr06.common;
 
-import L7.Gr06.arena.Arena;
-import L7.Gr06.arena.Level_1;
-import L7.Gr06.arena.Level_2;
-import L7.Gr06.arena.Level_3;
-import L7.Gr06.elements.Bullet;
-import L7.Gr06.elements.Enemies.Enemy;
+import L7.Gr06.arena.*;
 import L7.Gr06.elements.MenuBar;
 import L7.Gr06.elements.Position;
-import L7.Gr06.elements.Wall;
 import com.googlecode.lanterna.TerminalPosition;
 
 import java.awt.*;
@@ -30,8 +24,8 @@ public class Game {
     MainMenu mainMenu = new MainMenu();
     List<Arena> allLevels = new ArrayList<>();
     MenuBar menuBar = new MenuBar(new Position(0,0));
-    int currentLevel = 0;
-    int lastLevel = 2;
+    int currentLevel = 1;
+    int lastLevel = 3;
     int FPS = 20;
     int frameTime = 1000 / FPS;
     Integer totalScore = 0;
@@ -51,6 +45,7 @@ public class Game {
         allLevels.add(new Level_1());
         allLevels.add(new Level_2());
         allLevels.add(new Level_3());
+        allLevels.add(new Level_4());
     }
 
     private void draw() {

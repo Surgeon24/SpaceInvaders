@@ -16,7 +16,7 @@ public class About {
             screen.clear();
             draw(screen.newTextGraphics());
             screen.refresh();
-            KeyStroke key = screen.readInput();
+            screen.readInput();
         }
         catch (IOException e){
             e.printStackTrace();

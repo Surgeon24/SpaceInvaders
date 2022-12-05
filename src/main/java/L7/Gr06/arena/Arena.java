@@ -1,7 +1,4 @@
 package L7.Gr06.arena;
-/*
-    Generic Arena for all game levels.
- */
 
 import L7.Gr06.elements.Bullet;
 import L7.Gr06.elements.Enemies.Enemy;
@@ -22,17 +19,24 @@ import static java.util.Collections.emptyList;
 
 public class Arena {
     public Integer score = 0;
-                                        //instances
     public Hero hero = new Hero(new Position(Globals.width/2, Globals.height-2));
-
     public List<Enemy> enemies = new ArrayList<>();
     public List<Wall> walls = new ArrayList<>();
-                                        //constructors
-    public Arena(){}
 
+    public Arena(){}
     public Integer getScore(){ return score; }
-                                        //instances behaviour
-    public void changePositions(){}
+    public void changePositions(){
+        for (Enemy enemy : enemies) {
+            if ((enemy.getVector() == 1 && enemy.getX() >= Globals.width-3)
+                || (enemy.getVector() == -1 && enemy.getX() <= 1)) {
+                enemy.setY(enemy.getY() + 3);
+                enemy.setVector(enemy.getVector() * (-1));
+            } else {
+                enemy.setX(enemy.getX() + enemy.getVector());
+            }
+            enemy.shoot();
+        }
+    }
     public void checkCollisions(){
         List<Enemy> deadEnemies = new ArrayList<>();
         List<Bullet> goodPlayerShots = new ArrayList<>();
@@ -85,7 +89,6 @@ public class Arena {
             walls.remove(wall);
         }
     }
-
     public boolean enemiesReachedFinish(){
         for (Enemy enemy : enemies) {
             if (enemy.getY() > Globals.height-8){
@@ -94,7 +97,6 @@ public class Arena {
         }
         return false;
     }
-
     public boolean nextLevel(){
         return enemies.equals(emptyList());
     }

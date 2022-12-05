@@ -27,11 +27,11 @@ public class Level_3 extends Arena{
     //instances initialisations
     private List<Enemy> createEnemies(){
         List<Enemy> list = new ArrayList<>();
-        for (int i = 3; i < Globals.width; i+=10) {
+        for (int i = 1; i < Globals.width-3; i+=6) {
             list.add(new EnemyBeta(new Position(i, 6),1));
-            list.add(new EnemyAlfa(new Position(i-1, 9),-1));
+            list.add(new EnemyAlfa(new Position(i, 9),-1));
             list.add(new EnemyAlfa(new Position(i, 12),1));
-            list.add(new EnemyAlfa(new Position(i-1, 15),-1));
+            list.add(new EnemyAlfa(new Position(i, 15),-1));
             list.add(new EnemyBeta(new Position(i, 18),1));
         }
         return list;
@@ -48,16 +48,7 @@ public class Level_3 extends Arena{
     public void changePositions(){
         long currentTime = System.currentTimeMillis();
         if (currentTime > moveEnemyTimer + moveEnemySpeed) {
-            for (Enemy enemy : enemies) {
-                if ((enemy.getX() > (1)) && (enemy.getX() < (Globals.width - 3))) {
-                    enemy.setX(enemy.getX() + enemy.getVector());
-                } else {
-                    enemy.setY(enemy.getY() + 3);
-                    enemy.setVector(enemy.getVector() * (-1));
-                    enemy.setX(enemy.getX() + enemy.getVector());
-                }
-                enemy.shoot();
-            }
+            super.changePositions();
             moveEnemyTimer = System.currentTimeMillis();
         }
     }

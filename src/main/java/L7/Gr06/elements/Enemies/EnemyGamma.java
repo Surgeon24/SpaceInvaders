@@ -7,33 +7,26 @@ import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 
-import java.util.Random;
-
-
-public class EnemyBeta extends Enemy {
+public class EnemyGamma extends Enemy {
     Integer value = 20;
-    Random rand = new Random();
 
-    public EnemyBeta(Position pos, int vector) {
+    public EnemyGamma(Position pos, int vector) {
         super(pos, vector);
     }
     @Override
     public Integer getValue() { return value;}
 @Override
-    public void shoot(){
-        if (rand.nextInt(100) > 90){
-            Position pos = new Position(getX(), getY() + 1);
-            Bullet newShot = new Bullet(pos, 1);
-            addShot(newShot);
-        }
+    public boolean collide(Position object){
+        return  (getX() <= object.getX() && getX() + 3 >= object.getX()) &&
+                (getY() <= object.getY() && getY() + 3 >= object.getY());
     }
 
     @Override
     public void draw(TextGraphics s){
         s.setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));
         s.setForegroundColor(TextColor.Factory.fromString(Globals.textColor));
-        s.putString(new TerminalPosition(getX(), getY()), "jk");
-        s.putString(new TerminalPosition(getX(), getY()+1), "lm");
+        s.putString(new TerminalPosition(getX(), getY()), "nopq");
+        s.putString(new TerminalPosition(getX(), getY()+1), "rstu");
         if (!getShots().isEmpty()){
             for (Bullet shot : getShots()){
                 shot.draw(s);
