@@ -1,8 +1,8 @@
 package L7.Gr06.common;
 
-import L7.Gr06.arenas.Arena;
-import L7.Gr06.arenas.Level_1;
-import L7.Gr06.arenas.Level_2;
+import L7.Gr06.arena.Arena;
+import L7.Gr06.arena.Level_1;
+import L7.Gr06.arena.Level_2;
 import L7.Gr06.elements.MenuBar;
 import L7.Gr06.elements.Position;
 import com.googlecode.lanterna.TerminalPosition;
@@ -96,7 +96,7 @@ public class Game {
                     System.out.println("GAME OVER!");
                 }
                 if (allLevels.get(currentLevel).nextLevel()){
-                    if (currentLevel == 1)
+                    if (currentLevel == 2)
                         System.out.println("Congrats! You finished the game!");
                     else
                         totalScore += allLevels.get(currentLevel).getScore();

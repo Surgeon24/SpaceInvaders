@@ -5,12 +5,12 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 /*
     Generic instance
  */
-abstract class Instance {
+public abstract class Instance {
     private Position position;
     private String color;
 
     //constructor
-    Instance(Position pos) {
+    protected Instance(Position pos) {
         position = pos;
     }
     //getters and setters

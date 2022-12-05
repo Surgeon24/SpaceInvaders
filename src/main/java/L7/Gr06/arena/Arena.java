@@ -1,9 +1,9 @@
-package L7.Gr06.arenas;
+package L7.Gr06.arena;
 /*
     Generic Arena for all game levels.
  */
 
-import L7.Gr06.elements.Enemy;
+import L7.Gr06.elements.Enemies.Enemy;
 import L7.Gr06.elements.Hero;
 import L7.Gr06.elements.Position;
 import L7.Gr06.elements.Wall;
@@ -13,7 +13,6 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import L7.Gr06.common.Globals;
-import L7.Gr06.elements.*;
 
 import java.util.ArrayList;
 import java.util.List;
