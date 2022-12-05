@@ -1,15 +1,16 @@
 package L7.Gr06.elements.Enemies;
 
-import L7.Gr06.common.Globals;
+import L7.Gr06.elements.Bullet;
 import L7.Gr06.elements.Instance;
 import L7.Gr06.elements.Position;
-import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Enemy extends Instance {
     int vector = 1;
-
+    private List<Bullet> shots = new ArrayList<>();
 
     public Enemy(Position pos, int vector) {
         super(pos);
@@ -26,6 +27,9 @@ public abstract class Enemy extends Instance {
     }
 
     public void shoot(){}
+
+    public List<Bullet> getShots(){ return shots;}
+    public void addShot(Bullet newShot){ shots.add(newShot);}
 
     @Override
     public void draw(TextGraphics s){

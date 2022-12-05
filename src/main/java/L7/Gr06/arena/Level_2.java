@@ -1,4 +1,4 @@
-package L7.Gr06.arenas;
+package L7.Gr06.arena;
 
 import L7.Gr06.elements.Enemies.Enemy;
 import L7.Gr06.elements.Position;
@@ -15,15 +15,13 @@ import L7.Gr06.elements.Enemies.EnemyAlfa;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Level_3 extends Arena{
+public class Level_2 extends Arena{
     private long moveEnemyTimer;
-    private long moveEnemySpeed = 600;
-    //constructors
-    public Level_3() {
+    private long moveEnemySpeed = 700;
+    public Level_2() {
         enemies = createEnemies();
         walls = createWalls();
     }
-    //instances initialisations
     private List<Enemy> createEnemies(){
         List<Enemy> list = new ArrayList<>();
         for (int i = 3; i < Globals.width; i+=10) {
@@ -40,7 +38,7 @@ public class Level_3 extends Arena{
             list.add(new Wall(new Position(i,Globals.height - 8)));
         return list;
     }
-    //instances behaviour
+
     @Override
     public void changePositions(){
         long currentTime = System.currentTimeMillis();
@@ -63,7 +61,7 @@ public class Level_3 extends Arena{
         List<Enemy> deadEnemies = new ArrayList<>();
         List<Bullet> goodShots = new ArrayList<>();
         List<Wall> brokenWalls = new ArrayList<>();
-        //check collisions hero's bullets with enemies and walls
+            //check collisions hero's bullets with enemies and walls
         for (Bullet shot : hero.getShots()){
             for (Enemy enemy: enemies){
                 if (enemy.collide(shot.getPosition())){
@@ -92,11 +90,14 @@ public class Level_3 extends Arena{
             walls.remove(wall);
         }
         //check collisions enemy's bullets with hero (not implemented yet)
+        for(Enemy enemy : enemies){
+
+        }
     }
     @Override
     public boolean enemiesReachedFinish(){
         for (Enemy enemy : enemies) {
-            if (enemy.getY() == Globals.height-8){
+            if (enemy.getY() > Globals.height-8){
                 return true;
             }
         }

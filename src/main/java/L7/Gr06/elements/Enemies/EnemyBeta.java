@@ -2,7 +2,6 @@ package L7.Gr06.elements.Enemies;
 
 import L7.Gr06.common.Globals;
 import L7.Gr06.elements.Bullet;
-import L7.Gr06.elements.Instance;
 import L7.Gr06.elements.Position;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
@@ -16,7 +15,6 @@ import java.util.Random;
 public class EnemyBeta extends Enemy {
     int vector = 1;
     Random rand = new Random();
-    private List<Bullet> shots = new ArrayList<>();
 
     public EnemyBeta(Position pos, int vector) {
         super(pos, vector);
@@ -31,19 +29,18 @@ public class EnemyBeta extends Enemy {
         if (rand.nextInt(100) > 90){
             Position pos = new Position(getX(), getY() + 1);
             Bullet newShot = new Bullet(pos, 1);
-            shots.add(newShot);
+            addShot(newShot);
         }
     }
 
     @Override
     public void draw(TextGraphics s){
-        //NEW VERSION
         s.setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));
         s.setForegroundColor(TextColor.Factory.fromString(Globals.textColor));
         s.putString(new TerminalPosition(getX(), getY()), "jk");
         s.putString(new TerminalPosition(getX(), getY()+1), "lm");
-        if (!shots.isEmpty()){
-            for (Bullet shot : shots){
+        if (!getShots().isEmpty()){
+            for (Bullet shot : getShots()){
                 shot.draw(s);
             }
         }
