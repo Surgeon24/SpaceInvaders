@@ -27,7 +27,7 @@ public class Level_3 extends Arena{
     //instances initialisations
     private List<Enemy> createEnemies(){
         List<Enemy> list = new ArrayList<>();
-        for (int i = 1; i < Globals.width-3; i+=6) {
+        for (int i = 3; i < Globals.width-3; i+=6) {
             list.add(new EnemyBeta(new Position(i, 6),1));
             list.add(new EnemyAlfa(new Position(i, 9),-1));
             list.add(new EnemyAlfa(new Position(i, 12),1));

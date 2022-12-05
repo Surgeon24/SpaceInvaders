@@ -18,7 +18,7 @@ public class MainMenu {
     private int options = 0;
     String selectedColor = "#ede9dd";
     String idleColor     = "#968e5a";
-    enum STATUS {START, RESUME, GAMEOVER}
+    enum STATUS {START, RESUME, GAMEOVER, WIN}
 
     public boolean showMenu(Screen screen, STATUS status) {
         About about = new About();
@@ -62,6 +62,8 @@ public class MainMenu {
         graphics.putString(new TerminalPosition(Globals.width/2-9, Globals.height/2-6), "SPACE INVADERS V0.1");
         if (status == STATUS.GAMEOVER)
             graphics.putString(new TerminalPosition(Globals.width/2-5, Globals.height/2-4), "GAME OVER!");
+        else if (status == STATUS.WIN)
+            graphics.putString(new TerminalPosition(Globals.width/2-5, Globals.height/2-4), " YOU WON! ");
         if (options == 0) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
         if (status == STATUS.RESUME)

@@ -24,7 +24,7 @@ public class Game {
     MainMenu mainMenu = new MainMenu();
     List<Arena> allLevels = new ArrayList<>();
     MenuBar menuBar = new MenuBar(new Position(0,0));
-    int currentLevel = 1;
+    int currentLevel = 0;
     int lastLevel = 3;
     int FPS = 20;
     int frameTime = 1000 / FPS;
@@ -79,8 +79,7 @@ public class Game {
                 allLevels.get(currentLevel).changePositions();
                 allLevels.get(currentLevel).checkCollisions();
                 if (allLevels.get(currentLevel).enemiesReachedFinish()
-                        || allLevels.get(currentLevel).hero.getLives() < 1
-                        || (allLevels.get(currentLevel).nextLevel() && lastLevel == currentLevel) ){
+                        || allLevels.get(currentLevel).hero.getLives() < 1){
                     try {
                         gui.screen.newTextGraphics().putString(new TerminalPosition(Globals.width/2-4, Globals.height/2), "GAME OVER!");
                         currentLevel = 0;
@@ -93,9 +92,25 @@ public class Game {
                         e.printStackTrace();
                     }
                 }
+
                 if (allLevels.get(currentLevel).nextLevel()){
-                    totalScore += allLevels.get(currentLevel).getScore();
-                    currentLevel++;
+                    if (lastLevel == currentLevel){
+                        try {
+                            gui.screen.newTextGraphics().putString(new TerminalPosition(Globals.width/2-4, Globals.height/2), "GAME OVER!");
+                            currentLevel = 0;
+                            totalScore = 0;
+                            Thread.sleep(2000);
+                            runGame = mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("WIN"));
+                            allLevels.clear();
+                            createListOfAllLevels();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else {
+                        totalScore += allLevels.get(currentLevel).getScore();
+                        currentLevel++;
+                    }
                 }
 
                 long elapsedTime = System.currentTimeMillis() - startTime;

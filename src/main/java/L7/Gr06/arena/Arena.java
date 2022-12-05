@@ -27,8 +27,8 @@ public class Arena {
     public Integer getScore(){ return score; }
     public void changePositions(){
         for (Enemy enemy : enemies) {
-            if ((enemy.getVector() == 1 && enemy.getX() >= Globals.width-3)
-                || (enemy.getVector() == -1 && enemy.getX() <= 1)) {
+            if ((enemy.getVector() == 1 && enemy.getX() >= Globals.width-4)
+                || (enemy.getVector() == -1 && enemy.getX() <= 2)) {
                 enemy.setY(enemy.getY() + 3);
                 enemy.setVector(enemy.getVector() * (-1));
             } else {
