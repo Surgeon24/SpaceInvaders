@@ -1,5 +1,7 @@
 package L7.Gr06.common;
 
+import L7.Gr06.Audio.MusicPlayer;
+import L7.Gr06.Audio.SoundPlayer;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
@@ -18,11 +20,17 @@ public class MainMenu {
     private int options = 0;
     String selectedColor = "#ede9dd";
     String idleColor     = "#968e5a";
+    MusicPlayer musicPlayer = new MusicPlayer("main_theme.wav");
+    SoundPlayer soundPlayer = new SoundPlayer();
     enum STATUS {START, RESUME, GAMEOVER, WIN}
 
     public boolean showMenu(Screen screen, STATUS status) {
+        soundPlayer.setSound("gta-menu.wav");
         About about = new About();
         Upgrades upgrades = new Upgrades();
+        if (status != STATUS.RESUME){
+            musicPlayer.startMusic();
+        }
         try {
             while (true) {
                 screen.clear();
@@ -48,6 +56,9 @@ public class MainMenu {
         }
         catch (IOException e){
             e.printStackTrace();
+        }
+        finally {
+            musicPlayer.stopMusic();
         }
         return false;
 
@@ -89,8 +100,14 @@ public class MainMenu {
     private void processKey(KeyStroke key) {
         switch (key.getKeyType()) {
             case EOF -> buttonPressed = true;
-            case ArrowUp ->   options = (4 + (options-1)) % 4;
-            case ArrowDown -> options = (4 + (options+1)) % 4;
+            case ArrowUp ->   {
+                soundPlayer.playSound();
+                options = (4 + (options-1)) % 4;
+            }
+            case ArrowDown -> {
+                soundPlayer.playSound();
+                options = (4 + (options+1)) % 4;
+            }
             case Enter -> buttonPressed = true;
             }
         }
