@@ -24,9 +24,6 @@ public class Hero extends Instance {
     }
 
     public Integer getLives(){ return lives;}
-    public void setShots(List<Bullet> netList){
-        this.shots = netList;
-    }
     public void shoot(){
         long currentTime = System.currentTimeMillis();
         if (currentTime > gunTimer + gunSpeed) {

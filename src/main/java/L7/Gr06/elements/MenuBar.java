@@ -9,17 +9,14 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 
-public class MenuBar extends Instance {
-    public MenuBar(Position pos){
-        super(pos);
-    }
+public class MenuBar  {
 
     public void draw(TextGraphics s, Integer lives, Integer score, Integer level){
         s.setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));
         s.setForegroundColor(TextColor.Factory.fromString(Globals.textColor));
         s.enableModifiers(SGR.BOLD);
-        s.putString(new TerminalPosition(getX()+2, getY()), "LIVES: " + lives);
-        s.putString(new TerminalPosition(Globals.width/2-7, getY()), "~('W')~ LEVEL " + (level+1));
-        s.putString(new TerminalPosition(Globals.width-13, getY()), "SCORE: " + score);
+        s.putString(new TerminalPosition(2, 0), "LIVES: " + lives);
+        s.putString(new TerminalPosition(Globals.width/2-7, 0), "~('W')~ LEVEL " + (level+1));
+        s.putString(new TerminalPosition(Globals.width-13, 0), "SCORE: " + score);
     }
 }

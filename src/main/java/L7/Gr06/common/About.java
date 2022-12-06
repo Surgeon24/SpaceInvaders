@@ -28,6 +28,8 @@ public class About {
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(Globals.width, Globals.height), ' ');
         graphics.enableModifiers(SGR.BOLD);
         graphics.setForegroundColor(TextColor.Factory.fromString(Globals.textColor));
+        graphics.putString(new TerminalPosition(2, 2), "ab  ef  jk  nopq");
+        graphics.putString(new TerminalPosition(2, 3), "cd  gh  lm  rstu");
         graphics.putString(new TerminalPosition(Globals.width/2-9, Globals.height/2-6), "SPACE INVADERS V0.1");
         graphics.putString(new TerminalPosition(4, Globals.height/2), "SPACE INVADERS IS A TEXT BASED ARCADE GAME,");
         graphics.putString(new TerminalPosition(4, Globals.height/2+1), "THAT MAKE A REFERENCE TO THE GAME SERIES OF THE SAME TITLE,");

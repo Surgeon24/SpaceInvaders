@@ -32,7 +32,8 @@ public class Level_4 extends Arena{
             list.add(new EnemyBeta(new Position(i, 6),1));
             list.add(new EnemyBeta(new Position(i, 9),-1));
             list.add(new EnemyAlfa(new Position(i, 12),1));
-            list.add(new EnemyAlfa(new Position(i, 15),-1));
+            if (i > 5)
+                list.add(new EnemyAlfa(new Position(i, 15),-1));
             list.add(new EnemyGamma(new Position(i, 18),1));
             list.add(new EnemyAlfa(new Position(i, 21),-1));
 

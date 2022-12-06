@@ -22,6 +22,7 @@ public class MainMenu {
 
     public boolean showMenu(Screen screen, STATUS status) {
         About about = new About();
+        Upgrades upgrades = new Upgrades();
         try {
             while (true) {
                 screen.clear();
@@ -35,6 +36,8 @@ public class MainMenu {
                     if (options == 0){
                         return true;
                     } else if (options == 1) {
+                        upgrades.showUpgrades(screen);
+                    } else if (options == 2) {
                         about.showAbout(screen);
                     }
                     else {
@@ -73,17 +76,21 @@ public class MainMenu {
 
         if (options == 1) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(Globals.width/2-5, Globals.height/2+3), "ABOUT GAME");
+        graphics.putString(new TerminalPosition(Globals.width/2-4, Globals.height/2+3), "UPGRADES");
+
         if (options == 2) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(Globals.width/2-2, Globals.height/2+6), "EXIT");
+        graphics.putString(new TerminalPosition(Globals.width/2-5, Globals.height/2+6), "ABOUT GAME");
+        if (options == 3) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
+        else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
+        graphics.putString(new TerminalPosition(Globals.width/2-2, Globals.height/2+9), "EXIT");
     }
 
     private void processKey(KeyStroke key) {
         switch (key.getKeyType()) {
             case EOF -> buttonPressed = true;
-            case ArrowUp -> options = (options-1) % 3;
-            case ArrowDown -> options = (options+1) % 3;
+            case ArrowUp ->   options = (4 + (options-1)) % 4;
+            case ArrowDown -> options = (4 + (options+1)) % 4;
             case Enter -> buttonPressed = true;
             }
         }

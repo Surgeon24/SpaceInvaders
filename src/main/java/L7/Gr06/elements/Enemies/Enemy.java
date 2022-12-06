@@ -10,6 +10,7 @@ import java.util.List;
 
 public abstract class Enemy extends Instance {
     int vector = 1;
+    Integer health = 1;
     Integer value = 10;
     private List<Bullet> shots = new ArrayList<>();
 
@@ -22,6 +23,8 @@ public abstract class Enemy extends Instance {
     public void setVector(int newV){vector=newV;}
 
     public  Integer getValue() { return value;}
+    public Integer getHealth() { return health;}
+    public void setHealth(Integer health) {this.health = health;}
 @Override
     public boolean collide(Position object){
         return  (getX() <= object.getX() && getX() + 1 >= object.getX()) &&

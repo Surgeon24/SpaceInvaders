@@ -23,8 +23,8 @@ public class Game {
     private boolean gamePaused = true;
     MainMenu mainMenu = new MainMenu();
     List<Arena> allLevels = new ArrayList<>();
-    MenuBar menuBar = new MenuBar(new Position(0,0));
-    int currentLevel = 0;
+    MenuBar menuBar = new MenuBar();
+    int currentLevel = 3;
     int lastLevel = 3;
     int FPS = 20;
     int frameTime = 1000 / FPS;

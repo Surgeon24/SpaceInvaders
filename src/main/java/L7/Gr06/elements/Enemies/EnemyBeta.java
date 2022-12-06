@@ -12,6 +12,7 @@ import java.util.Random;
 
 public class EnemyBeta extends Enemy {
     Integer value = 20;
+    Integer health = 2;
     Random rand = new Random();
 
     public EnemyBeta(Position pos, int vector) {
@@ -19,6 +20,10 @@ public class EnemyBeta extends Enemy {
     }
     @Override
     public Integer getValue() { return value;}
+    @Override
+    public Integer getHealth() { return health;}
+    @Override
+    public void setHealth(Integer health) {this.health = health;}
 @Override
     public void shoot(){
         if (rand.nextInt(100) > 90){

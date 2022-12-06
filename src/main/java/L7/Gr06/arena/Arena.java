@@ -46,9 +46,12 @@ public class Arena {
         for (Bullet shot : hero.getShots()){
             for (Enemy enemy: enemies){
                 if (enemy.collide(shot.getPosition())){
-                    deadEnemies.add(enemy);
+                    if (enemy.getHealth() <= 1) {
+                        deadEnemies.add(enemy);
+                        score += enemy.getValue();
+                    }
+                    else enemy.setHealth(enemy.getHealth() - 1);
                     goodPlayerShots.add(shot);
-                    score += enemy.getValue();
                 }
             }
             for (Wall wall : walls){
