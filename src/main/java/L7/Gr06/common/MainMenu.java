@@ -28,7 +28,7 @@ public class MainMenu {
         soundPlayer.setSound("gta-menu.wav");
         About about = new About();
         Upgrades upgrades = new Upgrades();
-        if (status != STATUS.RESUME){
+        if (status == STATUS.START){
             musicPlayer.startMusic();
         }
         try {

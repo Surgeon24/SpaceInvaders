@@ -1,5 +1,6 @@
 package L7.Gr06.common;
 
+import L7.Gr06.Audio.MusicPlayer;
 import L7.Gr06.arena.*;
 import L7.Gr06.elements.MenuBar;
 import L7.Gr06.elements.Position;
@@ -29,6 +30,7 @@ public class Game {
     int FPS = 20;
     int frameTime = 1000 / FPS;
     Integer totalScore = 0;
+    MusicPlayer musicPlayer = new MusicPlayer("space_battle.wav");
 
 
 
@@ -63,7 +65,7 @@ public class Game {
         if (!mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("START")))
             runGame = false;
         gamePaused = false;
-
+        musicPlayer.startMusic();
         try {
             while (runGame) {
                 if (gamePaused) {
@@ -85,6 +87,7 @@ public class Game {
                         currentLevel = 0;
                         totalScore = 0;
                         Thread.sleep(2000);
+                        musicPlayer.stopMusic();
                         runGame = mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("GAMEOVER"));
                         allLevels.clear();
                         createListOfAllLevels();
@@ -100,6 +103,7 @@ public class Game {
                             currentLevel = 0;
                             totalScore = 0;
                             Thread.sleep(2000);
+                            musicPlayer.stopMusic();
                             runGame = mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("WIN"));
                             allLevels.clear();
                             createListOfAllLevels();
@@ -124,6 +128,9 @@ public class Game {
             gui.screen.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        finally {
+            musicPlayer.stopMusic();
         }
     }
 
