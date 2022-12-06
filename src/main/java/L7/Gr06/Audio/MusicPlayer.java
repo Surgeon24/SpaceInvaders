@@ -14,23 +14,18 @@ public class MusicPlayer {
     public MusicPlayer(String fileName) {
         this.file = fileName;
         this.backgroundMusic = loadMusic(fileName);
-        System.out.println("fileName - " + fileName + "\n");
-        System.out.println("loadMusic(fileName) - " + loadMusic(fileName) + "\n");
     }
 
     private Clip loadMusic(String fileName) throws NullPointerException{
         try {
             File musicFile = new File(Objects.requireNonNull(MusicPlayer.class.getResource("/Music/" + fileName)).getFile());
             if (musicFile.exists()) {
-                System.out.println("file exists: " + musicFile);
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicFile);
                 Clip musicClip = AudioSystem.getClip();
                 musicClip.open(audioInput);
                 FloatControl gainControl = (FloatControl) musicClip.getControl(FloatControl.Type.MASTER_GAIN);
-                gainControl.setValue(-10.0f);
+                gainControl.setValue(-5.0f);
                 return musicClip;
-            } else {
-                System.out.println("file not exists: " + musicFile);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -39,7 +34,7 @@ public class MusicPlayer {
     }
 
     public void startMusic() {
-        backgroundMusic.setMicrosecondPosition(0);
+        backgroundMusic.setMicrosecondPosition(0 * 1000000);
         backgroundMusic.start();
         backgroundMusic.loop(Clip.LOOP_CONTINUOUSLY);
     }
