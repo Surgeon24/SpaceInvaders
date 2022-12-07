@@ -29,7 +29,12 @@ public class EnemyGamma extends Enemy {
     @Override
     public void draw(TextGraphics s){
         s.setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));
-        s.setForegroundColor(TextColor.Factory.fromString(Globals.textColor));
+        if (health == 5)
+            s.setForegroundColor(TextColor.Factory.fromString(Globals.textColor));
+        else if (health > 2)
+            s.setForegroundColor(TextColor.Factory.fromString("#edaa82"));
+        else
+            s.setForegroundColor(TextColor.Factory.fromString("#db7e46"));
         s.putString(new TerminalPosition(getX(), getY()), "nopq");
         s.putString(new TerminalPosition(getX(), getY()+1), "rstu");
         if (!getShots().isEmpty()){

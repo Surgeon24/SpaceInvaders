@@ -36,7 +36,10 @@ public class EnemyBeta extends Enemy {
     @Override
     public void draw(TextGraphics s){
         s.setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));
-        s.setForegroundColor(TextColor.Factory.fromString(Globals.textColor));
+        if (health == 2)
+            s.setForegroundColor(TextColor.Factory.fromString(Globals.textColor));
+        else
+            s.setForegroundColor(TextColor.Factory.fromString("#db7e46"));
         s.putString(new TerminalPosition(getX(), getY()), "jk");
         s.putString(new TerminalPosition(getX(), getY()+1), "lm");
         if (!getShots().isEmpty()){
