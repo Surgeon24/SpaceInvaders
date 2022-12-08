@@ -38,6 +38,7 @@ public class MainMenu {
                 draw(screen.newTextGraphics(), status);
                 screen.refresh();
                     // warning - key refresh should be implemented to avoid blinking of the screen
+                System.out.println("test");
                 KeyStroke key = screen.readInput();
                 processKey(key);
                 if (buttonPressed){
@@ -85,30 +86,41 @@ public class MainMenu {
 
         if (options == 1) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(Globals.width/2-4, Globals.height/2+3), "ABOUT GAME");
+        graphics.putString(new TerminalPosition(Globals.width/2-5, Globals.height/2+3), "ABOUT GAME");
 
         if (options == 2) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(Globals.width/2-5, Globals.height/2+6), "EXIT");
+        graphics.putString(new TerminalPosition(Globals.width/2-2, Globals.height/2+6), "EXIT");
     }
 
     private void processKey(KeyStroke key) {
         switch (key.getKeyType()) {
             case EOF -> buttonPressed = true;
             case ArrowUp ->   {
+                soundPlayer.stopSound();
                 soundPlayer.playSound();
                 options = (3 + (options-1)) % 3;
             }
             case ArrowDown -> {
+                soundPlayer.stopSound();
                 soundPlayer.playSound();
                 options = (3 + (options+1)) % 3;
             }
             case Enter -> buttonPressed = true;
-            /*case Character -> {
+            case Character -> {
                 switch (key.getCharacter()){
-                    case VK_ ->
+                    case 'w' -> {
+                        soundPlayer.stopSound();
+                        soundPlayer.playSound();
+                        options = (3 + (options-1)) % 3;
+                    }
+                    case 's' -> {
+                        soundPlayer.stopSound();
+                        soundPlayer.playSound();
+                        options = (3 + (options+1)) % 3;
+                    }
                 }
-            }*/
+            }
         }
 
     }

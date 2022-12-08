@@ -1,6 +1,7 @@
 package L7.Gr06.common;
 
 import L7.Gr06.Audio.SoundPlayer;
+import L7.Gr06.elements.Hero;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
@@ -17,23 +18,23 @@ public class Upgrades {
     String selectedColor = "#ede9dd";
     String idleColor     = "#968e5a";
     SoundPlayer soundPlayer = new SoundPlayer();
-    public void showUpgrades(Screen screen){
+    public void showUpgrades(Screen screen, Hero hero, Integer score){
+        soundPlayer.setSound("gta-menu.wav");
         try {
             while (true) {
                 screen.clear();
-                draw(screen.newTextGraphics());
+                draw(screen.newTextGraphics(), score);
                 screen.refresh();
                 // warning - key refresh should be implemented to avoid blinking of the screen
                 KeyStroke key = screen.readInput();
                 processKey(key);
-                if (buttonPressed){
+                if (buttonPressed) {
                     buttonPressed = false;
-                    if (options == 0){
-                    } else if (options == 1) {
-                    } else if (options == 2) {
-                    }
-                    else {
-                    }
+                    if (options == 0) {}
+                    else if (options == 1) {}
+                    else if (options == 2) {}
+                    else if (options == 3) {}
+                    else { return; }
                 }
             }
         }
@@ -43,42 +44,68 @@ public class Upgrades {
     }
 
 
-    public void draw(TextGraphics graphics) {
+    public void draw(TextGraphics graphics, Integer score) {
+
         graphics.setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(Globals.width, Globals.height), ' ');
         graphics.enableModifiers(SGR.BOLD);
         graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
-        graphics.putString(new TerminalPosition(2, 2), "ab  ef  jk  nopq");
-        graphics.putString(new TerminalPosition(2, 3), "cd  gh  lm  rstu");
 
-        graphics.putString(new TerminalPosition(Globals.width/2-9, Globals.height/2-6), "SPACE INVADERS V0.1");
+        graphics.putString(new TerminalPosition(Globals.width/2-4, 3), "UPGRADES:");
+        graphics.putString(new TerminalPosition(Globals.width/2-6, 5), "POINTS: " + score);
         if (options == 0) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(Globals.width/2-5, Globals.height/2), "RESUME GAME");
+        graphics.putString(new TerminalPosition(1, 8), "GUN RAMMER");
+        graphics.putString(new TerminalPosition(1, 10), "(GUN SPEED X1.5)");
         if (options == 1) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(Globals.width/2-4, Globals.height/2+3), "UPGRADES");
-
+        graphics.putString(new TerminalPosition(1, 14), "60MM GUNS");
+        graphics.putString(new TerminalPosition(1, 16), "(GUN POWER +1)");
         if (options == 2) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(Globals.width/2-5, Globals.height/2+6), "ABOUT GAME");
+        graphics.putString(new TerminalPosition(1, 20), "REINFORCED ARMOR");
+        graphics.putString(new TerminalPosition(1, 22), "(MAX LIVES +1)");
         if (options == 3) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(Globals.width/2-2, Globals.height/2+9), "EXIT");
+        graphics.putString(new TerminalPosition(1, 26), "PATCH HOLES");
+        graphics.putString(new TerminalPosition(1, 28), "CURRENT LIVES +1");
+
+        graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
+        graphics.putString(new TerminalPosition(Globals.width-30, Globals.height-1), "PRESS ESC FOR RESUME THE GAME");
     }
 
     private void processKey(KeyStroke key) {
         switch (key.getKeyType()) {
             case EOF -> buttonPressed = true;
             case ArrowUp ->   {
+                soundPlayer.stopSound();
                 soundPlayer.playSound();
                 options = (4 + (options-1)) % 4;
             }
             case ArrowDown -> {
+                soundPlayer.stopSound();
                 soundPlayer.playSound();
                 options = (4 + (options+1)) % 4;
             }
             case Enter -> buttonPressed = true;
+            case Escape -> {
+                options = -1;
+                buttonPressed = true;
+            }
+            case Character -> {
+                switch (key.getCharacter()){
+                    case 'w' -> {
+                        soundPlayer.stopSound();
+                        soundPlayer.playSound();
+                        options = (4 + (options-1)) % 4;
+                    }
+                    case 's' -> {
+                        soundPlayer.stopSound();
+                        soundPlayer.playSound();
+                        options = (4 + (options+1)) % 4;
+                    }
+                }
+            }
         }
 
     }

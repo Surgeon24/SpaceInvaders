@@ -74,10 +74,13 @@ public class GUI {
     public java.util.List<Game.ACTION> getNextActions (){
         List<Game.ACTION> actions = new LinkedList<>();
 
-        if (pressedKeys.contains(KeyEvent.VK_Q)) actions.add(Game.ACTION.PAUSE);
-        if (pressedKeys.contains(KeyEvent.VK_D)) actions.add(Game.ACTION.RIGHT);
-        if (pressedKeys.contains(KeyEvent.VK_A)) actions.add(Game.ACTION.LEFT);
+        if ((pressedKeys.contains(KeyEvent.VK_LEFT))||(pressedKeys.contains(KeyEvent.VK_A)))
+            actions.add(Game.ACTION.LEFT);
+        if ((pressedKeys.contains(KeyEvent.VK_RIGHT))||(pressedKeys.contains(KeyEvent.VK_D)))
+            actions.add(Game.ACTION.RIGHT);
+        if (pressedKeys.contains(KeyEvent.VK_ESCAPE)) actions.add(Game.ACTION.PAUSE);
         if (pressedKeys.contains(KeyEvent.VK_SPACE)) actions.add(Game.ACTION.SHOOT);
+        if (pressedKeys.contains(KeyEvent.VK_TAB)) actions.add(Game.ACTION.UPGRADE);
 
         return actions;
     }

@@ -33,4 +33,8 @@ public class SoundPlayer {
         sound.setMicrosecondPosition(0);
         sound.start();
     }
+
+    public void stopSound() {
+        sound.stop();
+    }
 }

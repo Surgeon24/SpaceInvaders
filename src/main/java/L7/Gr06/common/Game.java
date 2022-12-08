@@ -22,7 +22,9 @@ public class Game {
     private final GUI gui;
     private boolean runGame;
     private boolean gamePaused = true;
+    private boolean openUpgrades = false;
     MainMenu mainMenu = new MainMenu();
+    Upgrades upgrades = new Upgrades();
     List<Arena> allLevels = new ArrayList<>();
     MenuBar menuBar = new MenuBar();
     int currentLevel = 3;
@@ -34,7 +36,7 @@ public class Game {
 
 
 
-    enum ACTION {LEFT, RIGHT, PAUSE, SHOOT}
+    enum ACTION {LEFT, RIGHT, PAUSE, SHOOT, UPGRADE}
 
     public Game() throws FontFormatException, IOException, URISyntaxException {
         this.gui = new GUI(Globals.width, Globals.height);
@@ -73,11 +75,14 @@ public class Game {
                         runGame = false;
                     gamePaused = false;
                 }
+                if (openUpgrades) {
+                    upgrades.showUpgrades(gui.screen, allLevels.get(currentLevel).hero, totalScore);
+                    openUpgrades = false;
+                }
                 long startTime = System.currentTimeMillis();
                 draw();
                 List<ACTION> actions = gui.getNextActions();
                 processKeys(actions);
-
                 allLevels.get(currentLevel).changePositions();
                 allLevels.get(currentLevel).checkCollisions();
                 if (allLevels.get(currentLevel).enemiesReachedFinish()
@@ -148,6 +153,7 @@ public class Game {
                 }
                 case SHOOT -> allLevels.get(currentLevel).hero.shoot();
                 case PAUSE -> gamePaused = true;
+                case UPGRADE -> openUpgrades = true;
             }
         }
     }
