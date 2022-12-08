@@ -1,113 +1,37 @@
 package L7.Gr06.common;
 
-import L7.Gr06.Audio.SoundPlayer;
-import L7.Gr06.elements.Hero;
-import com.googlecode.lanterna.SGR;
-import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.screen.Screen;
+import org.javatuples.Triplet;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Upgrades {
-    private Boolean buttonPressed = false;
-    private int options = 0;
-    String selectedColor = "#ede9dd";
-    String idleColor     = "#968e5a";
-    SoundPlayer soundPlayer = new SoundPlayer();
-    public void showUpgrades(Screen screen, Hero hero, Integer score){
-        soundPlayer.setSound("gta-menu.wav");
-        try {
-            while (true) {
-                screen.clear();
-                draw(screen.newTextGraphics(), score);
-                screen.refresh();
-                // warning - key refresh should be implemented to avoid blinking of the screen
-                KeyStroke key = screen.readInput();
-                processKey(key);
-                if (buttonPressed) {
-                    buttonPressed = false;
-                    if (options == 0) {}
-                    else if (options == 1) {}
-                    else if (options == 2) {}
-                    else if (options == 3) {}
-                    else { return; }
-                }
-            }
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-    }
+    List <Triplet> gunSpeed = new ArrayList<>();
+    List <Triplet> gunPower = new ArrayList<>();
+    List <Triplet> armor = new ArrayList<>();
 
+    public Upgrades(){
+        gunSpeed.add(new Triplet<>(100,"VERY SLOW", 0));
+        gunSpeed.add(new Triplet<>(300,"SLOW", -100));
+        gunSpeed.add(new Triplet<>(500,"BURST", -100));
+        gunSpeed.add(new Triplet<>(800,"MACHINE GUN", -200));
+        gunSpeed.add(new Triplet<>(2000,"LASER", -200));
+        gunSpeed.add(new Triplet<>(0,"BEST", 0));
 
-    public void draw(TextGraphics graphics, Integer score) {
+        gunPower.add(new Triplet<>(100,"48MM", 0));
+        gunPower.add(new Triplet<>(300,"60MM", 1));
+        gunPower.add(new Triplet<>(500,"76MM", 1));
+        gunPower.add(new Triplet<>(700,"88MM", 2));
+        gunPower.add(new Triplet<>(1500,"96MM", 2));
+        gunPower.add(new Triplet<>(3000,"120MM",3));
+        gunPower.add(new Triplet<>(0,"BEST",0));
 
-        graphics.setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));
-        graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(Globals.width, Globals.height), ' ');
-        graphics.enableModifiers(SGR.BOLD);
-        graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
-
-        graphics.putString(new TerminalPosition(Globals.width/2-4, 3), "UPGRADES:");
-        graphics.putString(new TerminalPosition(Globals.width/2-6, 5), "POINTS: " + score);
-        if (options == 0) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
-        else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(1, 8), "GUN RAMMER");
-        graphics.putString(new TerminalPosition(1, 10), "(GUN SPEED X1.5)");
-        if (options == 1) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
-        else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(1, 14), "60MM GUNS");
-        graphics.putString(new TerminalPosition(1, 16), "(GUN POWER +1)");
-        if (options == 2) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
-        else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(1, 20), "REINFORCED ARMOR");
-        graphics.putString(new TerminalPosition(1, 22), "(MAX LIVES +1)");
-        if (options == 3) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
-        else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(1, 26), "PATCH HOLES");
-        graphics.putString(new TerminalPosition(1, 28), "CURRENT LIVES +1");
-
-        graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(Globals.width-30, Globals.height-1), "PRESS ESC FOR RESUME THE GAME");
-    }
-
-    private void processKey(KeyStroke key) {
-        switch (key.getKeyType()) {
-            case EOF -> buttonPressed = true;
-            case ArrowUp ->   {
-                soundPlayer.stopSound();
-                soundPlayer.playSound();
-                options = (4 + (options-1)) % 4;
-            }
-            case ArrowDown -> {
-                soundPlayer.stopSound();
-                soundPlayer.playSound();
-                options = (4 + (options+1)) % 4;
-            }
-            case Enter -> buttonPressed = true;
-            case Escape -> {
-                options = -1;
-                buttonPressed = true;
-            }
-            case Character -> {
-                switch (key.getCharacter()){
-                    case 'w' -> {
-                        soundPlayer.stopSound();
-                        soundPlayer.playSound();
-                        options = (4 + (options-1)) % 4;
-                    }
-                    case 's' -> {
-                        soundPlayer.stopSound();
-                        soundPlayer.playSound();
-                        options = (4 + (options+1)) % 4;
-                    }
-                }
-            }
-        }
+        armor.add(new Triplet<>(100,"THE PAST CENTURY", 0));
+        armor.add(new Triplet<>(300,"OBSOLETE", 1));
+        armor.add(new Triplet<>(500,"STANDARD", 1));
+        armor.add(new Triplet<>(700,"MODERNIZED", 2));
+        armor.add(new Triplet<>(2000,"SECRET DEVELOPMENT", 3));
+        armor.add(new Triplet<>(0,"BEST",0));
 
     }
-
 }

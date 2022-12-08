@@ -1,5 +1,6 @@
 package L7.Gr06.elements;
 
+import L7.Gr06.Audio.SoundPlayer;
 import L7.Gr06.common.Globals;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
@@ -11,12 +12,14 @@ import java.util.List;
 
 public class Hero extends Instance {
     private List<Bullet> shots = new ArrayList<>();
-
-    private Integer lives = Globals.lives;
+    private Integer lives = Globals.maxLives;
     private long gunTimer;
     private long gunSpeed = 800;
+    private Integer gunPower = 1;
+    SoundPlayer soundPlayer = new SoundPlayer();
     public Hero(Position pos) {
         super(pos);
+        soundPlayer.setSound("laserShoot.wav", -30);
     }
 
     public List<Bullet> getShots(){
@@ -24,12 +27,15 @@ public class Hero extends Instance {
     }
 
     public Integer getLives(){ return lives;}
+    public Integer getGunPower(){ return gunPower;}
+    public void changeGunPower(Integer x){ gunPower += x;}
     public void shoot(){
         long currentTime = System.currentTimeMillis();
         if (currentTime > gunTimer + gunSpeed) {
             Position pos = new Position(getX(), getY() - 2);
             Bullet newShot = new Bullet(pos, -1);
             shots.add(newShot);
+            soundPlayer.playSound();
             gunTimer = System.currentTimeMillis();
         }
     }
@@ -38,10 +44,8 @@ public class Hero extends Instance {
         return  (getX() <= object.getX() && getX() + 1 >= object.getX()) &&
                 (getY() <= object.getY() && getY() + 1 >= object.getY());
     }
-
-    public void subtractLive(){
-        lives --;
-    }
+    public void changeLives(Integer x) {lives += x;}
+    public void changeGunSpeed(double x){ gunSpeed += x;}
     @Override
     public void draw(TextGraphics s){
         s.setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));

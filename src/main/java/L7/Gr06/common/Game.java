@@ -3,7 +3,6 @@ package L7.Gr06.common;
 import L7.Gr06.Audio.MusicPlayer;
 import L7.Gr06.arena.*;
 import L7.Gr06.elements.MenuBar;
-import L7.Gr06.elements.Position;
 import com.googlecode.lanterna.TerminalPosition;
 
 import java.awt.*;
@@ -24,14 +23,13 @@ public class Game {
     private boolean gamePaused = true;
     private boolean openUpgrades = false;
     MainMenu mainMenu = new MainMenu();
-    Upgrades upgrades = new Upgrades();
+    UpgradesMenu upgradesMenu = new UpgradesMenu();
     List<Arena> allLevels = new ArrayList<>();
     MenuBar menuBar = new MenuBar();
-    int currentLevel = 3;
+    int currentLevel = 0;
     int lastLevel = 3;
     int FPS = 20;
     int frameTime = 1000 / FPS;
-    Integer totalScore = 0;
     MusicPlayer musicPlayer = new MusicPlayer("space_battle.wav");
 
 
@@ -56,7 +54,7 @@ public class Game {
         try {
             gui.screen.clear();
             allLevels.get(currentLevel).draw(gui.screen.newTextGraphics());
-            menuBar.draw(gui.screen.newTextGraphics(), allLevels.get(currentLevel).hero.getLives(),totalScore+allLevels.get(currentLevel).getScore(), currentLevel);
+            menuBar.draw(gui.screen.newTextGraphics(), allLevels.get(currentLevel).hero.getLives(), currentLevel);
             gui.screen.refresh();
         }
         catch (IOException e){
@@ -76,7 +74,7 @@ public class Game {
                     gamePaused = false;
                 }
                 if (openUpgrades) {
-                    upgrades.showUpgrades(gui.screen, allLevels.get(currentLevel).hero, totalScore);
+                    upgradesMenu.showUpgrades(gui.screen, allLevels.get(currentLevel).hero);
                     openUpgrades = false;
                 }
                 long startTime = System.currentTimeMillis();
@@ -90,10 +88,11 @@ public class Game {
                     try {
                         gui.screen.newTextGraphics().putString(new TerminalPosition(Globals.width/2-4, Globals.height/2), "GAME OVER!");
                         currentLevel = 0;
-                        totalScore = 0;
+                        Globals.score = 0;
                         Thread.sleep(2000);
                         musicPlayer.stopMusic();
                         runGame = mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("GAMEOVER"));
+                        Globals.maxLives = Globals.startLives;
                         allLevels.clear();
                         createListOfAllLevels();
                     } catch (InterruptedException e) {
@@ -106,10 +105,11 @@ public class Game {
                         try {
                             gui.screen.newTextGraphics().putString(new TerminalPosition(Globals.width/2-4, Globals.height/2), "GAME OVER!");
                             currentLevel = 0;
-                            totalScore = 0;
+                            Globals.score = 0;
                             Thread.sleep(2000);
                             musicPlayer.stopMusic();
                             runGame = mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("WIN"));
+                            Globals.maxLives = Globals.startLives;
                             allLevels.clear();
                             createListOfAllLevels();
                         } catch (InterruptedException e) {
@@ -117,7 +117,7 @@ public class Game {
                         }
                     }
                     else {
-                        totalScore += allLevels.get(currentLevel).getScore();
+                        allLevels.get(currentLevel+1).hero = allLevels.get(currentLevel).hero;
                         currentLevel++;
                     }
                 }

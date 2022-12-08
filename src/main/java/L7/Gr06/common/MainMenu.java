@@ -2,7 +2,6 @@ package L7.Gr06.common;
 
 import L7.Gr06.Audio.MusicPlayer;
 import L7.Gr06.Audio.SoundPlayer;
-import L7.Gr06.elements.Hero;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
@@ -26,9 +25,9 @@ public class MainMenu {
     enum STATUS {START, RESUME, GAMEOVER, WIN}
 
     public boolean showMenu(Screen screen, STATUS status) {
-        soundPlayer.setSound("gta-menu.wav");
+        soundPlayer.setSound("gta-menu.wav", -5);
         About about = new About();
-        Upgrades upgrades = new Upgrades();
+        UpgradesMenu upgradesMenu = new UpgradesMenu();
         if (status == STATUS.START){
             musicPlayer.startMusic();
         }
@@ -37,8 +36,9 @@ public class MainMenu {
                 screen.clear();
                 draw(screen.newTextGraphics(), status);
                 screen.refresh();
-                    // warning - key refresh should be implemented to avoid blinking of the screen
-                System.out.println("test");
+                // while loop delete all keys, that was pressed at the current level
+                while (screen.pollInput() != null)
+                    screen.pollInput();
                 KeyStroke key = screen.readInput();
                 processKey(key);
                 if (buttonPressed){
@@ -97,26 +97,22 @@ public class MainMenu {
         switch (key.getKeyType()) {
             case EOF -> buttonPressed = true;
             case ArrowUp ->   {
-                soundPlayer.stopSound();
-                soundPlayer.playSound();
+                soundPlayer.playMenu();
                 options = (3 + (options-1)) % 3;
             }
             case ArrowDown -> {
-                soundPlayer.stopSound();
-                soundPlayer.playSound();
+                soundPlayer.playMenu();
                 options = (3 + (options+1)) % 3;
             }
             case Enter -> buttonPressed = true;
             case Character -> {
                 switch (key.getCharacter()){
                     case 'w' -> {
-                        soundPlayer.stopSound();
-                        soundPlayer.playSound();
+                        soundPlayer.playMenu();
                         options = (3 + (options-1)) % 3;
                     }
                     case 's' -> {
-                        soundPlayer.stopSound();
-                        soundPlayer.playSound();
+                        soundPlayer.playMenu();
                         options = (3 + (options+1)) % 3;
                     }
                 }

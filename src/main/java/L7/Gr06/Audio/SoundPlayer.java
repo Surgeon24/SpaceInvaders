@@ -10,14 +10,14 @@ import java.util.Objects;
 public class SoundPlayer {
     private Clip sound;
 
-    private Clip loadSound(String fileName) throws NullPointerException{
+    private Clip loadSound(String fileName, float vol) throws NullPointerException{
         try {
             File musicFile = new File(Objects.requireNonNull(MusicPlayer.class.getResource("/Sounds/" + fileName)).getFile());
             AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicFile);
             Clip musicClip = AudioSystem.getClip();
             musicClip.open(audioInput);
             FloatControl gainControl = (FloatControl) musicClip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(-10.0f);
+            gainControl.setValue(vol);
             return musicClip;
         } catch (Exception e) {
             e.printStackTrace();
@@ -25,8 +25,8 @@ public class SoundPlayer {
         return null;
     }
 
-    public void setSound(String fileName) {
-        this.sound = loadSound(fileName);
+    public void setSound(String fileName, float vol) {
+        this.sound = loadSound(fileName, vol);
     }
 
     public void playSound() {
@@ -34,7 +34,22 @@ public class SoundPlayer {
         sound.start();
     }
 
-    public void stopSound() {
+    public void playUpgrade() {
+        setSound("upgrade.wav", -10);
+        sound.setMicrosecondPosition(0);
+        sound.start();
+    }
+
+    public void playDecline() {
+        setSound("decline.wav", -10);
+        sound.setMicrosecondPosition(0);
+        sound.start();
+    }
+
+    public void playMenu() {
+        setSound("gta-menu.wav", -5);
         sound.stop();
+        sound.setMicrosecondPosition(0);
+        sound.start();
     }
 }
