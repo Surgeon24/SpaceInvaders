@@ -2,6 +2,7 @@ package L7.Gr06.common;
 
 import L7.Gr06.Audio.MusicPlayer;
 import L7.Gr06.Audio.SoundPlayer;
+import L7.Gr06.elements.Hero;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
@@ -44,11 +45,8 @@ public class MainMenu {
                     if (options == 0){
                         return true;
                     } else if (options == 1) {
-                        upgrades.showUpgrades(screen);
-                    } else if (options == 2) {
                         about.showAbout(screen);
-                    }
-                    else {
+                    } else {
                         return false;
                     }
                 }
@@ -87,14 +85,11 @@ public class MainMenu {
 
         if (options == 1) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(Globals.width/2-4, Globals.height/2+3), "UPGRADES");
+        graphics.putString(new TerminalPosition(Globals.width/2-4, Globals.height/2+3), "ABOUT GAME");
 
         if (options == 2) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(Globals.width/2-5, Globals.height/2+6), "ABOUT GAME");
-        if (options == 3) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
-        else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(Globals.width/2-2, Globals.height/2+9), "EXIT");
+        graphics.putString(new TerminalPosition(Globals.width/2-5, Globals.height/2+6), "EXIT");
     }
 
     private void processKey(KeyStroke key) {
@@ -102,14 +97,20 @@ public class MainMenu {
             case EOF -> buttonPressed = true;
             case ArrowUp ->   {
                 soundPlayer.playSound();
-                options = (4 + (options-1)) % 4;
+                options = (3 + (options-1)) % 3;
             }
             case ArrowDown -> {
                 soundPlayer.playSound();
-                options = (4 + (options+1)) % 4;
+                options = (3 + (options+1)) % 3;
             }
             case Enter -> buttonPressed = true;
+            case Character -> {
+                switch (key.getCharacter()){
+                    case VK_ ->
+                }
             }
         }
+
     }
+}
 
