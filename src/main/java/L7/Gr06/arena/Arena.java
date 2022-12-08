@@ -18,13 +18,11 @@ import java.util.List;
 import static java.util.Collections.emptyList;
 
 public class Arena {
-    public Integer score = 0;
     public Hero hero = new Hero(new Position(Globals.width/2, Globals.height-2));
     public List<Enemy> enemies = new ArrayList<>();
     public List<Wall> walls = new ArrayList<>();
 
     public Arena(){}
-    public Integer getScore(){ return score; }
     public void changePositions(){
         for (Enemy enemy : enemies) {
             if ((enemy.getVector() == 1 && enemy.getX() >= Globals.width-4)
@@ -46,11 +44,11 @@ public class Arena {
         for (Bullet shot : hero.getShots()){
             for (Enemy enemy: enemies){
                 if (enemy.collide(shot.getPosition())){
-                    if (enemy.getHealth() <= 1) {
+                    if (enemy.getHealth() <= hero.getGunPower()) {
                         deadEnemies.add(enemy);
-                        score += enemy.getValue();
+                        Globals.score += enemy.getValue();
                     }
-                    else enemy.setHealth(enemy.getHealth() - 1);
+                    else enemy.setHealth(enemy.getHealth() - hero.getGunPower());
                     goodPlayerShots.add(shot);
                 }
             }
@@ -72,7 +70,7 @@ public class Arena {
         for(Enemy enemy : enemies){
             for (Bullet shot : enemy.getShots()){
                 if (hero.collide(shot.getPosition())){
-                    hero.subtractLive();
+                    hero.changeLives(-1);
                     goodEnemyShots.add(shot);
                 }
                 for (Wall wall : walls){

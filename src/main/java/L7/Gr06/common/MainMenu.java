@@ -25,9 +25,9 @@ public class MainMenu {
     enum STATUS {START, RESUME, GAMEOVER, WIN}
 
     public boolean showMenu(Screen screen, STATUS status) {
-        soundPlayer.setSound("gta-menu.wav");
+        soundPlayer.setSound("gta-menu.wav", -5);
         About about = new About();
-        Upgrades upgrades = new Upgrades();
+        UpgradesMenu upgradesMenu = new UpgradesMenu();
         if (status == STATUS.START){
             musicPlayer.startMusic();
         }
@@ -36,7 +36,9 @@ public class MainMenu {
                 screen.clear();
                 draw(screen.newTextGraphics(), status);
                 screen.refresh();
-                    // warning - key refresh should be implemented to avoid blinking of the screen
+                // while loop delete all keys, that was pressed at the current level
+                while (screen.pollInput() != null)
+                    screen.pollInput();
                 KeyStroke key = screen.readInput();
                 processKey(key);
                 if (buttonPressed){
@@ -44,11 +46,8 @@ public class MainMenu {
                     if (options == 0){
                         return true;
                     } else if (options == 1) {
-                        upgrades.showUpgrades(screen);
-                    } else if (options == 2) {
                         about.showAbout(screen);
-                    }
-                    else {
+                    } else {
                         return false;
                     }
                 }
@@ -87,29 +86,39 @@ public class MainMenu {
 
         if (options == 1) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(Globals.width/2-4, Globals.height/2+3), "UPGRADES");
+        graphics.putString(new TerminalPosition(Globals.width/2-5, Globals.height/2+3), "ABOUT GAME");
 
         if (options == 2) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(Globals.width/2-5, Globals.height/2+6), "ABOUT GAME");
-        if (options == 3) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
-        else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(Globals.width/2-2, Globals.height/2+9), "EXIT");
+        graphics.putString(new TerminalPosition(Globals.width/2-2, Globals.height/2+6), "EXIT");
     }
 
     private void processKey(KeyStroke key) {
         switch (key.getKeyType()) {
             case EOF -> buttonPressed = true;
             case ArrowUp ->   {
-                soundPlayer.playSound();
-                options = (4 + (options-1)) % 4;
+                soundPlayer.playMenu();
+                options = (3 + (options-1)) % 3;
             }
             case ArrowDown -> {
-                soundPlayer.playSound();
-                options = (4 + (options+1)) % 4;
+                soundPlayer.playMenu();
+                options = (3 + (options+1)) % 3;
             }
             case Enter -> buttonPressed = true;
+            case Character -> {
+                switch (key.getCharacter()){
+                    case 'w' -> {
+                        soundPlayer.playMenu();
+                        options = (3 + (options-1)) % 3;
+                    }
+                    case 's' -> {
+                        soundPlayer.playMenu();
+                        options = (3 + (options+1)) % 3;
+                    }
+                }
             }
         }
+
     }
+}
 
