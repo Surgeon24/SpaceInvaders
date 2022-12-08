@@ -28,7 +28,7 @@ public class Game {
     List<Arena> allLevels = new ArrayList<>();
     MenuBar menuBar = new MenuBar();
     int currentLevel = 0;
-    int lastLevel = 3;
+    int lastLevel = 4;
     int FPS = 20;
     int frameTime = 1000 / FPS;
     MusicPlayer musicPlayer = new MusicPlayer("space_battle.wav");
@@ -51,6 +51,7 @@ public class Game {
         allLevels.add(new Level_2());
         allLevels.add(new Level_3());
         allLevels.add(new Level_4());
+        allLevels.add(new Level_5());
     }
 
     private void draw() {

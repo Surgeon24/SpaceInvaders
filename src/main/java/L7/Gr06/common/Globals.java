@@ -7,5 +7,5 @@ public class Globals {
     public static String textColor = "#ede9dd";
     public static Integer startLives = 3;
     public static Integer maxLives = 3;
-    public static Integer score = 0;
+    public static Integer score = 3000;
 }
