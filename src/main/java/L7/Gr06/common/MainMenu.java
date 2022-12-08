@@ -104,11 +104,11 @@ public class MainMenu {
                 options = (3 + (options+1)) % 3;
             }
             case Enter -> buttonPressed = true;
-            case Character -> {
+            /*case Character -> {
                 switch (key.getCharacter()){
                     case VK_ ->
                 }
-            }
+            }*/
         }
 
     }
