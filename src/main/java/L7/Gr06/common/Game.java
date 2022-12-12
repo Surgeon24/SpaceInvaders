@@ -42,7 +42,6 @@ public class Game {
     public Game() throws FontFormatException, IOException, URISyntaxException {
         this.gui = new GUI(Globals.width, Globals.height);
         runGame = true;
-        //to simplify rotation to the next level we create ordered list of all levels in the game.
         createListOfAllLevels();
     }
 
