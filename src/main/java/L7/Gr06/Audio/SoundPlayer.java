@@ -29,11 +29,6 @@ public class SoundPlayer {
         this.sound = loadSound(fileName, vol);
     }
 
-    public void playSound() {
-        sound.setMicrosecondPosition(0);
-        sound.start();
-    }
-
     public void playUpgrade() {
         setSound("upgrade.wav", -10);
         sound.setMicrosecondPosition(0);
@@ -49,6 +44,18 @@ public class SoundPlayer {
     public void playMenu() {
         setSound("gta-menu.wav", -5);
         sound.stop();
+        sound.setMicrosecondPosition(0);
+        sound.start();
+    }
+
+    public void playShootSound() {
+        setSound("laserShoot.wav", -30);
+        sound.setMicrosecondPosition(0);
+        sound.start();
+    }
+
+    public void playGameOver() {
+        setSound("game-over.wav", 0);
         sound.setMicrosecondPosition(0);
         sound.start();
     }

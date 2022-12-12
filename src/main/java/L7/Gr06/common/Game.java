@@ -31,7 +31,7 @@ public class Game {
     int lastLevel = 4;
     int FPS = 20;
     int frameTime = 1000 / FPS;
-    MusicPlayer musicPlayer = new MusicPlayer("space_battle.wav");
+    MusicPlayer musicPlayer = new MusicPlayer();
     SoundPlayer soundPlayer = new SoundPlayer();
 
 
@@ -69,7 +69,7 @@ public class Game {
         if (!mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("START")))
             runGame = false;
         gamePaused = false;
-        musicPlayer.startMusic();
+        musicPlayer.startInGameMusic();
         try {
             while (runGame) {
                 if (gamePaused) {
@@ -93,8 +93,7 @@ public class Game {
                         gui.screen.newTextGraphics().putString(new TerminalPosition(Globals.width/2-4, Globals.height/2), "GAME OVER!");
                         currentLevel = 0;
                         Globals.score = 0;
-                        soundPlayer.setSound("game-over.wav", 0);
-                        soundPlayer.playSound();
+                        soundPlayer.playGameOver();
                         Thread.sleep(2000);
                         musicPlayer.stopMusic();
                         runGame = mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("GAMEOVER"));
@@ -112,8 +111,7 @@ public class Game {
                             gui.screen.newTextGraphics().putString(new TerminalPosition(Globals.width/2-4, Globals.height/2), "GAME OVER!");
                             currentLevel = 0;
                             Globals.score = 0;
-                            soundPlayer.setSound("game-over.wav", 0);
-                            soundPlayer.playSound();
+                            soundPlayer.playGameOver();
                             Thread.sleep(2000);
                             musicPlayer.stopMusic();
                             runGame = mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("WIN"));

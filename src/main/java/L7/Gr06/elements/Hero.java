@@ -19,7 +19,6 @@ public class Hero extends Instance {
     SoundPlayer soundPlayer = new SoundPlayer();
     public Hero(Position pos) {
         super(pos);
-        soundPlayer.setSound("laserShoot.wav", -30);
     }
 
     public List<Bullet> getShots(){
@@ -35,7 +34,7 @@ public class Hero extends Instance {
             Position pos = new Position(getX(), getY() - 2);
             Bullet newShot = new Bullet(pos, -1);
             shots.add(newShot);
-            soundPlayer.playSound();
+            soundPlayer.playShootSound();
             gunTimer = System.currentTimeMillis();
         }
     }

@@ -20,16 +20,14 @@ public class MainMenu {
     private int options = 0;
     String selectedColor = "#ede9dd";
     String idleColor     = "#968e5a";
-    MusicPlayer musicPlayer = new MusicPlayer("main_theme.wav");
+    MusicPlayer musicPlayer = new MusicPlayer();
     SoundPlayer soundPlayer = new SoundPlayer();
     enum STATUS {START, RESUME, GAMEOVER, WIN}
 
     public boolean showMenu(Screen screen, STATUS status) {
-        soundPlayer.setSound("gta-menu.wav", -5);
         About about = new About();
-        UpgradesMenu upgradesMenu = new UpgradesMenu();
         if (status == STATUS.START){
-            musicPlayer.startMusic();
+            musicPlayer.startMainMenuMusic();
         }
         try {
             while (true) {

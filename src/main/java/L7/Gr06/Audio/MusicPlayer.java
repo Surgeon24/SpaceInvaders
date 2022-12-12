@@ -10,13 +10,13 @@ import java.util.Objects;
 public class MusicPlayer {
     private Clip backgroundMusic;
     private String file;
-
+/*
     public MusicPlayer(String fileName) {
         this.file = fileName;
-        this.backgroundMusic = loadMusic(fileName);
-    }
+        this.backgroundMusic = loadMusic(fileName, );
+    }*/
 
-    private Clip loadMusic(String fileName) throws NullPointerException{
+    private Clip loadMusic(String fileName, float vol) throws NullPointerException{
         try {
             File musicFile = new File(Objects.requireNonNull(MusicPlayer.class.getResource("/Music/" + fileName)).getFile());
             if (musicFile.exists()) {
@@ -24,7 +24,7 @@ public class MusicPlayer {
                 Clip musicClip = AudioSystem.getClip();
                 musicClip.open(audioInput);
                 FloatControl gainControl = (FloatControl) musicClip.getControl(FloatControl.Type.MASTER_GAIN);
-                gainControl.setValue(-5.0f);
+                gainControl.setValue(vol);
                 return musicClip;
             }
         } catch (Exception e) {
@@ -33,7 +33,19 @@ public class MusicPlayer {
         return null;
     }
 
-    public void startMusic() {
+    public void setMusic(String fileName, float vol) {
+        this.backgroundMusic = loadMusic(fileName, -5);
+    }
+
+    public void startInGameMusic() {
+        setMusic("space_battle.wav", 0);
+        backgroundMusic.setMicrosecondPosition(0 * 1000000);
+        backgroundMusic.start();
+        backgroundMusic.loop(Clip.LOOP_CONTINUOUSLY);
+    }
+
+    public void startMainMenuMusic() {
+        setMusic("main_theme.wav", -5);
         backgroundMusic.setMicrosecondPosition(0 * 1000000);
         backgroundMusic.start();
         backgroundMusic.loop(Clip.LOOP_CONTINUOUSLY);
