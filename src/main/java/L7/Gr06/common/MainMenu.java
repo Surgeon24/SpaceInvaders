@@ -11,6 +11,7 @@ import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
 
 import java.io.IOException;
+import java.util.Random;
 
 public class MainMenu {
 
@@ -22,10 +23,13 @@ public class MainMenu {
     String idleColor     = "#968e5a";
     MusicPlayer musicPlayer = new MusicPlayer();
     SoundPlayer soundPlayer = new SoundPlayer();
+    About about = new About();
+    Random rand = new Random();
+    String advice;
     enum STATUS {START, RESUME, GAMEOVER, WIN}
 
     public boolean showMenu(Screen screen, STATUS status) {
-        About about = new About();
+        advice = advice();
         if (status == STATUS.START){
             musicPlayer.startMainMenuMusic();
         }
@@ -90,6 +94,23 @@ public class MainMenu {
         if (options == 2) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
         graphics.putString(new TerminalPosition(Globals.width/2-2, Globals.height/2+6), "EXIT");
+
+        graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
+        graphics.putString(new TerminalPosition(1, Globals.height-1), advice);
+    }
+
+    private String advice() {
+        int x = rand.nextInt(100);
+        if (x >= 80)
+            return "HINT: PRESS TAB DURING THE GAME TO OPEN THE SHOP";
+        else if (x >= 60)
+            return "HINT: TRY TO ELUDE THE LIGHTNING WHILE ITS GAINING STRENGTH";
+        else if (x >= 40)
+            return "HINT: UPGRADE YOUR GUN POWER IF YOU WANT TO DEFEAT THE BOSS";
+        else if (x >= 20)
+            return "HINT: GUN SPEED HELPS AGAINST A LARGE NUMBER OF TARGETS";
+        else
+            return "HINT: IF YOU HAVE ONE LIFE LEFT, USE SHOP TO PATCH HOLES";
     }
 
     private void processKey(KeyStroke key) {
@@ -117,7 +138,6 @@ public class MainMenu {
                 }
             }
         }
-
     }
 }
 
