@@ -181,4 +181,10 @@ public class UpgradesMenu {
 
     }
 
+    public void resetAll() {
+        gunSpeedUpdate = 0;
+        gunPowerUpdate = 0;
+        armorUpdate = 0;
+    }
+
 }

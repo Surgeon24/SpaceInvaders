@@ -27,8 +27,8 @@ public class Game {
     UpgradesMenu upgradesMenu = new UpgradesMenu();
     List<Arena> allLevels = new ArrayList<>();
     MenuBar menuBar = new MenuBar();
-    int currentLevel = 0;
-    int lastLevel = 4;
+    int currentLevel = 4;
+    int lastLevel = 5;
     int FPS = 20;
     int frameTime = 1000 / FPS;
     MusicPlayer musicPlayer = new MusicPlayer();
@@ -51,6 +51,7 @@ public class Game {
         allLevels.add(new Level_3());
         allLevels.add(new Level_4());
         allLevels.add(new Level_5());
+        allLevels.add(new Level_6());
     }
 
     private void draw() {
@@ -98,16 +99,17 @@ public class Game {
                         runGame = mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("GAMEOVER"));
                         Globals.maxLives = Globals.startLives;
                         allLevels.clear();
+                        upgradesMenu.resetAll();
                         createListOfAllLevels();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
 
-                if (allLevels.get(currentLevel).nextLevel()){
-                    if (lastLevel == currentLevel){
-                        try {
-                            gui.screen.newTextGraphics().putString(new TerminalPosition(Globals.width/2-4, Globals.height/2), "GAME OVER!");
+                if (allLevels.get(currentLevel).nextLevel()) {
+                    try {
+                        if (lastLevel == currentLevel) {
+                            gui.screen.newTextGraphics().putString(new TerminalPosition(Globals.width / 2 - 4, Globals.height / 2), "GAME OVER!");
                             currentLevel = 0;
                             Globals.score = 0;
                             soundPlayer.playGameOver();
@@ -116,14 +118,17 @@ public class Game {
                             runGame = mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("WIN"));
                             Globals.maxLives = Globals.startLives;
                             allLevels.clear();
+                            upgradesMenu.resetAll();
                             createListOfAllLevels();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
                         }
-                    }
-                    else {
-                        allLevels.get(currentLevel+1).hero = allLevels.get(currentLevel).hero;
-                        currentLevel++;
+                        else{
+                            soundPlayer.playWellDone();
+                            Thread.sleep(2000);
+                            allLevels.get(currentLevel + 1).hero = allLevels.get(currentLevel).hero;
+                            currentLevel++;
+                        }
+                    } catch(InterruptedException e){
+                        e.printStackTrace();
                     }
                 }
 
@@ -153,7 +158,7 @@ public class Game {
                         allLevels.get(currentLevel).hero.setX(allLevels.get(currentLevel).hero.getX() - 1);
                 }
                 case RIGHT -> {
-                    if (allLevels.get(currentLevel).hero.getX() < Globals.width - 2)
+                    if (allLevels.get(currentLevel).hero.getX() < Globals.width - 3)
                         allLevels.get(currentLevel).hero.setX(allLevels.get(currentLevel).hero.getX() + 1);
                 }
                 case SHOOT -> allLevels.get(currentLevel).hero.shoot();

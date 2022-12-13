@@ -67,9 +67,9 @@ public class MainMenu {
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(Globals.width, Globals.height), ' ');
         graphics.enableModifiers(SGR.BOLD);
         graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
-        graphics.putString(new TerminalPosition(2, 1), "                  vwx");
-        graphics.putString(new TerminalPosition(2, 2), "ab  ef  jk  nopq  yz{");
-        graphics.putString(new TerminalPosition(2, 3), "cd  gh  lm  rstu  |}~");
+        graphics.putString(new TerminalPosition(2, 1), "                  vwx      _");
+        graphics.putString(new TerminalPosition(2, 2), "ab  ef  jk  nopq  yz{  [\\  `");
+        graphics.putString(new TerminalPosition(2, 3), "cd  gh  lm  rstu  |}~  ]^  _");
 
         graphics.putString(new TerminalPosition(Globals.width/2-9, Globals.height/2-6), "SPACE INVADERS V0.1");
         if (status == STATUS.GAMEOVER)
