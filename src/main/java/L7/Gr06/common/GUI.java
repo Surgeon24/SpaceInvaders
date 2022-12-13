@@ -59,7 +59,7 @@ public class GUI {
         return screen;
     }
     private AWTTerminalFontConfiguration loadSquareFont() throws URISyntaxException, FontFormatException, IOException {
-        URL resource = getClass().getClassLoader().getResource("Invaders100.otf");
+        URL resource = getClass().getClassLoader().getResource("Invaders203.otf");
         File fontFile = new File(resource.toURI());
         Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
 

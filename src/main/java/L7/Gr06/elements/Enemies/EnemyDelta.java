@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class EnemyDelta extends Enemy {
     Integer value = 500;
-    Integer health = 150;
+    Integer health = 200;
     Random rand = new Random();
 
     public EnemyDelta(Position pos, int vector) {
@@ -26,7 +26,7 @@ public class EnemyDelta extends Enemy {
     public void setHealth(Integer health) {this.health = health;}
     @Override
     public void shoot(){
-        if (rand.nextInt(100) > 50){
+        if (rand.nextInt(100) > 40){
             Position pos = new Position(getX(), getY() + 1);
             Bullet newShot = new Bullet(pos, 1);
             addShot(newShot);

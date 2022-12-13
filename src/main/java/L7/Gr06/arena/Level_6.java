@@ -1,8 +1,6 @@
 package L7.Gr06.arena;
 
-import L7.Gr06.elements.Enemies.Enemy;
-import L7.Gr06.elements.Enemies.EnemyBeta;
-import L7.Gr06.elements.Enemies.EnemyGamma;
+import L7.Gr06.elements.Enemies.*;
 import L7.Gr06.elements.Position;
 import L7.Gr06.elements.Wall;
 import com.googlecode.lanterna.SGR;
@@ -12,30 +10,32 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import L7.Gr06.common.Globals;
 import L7.Gr06.elements.Bullet;
-import L7.Gr06.elements.Enemies.EnemyAlfa;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Level_4 extends Arena{
+public class Level_6 extends Arena{
     private long moveEnemyTimer;
-    private long moveEnemySpeed = 400;
+    private long moveEnemySpeed = 200;
     //constructors
-    public Level_4() {
+    public Level_6() {
         enemies = createEnemies();
         walls = createWalls();
     }
     //instances initialisations
     private List<Enemy> createEnemies(){
         List<Enemy> list = new ArrayList<>();
+        list.add(new EnemyDelta(new Position(Globals.width/2, -3),1));
         for (int i = 3; i < Globals.width-3; i+=6) {
             list.add(new EnemyBeta(new Position(i, 6),1));
-            list.add(new EnemyBeta(new Position(i, 9),-1));
-            list.add(new EnemyAlfa(new Position(i, 12),1));
+            if (i == 3 || i == 27 || i == 51)
+                list.add(new EnemyTeta(new Position(i, 9),-1));
+            else
+                list.add(new EnemyBeta(new Position(i, 9),-1));
+            list.add(new EnemyAlfa(new Position(i, 12), 1));
             if (i > 5)
-                list.add(new EnemyAlfa(new Position(i, 15),-1));
+                list.add(new EnemyGamma(new Position(i, 15),-1));
             list.add(new EnemyGamma(new Position(i, 18),1));
-            list.add(new EnemyAlfa(new Position(i, 21),-1));
 
         }
         return list;

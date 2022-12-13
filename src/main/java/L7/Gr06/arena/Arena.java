@@ -59,6 +59,8 @@ public class Arena {
                     goodPlayerShots.add(shot);
                 }
             }
+            if (shot.getY() < -10)
+                goodPlayerShots.add(shot);
         }
         for (Enemy enemy : deadEnemies){
             enemies.remove(enemy);
@@ -80,6 +82,8 @@ public class Arena {
                             brokenWalls.add(wall);
                     }
                 }
+                if (shot.getY() > Globals.height+10)
+                    goodEnemyShots.add(shot);
             }
             for (Bullet shot : goodEnemyShots){
                 enemy.getShots().remove(shot);

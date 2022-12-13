@@ -2,6 +2,7 @@ package L7.Gr06.arena;
 
 import L7.Gr06.elements.Enemies.Enemy;
 import L7.Gr06.elements.Enemies.EnemyAlfa;
+import L7.Gr06.elements.Enemies.EnemyTeta;
 import L7.Gr06.elements.Position;
 import L7.Gr06.elements.Wall;
 import com.googlecode.lanterna.SGR;

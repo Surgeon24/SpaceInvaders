@@ -59,4 +59,10 @@ public class SoundPlayer {
         sound.setMicrosecondPosition(0);
         sound.start();
     }
+
+    public void playWellDone() {
+        setSound("well-done.wav", -20);
+        sound.setMicrosecondPosition(0);
+        sound.start();
+    }
 }

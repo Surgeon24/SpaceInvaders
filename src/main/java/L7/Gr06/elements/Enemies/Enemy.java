@@ -36,6 +36,8 @@ public abstract class Enemy extends Instance {
     public List<Bullet> getShots(){ return shots;}
     public void addShot(Bullet newShot){ shots.add(newShot);}
 
+    public void removeAllshots() {shots.clear();}
+
     @Override
     public void draw(TextGraphics s){
     }
