@@ -20,6 +20,7 @@ public class Game {
     MainMenu mainMenu = new MainMenu();
     UpgradesMenu upgradesMenu = new UpgradesMenu();
     List<Arena> allLevels = new ArrayList<>();
+    Prolog prolog = new Prolog();
     MenuBar menuBar = new MenuBar();
     int currentLevel = 0;
     int lastLevel = 5;
@@ -63,6 +64,8 @@ public class Game {
         if (!mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("START")))
             runGame = false;
         gamePaused = false;
+        if (runGame)
+            prolog.showProlog(gui.screen);
         musicPlayer.startInGameMusic();
         try {
             while (runGame) {
