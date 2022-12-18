@@ -71,15 +71,15 @@ public class MainMenu {
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(Globals.width, Globals.height), ' ');
         graphics.enableModifiers(SGR.BOLD);
         graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
-        graphics.putString(new TerminalPosition(2, 1), "                  vwx      _");
-        graphics.putString(new TerminalPosition(2, 2), "ab  ef  jk  nopq  yz{  [\\  `");
-        graphics.putString(new TerminalPosition(2, 3), "cd  gh  lm  rstu  |}~  ]^  _");
+        graphics.putString(new TerminalPosition(2, 1), "                  vwx                        vwx");
+        graphics.putString(new TerminalPosition(2, 2), "ab  ef  jk  nopq  yz{  [\\  ab  ef  jk  nopq  yz{  [\\  ab");
+        graphics.putString(new TerminalPosition(2, 3), "cd  gh  lm  rstu  |}~  ]^  cd  gh  lm  rstu  |}~  ]^  cd");
 
-        graphics.putString(new TerminalPosition(Globals.width/2-9, Globals.height/2-6), "SPACE INVADERS V0.1");
+        graphics.putString(new TerminalPosition(Globals.width/2-9, 10), "SPACE INVADERS V0.1");
         if (status == STATUS.GAMEOVER)
-            graphics.putString(new TerminalPosition(Globals.width/2-5, Globals.height/2-4), "GAME OVER!");
+            graphics.putString(new TerminalPosition(Globals.width/2-5, 12), "GAME OVER!");
         else if (status == STATUS.WIN)
-            graphics.putString(new TerminalPosition(Globals.width/2-5, Globals.height/2-4), " YOU WON! ");
+            graphics.putString(new TerminalPosition(Globals.width/2-5, 12), " YOU WON! ");
         if (options == 0) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
         if (status == STATUS.RESUME)
@@ -104,9 +104,9 @@ public class MainMenu {
         if (x >= 80)
             return "HINT: PRESS TAB DURING THE GAME TO OPEN THE SHOP";
         else if (x >= 60)
-            return "HINT: TRY TO ELUDE THE LIGHTNING WHILE ITS GAINING STRENGTH";
+            return "HINT: TRY TO ELUDE THE LIGHTNING WHILE ITS GAINING POWER";
         else if (x >= 40)
-            return "HINT: UPGRADE YOUR GUN POWER IF YOU WANT TO DEFEAT THE BOSS";
+            return "HINT: UPGRADE YOUR GUN POWER TO DEFEAT THE FINAL BOSS";
         else if (x >= 20)
             return "HINT: GUN SPEED HELPS AGAINST A LARGE NUMBER OF TARGETS";
         else

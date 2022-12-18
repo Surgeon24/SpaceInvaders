@@ -12,12 +12,6 @@ import java.net.URISyntaxException;
 import java.util.*;
 import java.util.List;
 
-
-
-/***
-    Body of the game. Initialises arenas, draws all instances and checks user input.
- ***/
-
 public class Game {
     private final GUI gui;
     private boolean runGame;
@@ -27,7 +21,7 @@ public class Game {
     UpgradesMenu upgradesMenu = new UpgradesMenu();
     List<Arena> allLevels = new ArrayList<>();
     MenuBar menuBar = new MenuBar();
-    int currentLevel = 4;
+    int currentLevel = 0;
     int lastLevel = 5;
     int FPS = 20;
     int frameTime = 1000 / FPS;
