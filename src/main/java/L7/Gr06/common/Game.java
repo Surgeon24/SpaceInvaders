@@ -6,6 +6,7 @@ import L7.Gr06.arena.*;
 import L7.Gr06.elements.MenuBar;
 import com.googlecode.lanterna.TerminalPosition;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -98,6 +99,7 @@ public class Game {
                         allLevels.clear();
                         upgradesMenu.resetAll();
                         createListOfAllLevels();
+                        musicPlayer.startInGameMusic();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -117,6 +119,7 @@ public class Game {
                             allLevels.clear();
                             upgradesMenu.resetAll();
                             createListOfAllLevels();
+                            musicPlayer.startInGameMusic();
                         }
                         else{
                             soundPlayer.playWellDone();

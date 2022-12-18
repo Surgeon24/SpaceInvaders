@@ -10,6 +10,7 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 
+import javax.swing.*;
 import java.io.IOException;
 
 public class Prolog {
@@ -25,6 +26,10 @@ public class Prolog {
                 draw1(screen.newTextGraphics());
                 screen.refresh();
                 Thread.sleep(1000);
+                if (screen.pollInput() != null) {
+                    firstRow = 19;
+                    System.out.println("!");
+                }
             }
             screen.clear();
             screen.newTextGraphics().setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));

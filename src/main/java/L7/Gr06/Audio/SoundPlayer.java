@@ -71,4 +71,10 @@ public class SoundPlayer {
         sound.setMicrosecondPosition(0);
         sound.start();
     }
+
+    public void playMonsterSound() {
+        setSound("monsterSound.wav", -5);
+        sound.setMicrosecondPosition(0);
+        sound.start();
+    }
 }
