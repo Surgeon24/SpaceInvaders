@@ -61,7 +61,19 @@ public class SoundPlayer {
     }
 
     public void playWellDone() {
-        setSound("well-done.wav", -20);
+        setSound("well-done.wav", -5);
+        sound.setMicrosecondPosition(0);
+        sound.start();
+    }
+
+    public void playStop() {
+        setSound("stop.wav", -5);
+        sound.setMicrosecondPosition(0);
+        sound.start();
+    }
+
+    public void playMonsterSound() {
+        setSound("monsterSound.wav", -5);
         sound.setMicrosecondPosition(0);
         sound.start();
     }

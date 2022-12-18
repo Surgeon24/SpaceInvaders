@@ -30,7 +30,7 @@ public class MainMenu {
 
     public boolean showMenu(Screen screen, STATUS status) {
         advice = advice();
-        if (status == STATUS.START){
+        if (status != STATUS.RESUME){
             musicPlayer.startMainMenuMusic();
         }
         try {

@@ -1,5 +1,6 @@
 package L7.Gr06.elements.Enemies;
 
+import L7.Gr06.Audio.SoundPlayer;
 import L7.Gr06.common.Globals;
 import L7.Gr06.elements.Bullet;
 import L7.Gr06.elements.Lightning;
@@ -12,7 +13,8 @@ import java.util.Random;
 
 
 public class EnemyTeta extends Enemy {
-    Integer value = 50;
+    SoundPlayer soundPlayer = new SoundPlayer();
+    Integer value = 100;
     Boolean ready = true;
     Lightning lightning;
     Position lightPos;
@@ -34,6 +36,7 @@ public class EnemyTeta extends Enemy {
             lightning = new Lightning(new Position(getX(),getY()+2), 1);
             counter = 5;
             ready = false;
+            soundPlayer.playMonsterSound();
         }
         if (!ready){
             lightning.setX(getX());

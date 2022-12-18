@@ -46,7 +46,14 @@ public class MusicPlayer {
 
     public void startMainMenuMusic() {
         setMusic("main_theme.wav", -5);
-        backgroundMusic.setMicrosecondPosition(0 * 1000000);
+        backgroundMusic.setMicrosecondPosition(0);
+        backgroundMusic.start();
+        backgroundMusic.loop(Clip.LOOP_CONTINUOUSLY);
+    }
+
+    public void prologMusic() {
+        setMusic("starWarsTheme.wav", 0);
+        backgroundMusic.setMicrosecondPosition(0);
         backgroundMusic.start();
         backgroundMusic.loop(Clip.LOOP_CONTINUOUSLY);
     }

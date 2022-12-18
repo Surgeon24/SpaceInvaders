@@ -7,7 +7,7 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 
 public class Wall extends Instance{
     String color = "#8c92ac";
-    private int strength = 3;
+    private int strength = 5;
     public Wall(Position pos) {
         super(pos);
     }
