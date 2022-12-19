@@ -49,7 +49,7 @@ public class SoundPlayer {
     }
 
     public void playShootSound() {
-        setSound("laserShoot.wav", -30);
+        setSound("laserShoot.wav", -40);
         sound.setMicrosecondPosition(0);
         sound.start();
     }

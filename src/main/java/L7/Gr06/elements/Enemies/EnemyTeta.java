@@ -42,16 +42,14 @@ public class EnemyTeta extends Enemy {
             lightning.setX(getX());
             lightning.setStartOfTheLighting(getY()+2);
         }
-        if (!ready && counter > 0){
+        if (!ready && counter > 0)
             counter  --;
-        }
         else if (!ready && counter == 0){
             addShot(lightning);
             counter --;
         }
-        else if (!ready && counter > -5){
+        else if (!ready && counter > -5)
             counter --;
-        }
         else if (!ready && counter == -5){
             counter = 5;
             lightning = null;
@@ -73,9 +71,6 @@ public class EnemyTeta extends Enemy {
             if (counter == 4 || counter == 2 || counter <= 0) {
                 s.setForegroundColor(TextColor.Factory.fromString(Globals.textColor));
                 lightning.draw(s);
-            }
-            else {
-                lightning.drawNothing(s);
             }
         }
     }

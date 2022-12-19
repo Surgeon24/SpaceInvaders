@@ -1,11 +1,8 @@
 package L7.Gr06.elements;
 
 import L7.Gr06.common.Globals;
-import L7.Gr06.elements.Instance;
-import L7.Gr06.elements.Position;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 

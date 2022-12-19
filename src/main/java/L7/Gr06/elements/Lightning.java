@@ -26,5 +26,4 @@ public class Lightning extends Bullet {
                 s.putString(new TerminalPosition(getX(), i), "`");
         }
     }
-    public void drawNothing(TextGraphics s) {}
 }

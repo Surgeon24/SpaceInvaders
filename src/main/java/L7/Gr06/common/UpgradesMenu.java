@@ -96,45 +96,51 @@ public class UpgradesMenu {
         }
     }
 
-
     private void draw(TextGraphics graphics) {
-
         graphics.setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(Globals.width, Globals.height), ' ');
         graphics.enableModifiers(SGR.BOLD);
         graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
 
-        graphics.putString(new TerminalPosition(Globals.width/2-4, 3), "UPGRADES:");
-        graphics.putString(new TerminalPosition(Globals.width/2-4, 5), "  POINTS: " + Globals.score);
+        graphics.putString(new TerminalPosition(Globals.width / 2 - 4, 3), "UPGRADES:");
+        graphics.putString(new TerminalPosition(Globals.width / 2 - 4, 5), "  POINTS: " + Globals.score);
+
         if (options == 0) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
         graphics.putString(new TerminalPosition(1, 8), " GUN RAMMER");
-        if (gunSpeedUpdate == 4)
+        if (gunSpeedUpdate == upgrades.gunSpeed.size()-2)
             graphics.putString(new TerminalPosition(1, 10), "(YOU ALREADY HAVE THE BEST)");
-        else
+        else {
             graphics.putString(new TerminalPosition(1, 10), "(INCREASE GUN SPEED)");
-        graphics.putString(new TerminalPosition(1, 11), " PRICE: " + upgrades.gunSpeed.get(gunSpeedUpdate+1).getValue0());
+            graphics.putString(new TerminalPosition(1, 11), " PRICE: " + upgrades.gunSpeed.get(gunSpeedUpdate + 1).getValue0());
+        }
+
         if (options == 1) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(1, 14),  upgrades.gunPower.get(gunPowerUpdate + 1).getValue1()+ " GUNS");
-        if (gunPowerUpdate == 5)
+        graphics.putString(new TerminalPosition(1, 14), upgrades.gunPower.get(gunPowerUpdate + 1).getValue1() + " GUNS");
+        if (gunPowerUpdate == upgrades.gunPower.size()-2)
             graphics.putString(new TerminalPosition(1, 16), "(YOU ALREADY HAVE THE BEST)");
-        else
+        else {
             graphics.putString(new TerminalPosition(1, 16), "(INCREASE GUN POWER)");
-        graphics.putString(new TerminalPosition(1, 17), " PRICE: " + upgrades.gunPower.get(gunPowerUpdate+1).getValue0());
+            graphics.putString(new TerminalPosition(1, 17), " PRICE: " + upgrades.gunPower.get(gunPowerUpdate + 1).getValue0());
+        }
+
         if (options == 2) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
         graphics.putString(new TerminalPosition(1, 20), " REINFORCED ARMOR");
-        if (armorUpdate == 4)
+        if (armorUpdate == upgrades.armor.size()-2)
             graphics.putString(new TerminalPosition(1, 22), "(YOU ALREADY HAVE THE BEST)");
-        else
+        else {
             graphics.putString(new TerminalPosition(1, 22), "(MAX LIVES +1)");
-        graphics.putString(new TerminalPosition(1, 23), " PRICE: " + upgrades.armor.get(armorUpdate+1).getValue0());
+            graphics.putString(new TerminalPosition(1, 23), " PRICE: " + upgrades.armor.get(armorUpdate + 1).getValue0());
+        }
+
         if (options == 3) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
         graphics.putString(new TerminalPosition(1, 26), " PATCH HOLES");
         graphics.putString(new TerminalPosition(1, 28), "CURRENT LIVES +1");
         graphics.putString(new TerminalPosition(1, 29), " PRICE: 250");
+
         if (options == 4) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
         graphics.putString(new TerminalPosition(Globals.width-20, Globals.height-1), "CONTINUE THE GAME");
@@ -143,14 +149,14 @@ public class UpgradesMenu {
 
     private void drawStats(TextGraphics graphics){
         graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(Globals.width/2+10, 10), "ef");
-        graphics.putString(new TerminalPosition(Globals.width/2+10, 11), "gh");
-        graphics.putString(new TerminalPosition(Globals.width/2, 14), "RATE OF FIRE: ");
-        graphics.putString(new TerminalPosition(Globals.width/2+15, 14), (String) upgrades.gunSpeed.get(gunSpeedUpdate).getValue1());
-        graphics.putString(new TerminalPosition(Globals.width/2, 16), "CALIBER: ");
-        graphics.putString(new TerminalPosition(Globals.width/2+10, 16), (String) upgrades.gunPower.get(gunPowerUpdate).getValue1());
-        graphics.putString(new TerminalPosition(Globals.width/2, 18), "ARMOR: ");
-        graphics.putString(new TerminalPosition(Globals.width/2+8, 18), (String) upgrades.armor.get(armorUpdate).getValue1());
+        graphics.putString(new TerminalPosition(Globals.width/2+12, 10), "ef");
+        graphics.putString(new TerminalPosition(Globals.width/2+12, 11), "gh");
+        graphics.putString(new TerminalPosition(Globals.width/2+2, 14), "RATE OF FIRE: ");
+        graphics.putString(new TerminalPosition(Globals.width/2+17, 14), (String) upgrades.gunSpeed.get(gunSpeedUpdate).getValue1());
+        graphics.putString(new TerminalPosition(Globals.width/2+2, 16), "CALIBER: ");
+        graphics.putString(new TerminalPosition(Globals.width/2+12, 16), (String) upgrades.gunPower.get(gunPowerUpdate).getValue1());
+        graphics.putString(new TerminalPosition(Globals.width/2+2, 18), "ARMOR: ");
+        graphics.putString(new TerminalPosition(Globals.width/2+10, 18), (String) upgrades.armor.get(armorUpdate).getValue1());
     }
 
     private void processKey(KeyStroke key) {

@@ -1,5 +1,6 @@
 package L7.Gr06.elements.Enemies;
 
+import L7.Gr06.Audio.SoundPlayer;
 import L7.Gr06.common.Globals;
 import L7.Gr06.elements.Bullet;
 import L7.Gr06.elements.Position;
@@ -11,6 +12,7 @@ import java.util.Random;
 
 
 public class EnemyDelta extends Enemy {
+    SoundPlayer soundPlayer = new SoundPlayer();
     Integer value = 500;
     Integer health = 200;
     Random rand = new Random();
@@ -30,6 +32,7 @@ public class EnemyDelta extends Enemy {
             Position pos = new Position(getX(), getY() + 1);
             Bullet newShot = new Bullet(pos, 1);
             addShot(newShot);
+            soundPlayer.playShootSound();
         }
     }
     @Override

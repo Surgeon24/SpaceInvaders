@@ -40,7 +40,17 @@ public class Arena {
         List<Bullet> goodPlayerShots = new ArrayList<>();
         List<Bullet> goodEnemyShots = new ArrayList<>();
         List<Wall> brokenWalls = new ArrayList<>();
-        //check collisions hero's bullets
+        heroShotsCollision(deadEnemies, goodPlayerShots, brokenWalls);
+        enemyShotsCollision(goodEnemyShots, brokenWalls);
+        for (Enemy enemy : deadEnemies)
+            enemies.remove(enemy);
+        for (Bullet shot : goodPlayerShots)
+            hero.getShots().remove(shot);
+        for (Wall wall : brokenWalls)
+            walls.remove(wall);
+    }
+
+    private void heroShotsCollision(List<Enemy> deadEnemies, List<Bullet> goodPlayerShots, List<Wall> brokenWalls){
         for (Bullet shot : hero.getShots()){
             for (Enemy enemy: enemies){
                 if (enemy.collide(shot.getPosition())){
@@ -62,13 +72,9 @@ public class Arena {
             if (shot.getY() < -10)
                 goodPlayerShots.add(shot);
         }
-        for (Enemy enemy : deadEnemies){
-            enemies.remove(enemy);
-        }
-        for (Bullet shot : goodPlayerShots){
-            hero.getShots().remove(shot);
-        }
-        //check collisions enemy's bullets
+    }
+
+    private void enemyShotsCollision(List<Bullet> goodEnemyShots, List<Wall> brokenWalls){
         for(Enemy enemy : enemies){
             for (Bullet shot : enemy.getShots()){
                 if (hero.collide(shot.getPosition())){
@@ -89,9 +95,6 @@ public class Arena {
                 enemy.getShots().remove(shot);
             }
             goodEnemyShots.clear();
-        }
-        for (Wall wall : brokenWalls){
-            walls.remove(wall);
         }
     }
     public boolean enemiesReachedFinish(){

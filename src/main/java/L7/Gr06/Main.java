@@ -7,10 +7,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class Main {
-
-    /*
-        main application, that construct the game and closes all processes after exiting from the game.
-     */
     public static void main(String[] args) throws IOException, FontFormatException, URISyntaxException {
 
         new Game().run();

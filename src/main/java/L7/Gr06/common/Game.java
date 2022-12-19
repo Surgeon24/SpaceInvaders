@@ -23,7 +23,7 @@ public class Game {
     List<Arena> allLevels = new ArrayList<>();
     Prolog prolog = new Prolog();
     MenuBar menuBar = new MenuBar();
-    int currentLevel = 0;
+    int currentLevel = 5;
     int lastLevel = 5;
     int FPS = 20;
     int frameTime = 1000 / FPS;
@@ -70,68 +70,14 @@ public class Game {
         musicPlayer.startInGameMusic();
         try {
             while (runGame) {
-                if (gamePaused) {
-                    if (!mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("RESUME")))
-                        runGame = false;
-                    gamePaused = false;
-                }
-                if (openUpgrades) {
-                    upgradesMenu.showUpgrades(gui.screen, allLevels.get(currentLevel).hero);
-                    openUpgrades = false;
-                }
+                checkIfGamePaused();
                 long startTime = System.currentTimeMillis();
                 draw();
                 List<ACTION> actions = gui.getNextActions();
                 processKeys(actions);
                 allLevels.get(currentLevel).changePositions();
                 allLevels.get(currentLevel).checkCollisions();
-                if (allLevels.get(currentLevel).enemiesReachedFinish()
-                        || allLevels.get(currentLevel).hero.getLives() < 1){
-                    try {
-                        gui.screen.newTextGraphics().putString(new TerminalPosition(Globals.width/2-4, Globals.height/2), "GAME OVER!");
-                        currentLevel = 0;
-                        Globals.score = 0;
-                        soundPlayer.playGameOver();
-                        Thread.sleep(2000);
-                        musicPlayer.stopMusic();
-                        runGame = mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("GAMEOVER"));
-                        Globals.maxLives = Globals.startLives;
-                        allLevels.clear();
-                        upgradesMenu.resetAll();
-                        createListOfAllLevels();
-                        musicPlayer.startInGameMusic();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                if (allLevels.get(currentLevel).nextLevel()) {
-                    try {
-                        if (lastLevel == currentLevel) {
-                            gui.screen.newTextGraphics().putString(new TerminalPosition(Globals.width / 2 - 4, Globals.height / 2), "GAME OVER!");
-                            currentLevel = 0;
-                            Globals.score = 0;
-                            soundPlayer.playGameOver();
-                            Thread.sleep(2000);
-                            musicPlayer.stopMusic();
-                            runGame = mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("WIN"));
-                            Globals.maxLives = Globals.startLives;
-                            allLevels.clear();
-                            upgradesMenu.resetAll();
-                            createListOfAllLevels();
-                            musicPlayer.startInGameMusic();
-                        }
-                        else{
-                            soundPlayer.playWellDone();
-                            Thread.sleep(2000);
-                            allLevels.get(currentLevel + 1).hero = allLevels.get(currentLevel).hero;
-                            currentLevel++;
-                        }
-                    } catch(InterruptedException e){
-                        e.printStackTrace();
-                    }
-                }
-
+                checkIfLevelFinished();
                 long elapsedTime = System.currentTimeMillis() - startTime;
                 long sleepTime = frameTime - elapsedTime;
                 try {
@@ -146,6 +92,66 @@ public class Game {
         }
         finally {
             musicPlayer.stopMusic();
+        }
+    }
+
+    private void checkIfGamePaused(){
+        if (gamePaused) {
+            if (!mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("RESUME")))
+                runGame = false;
+            gamePaused = false;
+        }
+        if (openUpgrades) {
+            upgradesMenu.showUpgrades(gui.screen, allLevels.get(currentLevel).hero);
+            openUpgrades = false;
+        }
+    }
+
+    private void checkIfLevelFinished(){
+        if (allLevels.get(currentLevel).enemiesReachedFinish()
+                || allLevels.get(currentLevel).hero.getLives() < 1){
+            try {
+                gui.screen.newTextGraphics().putString(new TerminalPosition(Globals.width/2-4, Globals.height/2), "GAME OVER!");
+                currentLevel = 0;
+                Globals.score = 0;
+                soundPlayer.playGameOver();
+                Thread.sleep(2000);
+                musicPlayer.stopMusic();
+                runGame = mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("GAMEOVER"));
+                Globals.maxLives = Globals.startLives;
+                allLevels.clear();
+                upgradesMenu.resetAll();
+                createListOfAllLevels();
+                musicPlayer.startInGameMusic();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        if (allLevels.get(currentLevel).nextLevel()) {
+            try {
+                if (lastLevel == currentLevel) {
+                    gui.screen.newTextGraphics().putString(new TerminalPosition(Globals.width / 2 - 4, Globals.height / 2), "GAME OVER!");
+                    currentLevel = 0;
+                    Globals.score = 0;
+                    soundPlayer.playGameOver();
+                    Thread.sleep(2000);
+                    musicPlayer.stopMusic();
+                    runGame = mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("WIN"));
+                    Globals.maxLives = Globals.startLives;
+                    allLevels.clear();
+                    upgradesMenu.resetAll();
+                    createListOfAllLevels();
+                    musicPlayer.startInGameMusic();
+                }
+                else{
+                    soundPlayer.playWellDone();
+                    Thread.sleep(2000);
+                    allLevels.get(currentLevel + 1).hero = allLevels.get(currentLevel).hero;
+                    currentLevel++;
+                }
+            } catch(InterruptedException e){
+                e.printStackTrace();
+            }
         }
     }
 
