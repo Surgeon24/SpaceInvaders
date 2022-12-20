@@ -103,7 +103,7 @@ public class UpgradesMenu {
         graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
 
         graphics.putString(new TerminalPosition(Globals.width / 2 - 4, 3), "UPGRADES:");
-        graphics.putString(new TerminalPosition(Globals.width / 2 - 4, 5), "  POINTS: " + Globals.score);
+        graphics.putString(new TerminalPosition(Globals.width / 2 - 4, 5), "POINTS: " + Globals.score);
 
         if (options == 0) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));

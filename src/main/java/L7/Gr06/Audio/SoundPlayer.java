@@ -50,30 +50,42 @@ public class SoundPlayer {
 
     public void playShootSound() {
         setSound("laserShoot.wav", -40);
+        sound.stop();
         sound.setMicrosecondPosition(0);
         sound.start();
     }
 
     public void playGameOver() {
         setSound("game-over.wav", 0);
+        sound.stop();
         sound.setMicrosecondPosition(0);
         sound.start();
     }
 
     public void playWellDone() {
         setSound("well-done.wav", -5);
+        sound.stop();
         sound.setMicrosecondPosition(0);
         sound.start();
     }
 
     public void playStop() {
         setSound("stop.wav", -5);
+        sound.stop();
         sound.setMicrosecondPosition(0);
         sound.start();
     }
 
     public void playMonsterSound() {
         setSound("monsterSound.wav", -5);
+        sound.stop();
+        sound.setMicrosecondPosition(0);
+        sound.start();
+    }
+
+    public void playVictorySound() {
+        setSound("winSound.wav", 0);
+        sound.stop();
         sound.setMicrosecondPosition(0);
         sound.start();
     }

@@ -133,9 +133,10 @@ public class Game {
                     gui.screen.newTextGraphics().putString(new TerminalPosition(Globals.width / 2 - 4, Globals.height / 2), "GAME OVER!");
                     currentLevel = 0;
                     Globals.score = 0;
-                    soundPlayer.playGameOver();
-                    Thread.sleep(2000);
                     musicPlayer.stopMusic();
+                    Thread.sleep(500);
+                    soundPlayer.playVictorySound();
+                    Thread.sleep(2000);
                     runGame = mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("WIN"));
                     Globals.maxLives = Globals.startLives;
                     allLevels.clear();
