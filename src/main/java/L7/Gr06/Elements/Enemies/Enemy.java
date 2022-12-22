@@ -31,7 +31,7 @@ public abstract class Enemy extends Instance {
                 (getY() <= object.getY() && getY() + 1 >= object.getY());
     }
 
-    public void shoot(){}
+    public void shoot(int randomNum){}
 
     public List<Bullet> getShots(){ return shots;}
     public void addShot(Bullet newShot){ shots.add(newShot);}

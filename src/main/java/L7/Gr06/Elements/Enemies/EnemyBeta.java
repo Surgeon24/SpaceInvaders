@@ -26,9 +26,9 @@ public class EnemyBeta extends Enemy {
     public Integer getHealth() { return health;}
     @Override
     public void setHealth(Integer health) {this.health = health;}
-@Override
-    public void shoot(){
-        if (rand.nextInt(100) > 90){
+    @Override
+    public void shoot(int randomNum){
+        if (randomNum > 90){
             Position pos = new Position(getX(), getY() + 1);
             Bullet newShot = new Bullet(pos, 1);
             addShot(newShot);

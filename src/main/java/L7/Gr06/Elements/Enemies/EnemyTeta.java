@@ -30,9 +30,10 @@ public class EnemyTeta extends Enemy {
     @Override
     public void setHealth(Integer health) {this.health = health;}
     @Override
-    public void shoot(){
-        if (ready && rand.nextInt(100) >= 75){
+    public void shoot(int randomNum){
+        if (ready && randomNum >= 75){
             lightning = new Lightning(new Position(getX(),getY()+2), 1);
+            addShot(lightning);
             counter = 5;
             ready = false;
             soundPlayer.playMonsterSound();
