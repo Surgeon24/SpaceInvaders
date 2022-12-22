@@ -15,7 +15,6 @@ public class EnemyDelta extends Enemy {
     SoundPlayer soundPlayer = new SoundPlayer();
     Integer value = 500;
     Integer health = 200;
-    Random rand = new Random();
 
     public EnemyDelta(Position pos, int vector) {
         super(pos, vector);
@@ -27,8 +26,8 @@ public class EnemyDelta extends Enemy {
     @Override
     public void setHealth(Integer health) {this.health = health;}
     @Override
-    public void shoot(){
-        if (rand.nextInt(100) > 40){
+    public void shoot(int randomNum){
+        if (randomNum > 40){
             Position pos = new Position(getX(), getY() + 1);
             Bullet newShot = new Bullet(pos, 1);
             addShot(newShot);

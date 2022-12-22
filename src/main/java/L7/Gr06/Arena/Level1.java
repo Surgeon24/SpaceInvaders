@@ -59,7 +59,5 @@ public class Level1 extends Arena{
         for (Wall wall : walls){
             wall.draw(graphics);
         }
-
-
     }
 }

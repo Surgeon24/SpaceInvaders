@@ -14,10 +14,12 @@ import L7.Gr06.Common.Globals;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static java.util.Collections.emptyList;
 
 public abstract class Arena {
+    Random rand = new Random();
     public Hero hero = new Hero(new Position(Globals.width/2, Globals.height-2));
     public List<Enemy> enemies = new ArrayList<>();
     public List<Wall> walls = new ArrayList<>();
@@ -26,6 +28,7 @@ public abstract class Arena {
 
     public void changePositions(){
         for (Enemy enemy : enemies) {
+            int randomNum = rand.nextInt(100);
             if ((enemy.getVector() == 1 && enemy.getX() >= Globals.width-4)
                 || (enemy.getVector() == -1 && enemy.getX() <= 2)) {
                 enemy.setY(enemy.getY() + 3);
@@ -33,7 +36,7 @@ public abstract class Arena {
             } else {
                 enemy.setX(enemy.getX() + enemy.getVector());
             }
-            enemy.shoot();
+            enemy.shoot(randomNum);
         }
     }
     public void checkCollisions(){
