@@ -1,6 +1,6 @@
 package L7.Gr06;
 
-import L7.Gr06.common.Game;
+import L7.Gr06.Common.Game;
 
 import java.awt.*;
 import java.io.IOException;
