@@ -24,7 +24,7 @@ public class Hero extends Instance {
     public List<Bullet> getShots(){
         return shots;
     }
-
+    public void setShots(List<Bullet> newShots) {this.shots = newShots;}
     public Integer getLives(){ return lives;}
     public Integer getGunPower(){ return gunPower;}
     public void changeGunPower(Integer x){ gunPower += x;}

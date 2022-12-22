@@ -23,7 +23,7 @@ public class EnemyBeta extends Enemy {
     @Override
     public Integer getValue() { return value;}
     @Override
-    public Integer getHealth() { return health;}
+    public Integer getHealth() { return this.health;}
     @Override
     public void setHealth(Integer health) {this.health = health;}
 @Override
