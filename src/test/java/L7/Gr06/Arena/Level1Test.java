@@ -1,20 +1,13 @@
 package L7.Gr06.Arena;
 
 import L7.Gr06.Common.Globals;
-import L7.Gr06.Elements.Bullet;
-import L7.Gr06.Elements.Enemies.Enemy;
-import L7.Gr06.Elements.Enemies.EnemyBeta;
-import L7.Gr06.Elements.Enemies.EnemyGamma;
 import L7.Gr06.Elements.Position;
 import org.junit.jupiter.api.Test;
 
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Level1Test {
-    //Level1 tests
     @Test
     public void createEnemies(){
         Arena arena = new Level1();
@@ -27,6 +20,7 @@ public class Level1Test {
     public void createWalls(){
         Arena arena = new Level1();
         assertEquals(new Position(5, Globals.height-8), arena.walls.get(0).getPosition());
+        assertEquals(new Position(25,Globals.height-8), arena.walls.get(1).getPosition());
         assertEquals(new Position(45,Globals.height-8), arena.walls.get(2).getPosition());
     }
 

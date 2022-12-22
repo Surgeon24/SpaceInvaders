@@ -11,6 +11,38 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Level6Test {
+    @Test
+    public void createEnemies(){
+        Arena arena = new Level6();
+        assertEquals(new Position(3,6),  arena.enemies.get(1).getPosition());
+        assertEquals(new Position(3,9),  arena.enemies.get(2).getPosition());
+        assertEquals(new Position(3,18), arena.enemies.get(4).getPosition());
+        assertEquals(new Position(9,15), arena.enemies.get(8).getPosition());
+    }
+
+    @Test
+    public void createWalls(){
+        Arena arena = new Level6();
+        assertEquals(new Position(5, Globals.height-8), arena.walls.get(0).getPosition());
+        assertEquals(new Position(25,Globals.height-8), arena.walls.get(1).getPosition());
+        assertEquals(new Position(45,Globals.height-8), arena.walls.get(2).getPosition());
+    }
+
+    @Test
+    public void changePositions() {
+        Arena arena = new Level6();
+        assertEquals(arena.enemies.get(1).getPosition(), new Position(3,6));
+        assertEquals(arena.enemies.get(6).getPosition(), new Position(9,9));
+        arena.changePositions();
+        assertEquals(arena.enemies.get(1).getPosition(), new Position(4,6));
+        assertEquals(arena.enemies.get(6).getPosition(), new Position(8,9));
+        //shouldn't change anything, because frame didn't change
+        arena.changePositions();
+        assertEquals(arena.enemies.get(1).getPosition(), new Position(4,6));
+        assertEquals(arena.enemies.get(6).getPosition(), new Position(8,9));
+    }
+
+
     //Arena tests
     @Test
     public void checkCollisions(){
