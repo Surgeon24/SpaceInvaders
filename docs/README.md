@@ -22,7 +22,7 @@ that will show progress in the game.
 - **Bear arms** - Enemy are able to shoot.
 - **Sometimes you lose** - If enemy reaches GC or shoots him
 the Game Over screen appears.
-- **Levels difficulty** - Next level is more difficult than the previous, and the difficulty is balanced. The game is not too easy and not too hard to play.
+- **Levels difficulty** - There are multiple levels. Next level is more difficult than the previous, and the difficulty is balanced. The game is not too easy and not too hard to play.
 - **Complex enemies** - different types of enemies are introduced.
 - **Destroying walls** - When the bullet hits wall, bullet disappears
 and wall loses its strength. After losing all the strength wall 
