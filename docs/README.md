@@ -9,9 +9,8 @@ This project was developed by *Mikhail Ermolaev* and *David Burchakov* for LDTS 
 
 ### IMPLEMENTED FEATURES
 
-All implemented classes and their relations are shown on the diagram:
+All implemented classes and their relations are shown on the diagram:\
 ![UML diagram](/docs/images/SpaceInvadersDiagram.jpeg "UML diagram")
-
 
 - **Moving** - The player can move the game character (hereinafter referred to as GC) 
 left and right by pressing *A* and *D* buttons.
@@ -22,14 +21,17 @@ left and right by pressing *A* and *D* buttons.
 and wall loses its strength. After losing all the strength wall 
 also disappears.
 - **Upgrade spaceship** - During the game, player can go to the upgrade menu (using TAB) and spend points
-to upgrade the GC.\
-![implemented features in mid delivery](/docs/images/midDeliveryImplemented.png "implemented features in mid delivery")
+to upgrade the GC.
+
+![screenshot1](/docs/images/screenshot1.png "main menu")
+![screenshot2](/docs/images/screenshot2.png "gameplay")
+![screenshot3](/docs/images/screenshot3.png "upgrade menu")
 
 ------
 
 ### DESIGN
 
-#### The GC should be able to move and shoot at the same time
+#### Creating and managing plenty of instances
 **Problem in Context**
 
 As the project became more complex, more and more classes 
@@ -45,12 +47,16 @@ the prototype.
 
 **Implementation**
 
-UML, that was represented above shows dependencies between Prototype (Instance)
+UML, that was represented above shows dependencies between Prototype (Instance) 
 and its objects (Enemy, Hero, Wall..)\
 These classes can be found in the following files:
-- [Instance](https://github.com/FEUP-LDTS-2022/project-l07gr06/blob/master/src/main/java/L7/Gr06/elements/Instance.java)
-- [Hero](https://github.com/FEUP-LDTS-2022/project-l07gr06/blob/master/src/main/java/L7/Gr06/elements/Hero.java)
-- [Enemy](https://github.com/FEUP-LDTS-2022/project-l07gr06/blob/master/src/main/java/L7/Gr06/elements/Enemy.java)
+- [Instance](https://github.com/FEUP-LDTS-2022/project-l07gr06/blob/master/src/main/java/L7/Gr06/Elements/Instance.java)
+- [Hero](https://github.com/FEUP-LDTS-2022/project-l07gr06/blob/master/src/main/java/L7/Gr06/Elements/Hero.java)
+- [Enemy](https://github.com/FEUP-LDTS-2022/project-l07gr06/blob/master/src/main/java/L7/Gr06/Elements/Enemies/Enemy.java)
+
+Another using of this pattern is between  Arena (Prototype) and Levels (objects)\
+These classes can be found in the following files:
+
 
 **Consequences**
 
