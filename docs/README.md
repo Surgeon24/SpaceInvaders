@@ -22,14 +22,17 @@ that will show progress in the game.
 - **Bear arms** - Enemy are able to shoot.
 - **Sometimes you lose** - If enemy reaches GC or shoots him
 the Game Over screen appears.
-- **Levels difficulty** - Next level is more difficult than the previous, and the difficulty is balanced. The game is not too easy and not too hard to play.
+- **Levels difficulty** - There are multiple levels. The next level is more difficult than the previous one.
+- **Balance** - The difficulty is balanced. The game is not too easy and not too hard to play.
 - **Complex enemies** - different types of enemies are introduced.
-- **Upgrades** - The GC can upgrade his gun to shoot faster or increase damage. Upgrades cost score.
 - **Destroying walls** - When the bullet hits wall, bullet disappears
 and wall loses its strength. After losing all the strength wall 
 also disappears.
 - **Upgrade spaceship** - During the game, player can go to the upgrade menu (using TAB) and spend points
 to upgrade the GC.
+- **Sound** - Background music and in-game sounds are implemented.
+- **Pause** - Player can pause and resume the game. 
+- **Hints** - During pause the Player is given hints. There are shown in the hint bar.
 
 ![screenshot1](/docs/images/screenshot1.png "main menu")
 ![screenshot2](/docs/images/screenshot2.png "gameplay")
@@ -118,12 +121,11 @@ code after:
 
 ### TESTING
 
-Testing with coverage shows us weak results, mostly because
+Testing with coverage shows us solid results, but not perfect. Mostly because
 there are many primitive getters and setters that weren't tested,
-also as constructors.\
-(more tests will be implemented in future updates, 
-also TDD methodology will be represented)
-![Test coverage](/docs/images/coverage.png "Test with coverage")
+as well as constructors, music libraries that are difficult to test.
+Tests were implemented using Junit and Mockito frameworks.
+![Test coverage](/docs/images/testResults.png "Test with coverage")
 
 
 
