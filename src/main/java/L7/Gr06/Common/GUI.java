@@ -22,7 +22,8 @@ import java.util.Set;
 
 public class GUI {
     final Screen screen;
-    Set<Integer> pressedKeys = new HashSet<>();
+    public Set<Integer> pressedKeys = new HashSet<>();
+
     public GUI(int width, int height) throws IOException, FontFormatException, URISyntaxException {
         AWTTerminalFontConfiguration fontConfig = loadSquareFont();
         Terminal terminal = createTerminal(width, height, fontConfig);
@@ -36,11 +37,12 @@ public class GUI {
         terminalFactory.setForceAWTOverSwing(true);
         terminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
         Terminal terminal = terminalFactory.createTerminal();
-        ((AWTTerminalFrame)terminal).getComponent(0).addKeyListener(new KeyAdapter() {
+        ((AWTTerminalFrame) terminal).getComponent(0).addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 pressedKeys.add(e.getKeyCode());
             }
+
             @Override
             public void keyReleased(KeyEvent e) {
                 pressedKeys.remove(e.getKeyCode());
@@ -58,6 +60,7 @@ public class GUI {
         screen.doResizeIfNecessary();
         return screen;
     }
+
     private AWTTerminalFontConfiguration loadSquareFont() throws URISyntaxException, FontFormatException, IOException {
         URL resource = getClass().getClassLoader().getResource("Invaders.otf");
         File fontFile = new File(resource.toURI());
@@ -71,12 +74,12 @@ public class GUI {
         return fontConfig;
     }
 
-    public java.util.List<Game.ACTION> getNextActions (){
+    public java.util.List<Game.ACTION> getNextActions() {
         List<Game.ACTION> actions = new LinkedList<>();
 
-        if ((pressedKeys.contains(KeyEvent.VK_LEFT))||(pressedKeys.contains(KeyEvent.VK_A)))
+        if ((pressedKeys.contains(KeyEvent.VK_LEFT)) || (pressedKeys.contains(KeyEvent.VK_A)))
             actions.add(Game.ACTION.LEFT);
-        if ((pressedKeys.contains(KeyEvent.VK_RIGHT))||(pressedKeys.contains(KeyEvent.VK_D)))
+        if ((pressedKeys.contains(KeyEvent.VK_RIGHT)) || (pressedKeys.contains(KeyEvent.VK_D)))
             actions.add(Game.ACTION.RIGHT);
         if (pressedKeys.contains(KeyEvent.VK_ESCAPE)) actions.add(Game.ACTION.PAUSE);
         if (pressedKeys.contains(KeyEvent.VK_SPACE)) actions.add(Game.ACTION.SHOOT);
@@ -84,5 +87,4 @@ public class GUI {
 
         return actions;
     }
-
 }

@@ -35,7 +35,6 @@ public class Game {
 
 
 
-
     enum ACTION {LEFT, RIGHT, PAUSE, SHOOT, UPGRADE}
 
     public Game() throws FontFormatException, IOException, URISyntaxException {

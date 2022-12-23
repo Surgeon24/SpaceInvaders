@@ -16,37 +16,43 @@ import L7.Gr06.Elements.Enemies.EnemyAlfa;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Level2 extends Arena{
-    protected long moveEnemySpeed = 600;
+    private long moveEnemySpeed = 600;
+
     public Level2() {
         enemies = createEnemies();
         walls = createWalls();
     }
+
     protected List<Enemy> createEnemies(){
+
         List<Enemy> list = new ArrayList<>();
-        for (int i = 3; i < Globals.width-3; i+=6) {
-            list.add(new EnemyAlfa(new Position(i, 6),1));
-            list.add(new EnemyAlfa(new Position(i, 9),-1));
-            list.add(new EnemyBeta(new Position(i, 12),1));
+        for (int i = 3; i < Globals.width - 3; i += 6) {
+            list.add(new EnemyAlfa(new Position(i, 6), 1));
+            list.add(new EnemyAlfa(new Position(i, 9), -1));
+            list.add(new EnemyBeta(new Position(i, 12), 1));
         }
         return list;
     }
 
     protected List<Wall> createWalls(){
+
         List<Wall> list = new ArrayList<>();
-        for (int i = 5; i < Globals.width; i+=20)
-            list.add(new Wall(new Position(i,Globals.height - 8)));
+        for (int i = 5; i < Globals.width; i += 20)
+            list.add(new Wall(new Position(i, Globals.height - 8)));
         return list;
     }
 
     @Override
-    public void changePositions(){
+    public void changePositions() {
         long currentTime = System.currentTimeMillis();
         if (currentTime > moveEnemyTimer + moveEnemySpeed) {
             super.changePositions();
             moveEnemyTimer = System.currentTimeMillis();
         }
     }
+
     @Override
     public void draw(TextGraphics graphics) {
         graphics.setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));
@@ -57,7 +63,7 @@ public class Level2 extends Arena{
         for (Enemy enemy : enemies){
             enemy.draw(graphics);
         }
-        for (Wall wall : walls){
+        for (Wall wall : walls) {
             wall.draw(graphics);
         }
     }

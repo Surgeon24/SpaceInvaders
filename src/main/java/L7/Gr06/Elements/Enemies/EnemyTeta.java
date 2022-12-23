@@ -19,6 +19,7 @@ public class EnemyTeta extends Enemy {
     Integer counter = 0;
     Random rand = new Random();
 
+
     public EnemyTeta(Position pos, int vector) {
         super(pos, vector);
     }

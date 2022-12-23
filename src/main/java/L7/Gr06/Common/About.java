@@ -16,8 +16,7 @@ public class About {
             draw(screen.newTextGraphics());
             screen.refresh();
             screen.readInput();
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -31,17 +30,17 @@ public class About {
         graphics.putString(new TerminalPosition(2, 2), "ab  ef  jk  nopq  yz{  [\\  ab  ef  jk  nopq  yz{  [\\  ab");
         graphics.putString(new TerminalPosition(2, 3), "cd  gh  lm  rstu  |}~  ]^  cd  gh  lm  rstu  |}~  ]^  cd");
 
-        graphics.putString(new TerminalPosition(Globals.width/2-9, 10), "SPACE INVADERS V0.1");
+        graphics.putString(new TerminalPosition(Globals.width / 2 - 9, 10), "SPACE INVADERS V0.1");
         graphics.putString(new TerminalPosition(4, 12), "SPACE INVADERS IS A TEXT BASED ARCADE GAME, THAT MAKE");
         graphics.putString(new TerminalPosition(4, 14), "A REFERENCE TO THE GAME SERIES OF THE SAME TITLE,");
         graphics.putString(new TerminalPosition(4, 16), "TAKING BEST MOMENTS FROM THOSE GAMES AND ADAPTING IT");
         graphics.putString(new TerminalPosition(4, 18), "TO MODERN REALITIES.");
-        graphics.putString(new TerminalPosition(Globals.width/2-4, 21), "CONTROLS:");
+        graphics.putString(new TerminalPosition(Globals.width / 2 - 4, 21), "CONTROLS:");
         graphics.putString(new TerminalPosition(4, 23), "'A' AND 'D' TO MOVE LEFT AND RIGHT");
         graphics.putString(new TerminalPosition(4, 25), "'SPACE' TO SHOOT");
         graphics.putString(new TerminalPosition(4, 27), "'TAB' TO UPGRADE YOUR SHIP");
         graphics.putString(new TerminalPosition(4, 30), "TRY TO GAIN MORE POINTS AND WATCH OUT ON YOUR LIVES.");
         graphics.putString(new TerminalPosition(4, 32), "GOOD LUCK!");
-        graphics.putString(new TerminalPosition(Globals.width-30, Globals.height-2), "PRESS ANY KEY TO RETURN...");
+        graphics.putString(new TerminalPosition(Globals.width - 30, Globals.height - 2), "PRESS ANY KEY TO RETURN...");
     }
 }
