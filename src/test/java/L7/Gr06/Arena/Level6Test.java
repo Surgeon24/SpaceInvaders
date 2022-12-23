@@ -79,9 +79,10 @@ public class Level6Test {
         Mockito.when(screen.newTextGraphics()).thenReturn(tg);
         Arena arena = new Level1();
         arena.draw(tg);
-        Mockito.verify(tg, Mockito.times(arena.enemies.size()+2)).setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));
-        Mockito.verify(tg, Mockito.times(arena.enemies.size()+2)).setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));
+
+        Mockito.verify(tg, Mockito.times(arena.enemies.size()+3)).setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));
+        Mockito.verify(tg, Mockito.times(arena.enemies.size()+3)).setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));
         Mockito.verify(tg, Mockito.times(1)).fillRectangle(new TerminalPosition(0, 0), new TerminalSize(Globals.width, Globals.height), ' ');;
-        Mockito.verify(tg, Mockito.times(2)).enableModifiers(SGR.BOLD);
+        Mockito.verify(tg, Mockito.times(3)).enableModifiers(SGR.BOLD);
     }
 }

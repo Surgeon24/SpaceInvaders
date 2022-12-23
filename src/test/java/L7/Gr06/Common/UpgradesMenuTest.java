@@ -25,7 +25,7 @@ public class UpgradesMenuTest {
         Mockito.when(screen.readInput()).thenReturn(new KeyStroke('w',false,false), new KeyStroke(KeyType.Enter,false,false));
 
         UpgradesMenu menu = new UpgradesMenu();
-        menu.showUpgrades(screen, new Hero(new Position(2,2)));
+        menu.showUpgrades(screen);
         Mockito.verify(tg, Mockito.times(2)).setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));
         Mockito.verify(tg, Mockito.times(2)).putString(new TerminalPosition(Globals.width-20, Globals.height-1), "CONTINUE THE GAME");
     }
