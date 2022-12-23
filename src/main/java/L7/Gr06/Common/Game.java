@@ -13,7 +13,7 @@ import java.util.*;
 import java.util.List;
 
 public class Game {
-    private final GUI gui;
+    final GUI gui;
     private boolean runGame;
     private boolean gamePaused = true;
     private boolean openUpgrades = false;
