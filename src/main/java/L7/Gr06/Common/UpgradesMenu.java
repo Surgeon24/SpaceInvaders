@@ -23,7 +23,7 @@ public class UpgradesMenu {
     Integer numberOfOptions = 5;
     SoundPlayer soundPlayer = new SoundPlayer();
     Upgrades upgrades = new Upgrades();
-    public void showUpgrades(Screen screen, Hero hero){
+    public void showUpgrades(Screen screen){
         try {
             while (true) {
                 screen.clear();
@@ -40,7 +40,7 @@ public class UpgradesMenu {
                         if (gunSpeedUpdate < 4) {
                             if (Globals.score >= (int) upgrades.gunSpeed.get(gunSpeedUpdate + 1).getValue0()) {
                                 Globals.score -= (int) upgrades.gunSpeed.get(gunSpeedUpdate + 1).getValue0();
-                                hero.changeGunSpeed((int) upgrades.gunSpeed.get(gunSpeedUpdate + 1).getValue2());
+                                Hero.getHero().changeGunSpeed((int) upgrades.gunSpeed.get(gunSpeedUpdate + 1).getValue2());
                                 gunSpeedUpdate++;
                                 soundPlayer.playUpgrade();
                             } else {
@@ -54,7 +54,7 @@ public class UpgradesMenu {
                         if (gunPowerUpdate < 5) {
                             if (Globals.score >= (int) upgrades.gunPower.get(gunPowerUpdate + 1).getValue0()) {
                                 Globals.score -= (int) upgrades.gunPower.get(gunPowerUpdate + 1).getValue0();
-                                hero.changeGunPower((int) upgrades.gunPower.get(gunPowerUpdate + 1).getValue2());
+                                Hero.getHero().changeGunPower((int) upgrades.gunPower.get(gunPowerUpdate + 1).getValue2());
                                 gunPowerUpdate++;
                                 soundPlayer.playUpgrade();
                             } else {
@@ -79,9 +79,9 @@ public class UpgradesMenu {
                         }
                     }
                     else if (options == 3) {
-                        if (Globals.score >= 250 && Globals.maxLives > hero.getLives()) {
+                        if (Globals.score >= 250 && Globals.maxLives > Hero.getHero().getLives()) {
                             Globals.score -= 250;
-                            hero.changeLives(1);
+                            Hero.getHero().changeLives(1);
                             soundPlayer.playUpgrade();
                         } else {
                             soundPlayer.playDecline();
@@ -117,29 +117,29 @@ public class UpgradesMenu {
 
         if (options == 1) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(1, 14), upgrades.gunPower.get(gunPowerUpdate + 1).getValue1() + " GUNS");
+        graphics.putString(new TerminalPosition(1, 15), upgrades.gunPower.get(gunPowerUpdate + 1).getValue1() + " GUNS");
         if (gunPowerUpdate == upgrades.gunPower.size()-2)
-            graphics.putString(new TerminalPosition(1, 16), "(YOU ALREADY HAVE THE BEST)");
+            graphics.putString(new TerminalPosition(1, 17), "(YOU ALREADY HAVE THE BEST)");
         else {
-            graphics.putString(new TerminalPosition(1, 16), "(INCREASE GUN POWER)");
-            graphics.putString(new TerminalPosition(1, 17), " PRICE: " + upgrades.gunPower.get(gunPowerUpdate + 1).getValue0());
+            graphics.putString(new TerminalPosition(1, 17), "(INCREASE GUN POWER)");
+            graphics.putString(new TerminalPosition(1, 18), " PRICE: " + upgrades.gunPower.get(gunPowerUpdate + 1).getValue0());
         }
 
         if (options == 2) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(1, 20), " REINFORCED ARMOR");
+        graphics.putString(new TerminalPosition(1, 22), " REINFORCED ARMOR");
         if (armorUpdate == upgrades.armor.size()-2)
-            graphics.putString(new TerminalPosition(1, 22), "(YOU ALREADY HAVE THE BEST)");
+            graphics.putString(new TerminalPosition(1, 24), "(YOU ALREADY HAVE THE BEST)");
         else {
-            graphics.putString(new TerminalPosition(1, 22), "(MAX LIVES +1)");
-            graphics.putString(new TerminalPosition(1, 23), " PRICE: " + upgrades.armor.get(armorUpdate + 1).getValue0());
+            graphics.putString(new TerminalPosition(1, 24), "(MAX LIVES +1)");
+            graphics.putString(new TerminalPosition(1, 25), " PRICE: " + upgrades.armor.get(armorUpdate + 1).getValue0());
         }
 
         if (options == 3) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));
-        graphics.putString(new TerminalPosition(1, 26), " PATCH HOLES");
-        graphics.putString(new TerminalPosition(1, 28), "CURRENT LIVES +1");
-        graphics.putString(new TerminalPosition(1, 29), " PRICE: 250");
+        graphics.putString(new TerminalPosition(1, 29), " PATCH HOLES");
+        graphics.putString(new TerminalPosition(1, 31), "CURRENT LIVES +1");
+        graphics.putString(new TerminalPosition(1, 32), " PRICE: 250");
 
         if (options == 4) graphics.setForegroundColor(TextColor.Factory.fromString(selectedColor));
         else graphics.setForegroundColor(TextColor.Factory.fromString(idleColor));

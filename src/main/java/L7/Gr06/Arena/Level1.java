@@ -2,6 +2,7 @@ package L7.Gr06.Arena;
 
 import L7.Gr06.Elements.Enemies.Enemy;
 import L7.Gr06.Elements.Enemies.EnemyAlfa;
+import L7.Gr06.Elements.Hero;
 import L7.Gr06.Elements.Position;
 import L7.Gr06.Elements.Wall;
 import com.googlecode.lanterna.SGR;
@@ -15,13 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Level1 extends Arena{
-    private long moveEnemyTimer;
-    private long moveEnemySpeed = 700;
     public Level1() {
+        super();
         enemies = createEnemies();
         walls = createWalls();
     }
-    private List<Enemy> createEnemies(){
+
+    protected List<Enemy> createEnemies(){
         List<Enemy> list = new ArrayList<>();
         for (int i = 1; i < Globals.width-3; i+=6) {
             list.add(new EnemyAlfa(new Position(i, 6),1));
@@ -30,7 +31,7 @@ public class Level1 extends Arena{
         return list;
     }
 
-    private List<Wall> createWalls(){
+    protected List<Wall> createWalls(){
         List<Wall> list = new ArrayList<>();
         for (int i = 5; i < Globals.width; i+=20)
             list.add(new Wall(new Position(i,Globals.height - 8)));

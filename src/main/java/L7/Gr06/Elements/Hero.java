@@ -2,6 +2,7 @@ package L7.Gr06.Elements;
 
 import L7.Gr06.Audio.SoundPlayer;
 import L7.Gr06.Common.Globals;
+import L7.Gr06.Elements.Shots.Bullet;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
@@ -11,14 +12,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Hero extends Instance {
+    private static Hero hero;
     private List<Bullet> shots = new ArrayList<>();
     private Integer lives = Globals.maxLives;
     private long gunTimer;
     private long gunSpeed = 800;
     private Integer gunPower = 1;
     SoundPlayer soundPlayer = new SoundPlayer();
-    public Hero(Position pos) {
-        super(pos);
+    public Hero(Position pos) {super(pos);}
+
+    public static Hero getHero(){
+        if (hero == null) {
+            hero = new Hero(new Position(Globals.width/2, Globals.height-2));
+        }
+        return hero;
     }
 
     public List<Bullet> getShots(){

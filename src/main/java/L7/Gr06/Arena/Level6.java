@@ -1,6 +1,7 @@
 package L7.Gr06.Arena;
 
 import L7.Gr06.Elements.Enemies.*;
+import L7.Gr06.Elements.Hero;
 import L7.Gr06.Elements.Position;
 import L7.Gr06.Elements.Wall;
 import com.googlecode.lanterna.SGR;
@@ -14,15 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Level6 extends Arena{
-    private long moveEnemyTimer;
-    private long moveEnemySpeed = 200;
-    //constructors
+    protected long moveEnemySpeed = 200;
     public Level6() {
         enemies = createEnemies();
         walls = createWalls();
     }
-    //instances initialisations
-    private List<Enemy> createEnemies(){
+    protected List<Enemy> createEnemies(){
         List<Enemy> list = new ArrayList<>();
         list.add(new EnemyDelta(new Position(Globals.width/2, -3),1));
         for (int i = 3; i < Globals.width-3; i+=6) {
@@ -40,7 +38,7 @@ public class Level6 extends Arena{
         return list;
     }
 
-    private List<Wall> createWalls(){
+    protected List<Wall> createWalls(){
         List<Wall> list = new ArrayList<>();
         for (int i = 5; i < Globals.width; i+=20)
             list.add(new Wall(new Position(i,Globals.height - 8)));
@@ -61,7 +59,7 @@ public class Level6 extends Arena{
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(Globals.width, Globals.height), ' ');
         graphics.enableModifiers(SGR.BOLD);
         graphics.setForegroundColor(TextColor.Factory.fromString(Globals.textColor));
-        hero.draw(graphics);
+        Hero.getHero().draw(graphics);
         for (Enemy enemy : enemies){
             enemy.draw(graphics);
         }

@@ -3,8 +3,12 @@ package L7.Gr06.Common;
 import L7.Gr06.Audio.MusicPlayer;
 import L7.Gr06.Audio.SoundPlayer;
 import L7.Gr06.Arena.*;
-import L7.Gr06.Elements.MenuBar;
+import L7.Gr06.Elements.Hero;
+import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.graphics.TextGraphics;
 
 import java.awt.*;
 import java.io.IOException;
@@ -53,7 +57,7 @@ public class Game {
         try {
             gui.screen.clear();
             allLevels.get(currentLevel).draw(gui.screen.newTextGraphics());
-            menuBar.draw(gui.screen.newTextGraphics(), allLevels.get(currentLevel).hero.getLives(), currentLevel);
+            menuBar.draw(gui.screen.newTextGraphics(), Hero.getHero().getLives(), currentLevel);
             gui.screen.refresh();
         }
         catch (IOException e){
@@ -101,22 +105,16 @@ public class Game {
             gamePaused = false;
         }
         if (openUpgrades) {
-            upgradesMenu.showUpgrades(gui.screen, allLevels.get(currentLevel).hero);
+            upgradesMenu.showUpgrades(gui.screen);
             openUpgrades = false;
         }
     }
 
-    private void checkIfLevelFinished(){
+    private void checkIfLevelFinished() throws java.io.IOException {
         if (allLevels.get(currentLevel).enemiesReachedFinish()
-                || allLevels.get(currentLevel).hero.getLives() < 1){
+                || Hero.getHero().getLives() < 1){
             try {
-                gui.screen.newTextGraphics().putString(new TerminalPosition(Globals.width/2-4, Globals.height/2), "GAME OVER!");
-                currentLevel = 0;
-                Globals.score = 0;
-                soundPlayer.playGameOver();
-                Thread.sleep(2000);
-                musicPlayer.stopMusic();
-                runGame = mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("GAMEOVER"));
+                showGameOverScreen();
                 Globals.maxLives = Globals.startLives;
                 allLevels.clear();
                 upgradesMenu.resetAll();
@@ -129,14 +127,7 @@ public class Game {
         if (allLevels.get(currentLevel).nextLevel()) {
             try {
                 if (lastLevel == currentLevel) {
-                    gui.screen.newTextGraphics().putString(new TerminalPosition(Globals.width / 2 - 4, Globals.height / 2), "GAME OVER!");
-                    currentLevel = 0;
-                    Globals.score = 0;
-                    musicPlayer.stopMusic();
-                    Thread.sleep(500);
-                    soundPlayer.playVictorySound();
-                    Thread.sleep(2000);
-                    runGame = mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("WIN"));
+                    showWinScreen();
                     Globals.maxLives = Globals.startLives;
                     allLevels.clear();
                     upgradesMenu.resetAll();
@@ -146,7 +137,6 @@ public class Game {
                 else{
                     soundPlayer.playWellDone();
                     Thread.sleep(2000);
-                    allLevels.get(currentLevel + 1).hero = allLevels.get(currentLevel).hero;
                     currentLevel++;
                 }
             } catch(InterruptedException e){
@@ -155,19 +145,52 @@ public class Game {
         }
     }
 
+    private void showWinScreen() throws java.io.IOException, java.lang.InterruptedException {
+        TextGraphics tg = gui.screen.newTextGraphics();
+        tg.enableModifiers(SGR.BOLD);
+        tg.setForegroundColor(TextColor.Factory.fromString("#ede9dd"));
+        tg.putString(new TerminalPosition(Globals.width/2-6, Globals.height/2-11), "              ");
+        tg.putString(new TerminalPosition(Globals.width/2-6, Globals.height/2-10), "   YOU WON!   ");
+        tg.putString(new TerminalPosition(Globals.width/2-6, Globals.height/2-9), "              ");
+        gui.screen.refresh();
+        currentLevel = 0;
+        Globals.score = 0;
+        musicPlayer.stopMusic();
+        Thread.sleep(1000);
+        soundPlayer.playVictorySound();
+        Thread.sleep(3000);
+        runGame = mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("WIN"));
+    }
+
+    private void showGameOverScreen() throws java.io.IOException, java.lang.InterruptedException {
+        TextGraphics tg = gui.screen.newTextGraphics();
+        tg.enableModifiers(SGR.BOLD);
+        tg.setForegroundColor(TextColor.Factory.fromString("#ede9dd"));
+        tg.putString(new TerminalPosition(Globals.width/2-6, Globals.height/2-11), "              ");
+        tg.putString(new TerminalPosition(Globals.width/2-6, Globals.height/2-10), "  GAME OVER!  ");
+        tg.putString(new TerminalPosition(Globals.width/2-6, Globals.height/2-9), "              ");
+        gui.screen.refresh();
+        currentLevel = 0;
+        Globals.score = 0;
+        soundPlayer.playGameOver();
+        Thread.sleep(3000);
+        musicPlayer.stopMusic();
+        runGame = mainMenu.showMenu(gui.screen, MainMenu.STATUS.valueOf("GAMEOVER"));
+    }
+
     private void processKeys (List<ACTION> actions){
 
         for (ACTION action : actions) {
             switch (action) {
                 case LEFT -> {
-                    if (allLevels.get(currentLevel).hero.getX() > 1)
-                        allLevels.get(currentLevel).hero.setX(allLevels.get(currentLevel).hero.getX() - 1);
+                    if (Hero.getHero().getX() > 1)
+                        Hero.getHero().setX(Hero.getHero().getX() - 1);
                 }
                 case RIGHT -> {
-                    if (allLevels.get(currentLevel).hero.getX() < Globals.width - 3)
-                        allLevels.get(currentLevel).hero.setX(allLevels.get(currentLevel).hero.getX() + 1);
+                    if (Hero.getHero().getX() < Globals.width - 3)
+                        Hero.getHero().setX(Hero.getHero().getX() + 1);
                 }
-                case SHOOT -> allLevels.get(currentLevel).hero.shoot();
+                case SHOOT -> Hero.getHero().shoot();
                 case PAUSE -> gamePaused = true;
                 case UPGRADE -> openUpgrades = true;
             }

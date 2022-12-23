@@ -1,6 +1,6 @@
 package L7.Gr06.Elements.Enemies;
 
-import L7.Gr06.Elements.Bullet;
+import L7.Gr06.Elements.Shots.Bullet;
 import L7.Gr06.Elements.Instance;
 import L7.Gr06.Elements.Position;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -36,7 +36,7 @@ public abstract class Enemy extends Instance {
     public List<Bullet> getShots(){ return shots;}
     public void addShot(Bullet newShot){ shots.add(newShot);}
 
-    public void removeAllshots() {shots.clear();}
+    public void removeAllShots() {shots.clear();}
 
     @Override
     public void draw(TextGraphics s){

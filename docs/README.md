@@ -9,7 +9,7 @@ This project was developed by *Mikhail Ermolaev* and *David Burchakov* for LDTS 
 
 ### IMPLEMENTED FEATURES
 
-All implemented classes and their relations are shown on the diagram:
+All implemented classes and their relations are shown on the diagram:\
 ![UML diagram](/docs/images/SpaceInvadersClassDiagram.jpg "UML diagram")
 
 - **Moving** - The player can move the game character (hereinafter referred to as GC) 
@@ -20,16 +20,10 @@ left and right by pressing *A* and *D* buttons.
 - **Destroying walls** - When the bullet hits wall, bullet disappears
 and wall loses its strength. After losing all the strength wall 
 also disappears.
+- **Upgrade spaceship** - During the game, player can go to the upgrade menu (using TAB) and spend points
+to upgrade the GC.\
 ![implemented features in mid delivery](/docs/images/midDeliveryImplemented.png "implemented features in mid delivery")
-### PLANNED FEATURES
 
-- **Point Counter** - By killing invaders, player should gain points
-that will show progress in the game.
-- **Bear arms** - Not only GC should have the right to have gun.
-Enemy should also be able to shoot.
-- **Sometimes you lose** - If enemy reaches GC or shoots him
-the Game Over screen should appear.
-![planed features in mid delivery](/docs/images/midDeliveryPlaned.png "planed features in mid delivery")
 ------
 
 ### DESIGN

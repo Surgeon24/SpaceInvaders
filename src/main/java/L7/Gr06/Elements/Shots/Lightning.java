@@ -1,6 +1,7 @@
-package L7.Gr06.Elements;
+package L7.Gr06.Elements.Shots;
 
 import L7.Gr06.Common.Globals;
+import L7.Gr06.Elements.Position;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
@@ -19,7 +20,6 @@ public class Lightning extends Bullet {
     @Override
     public void draw(TextGraphics s){
         s.setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));
-        //s.setForegroundColor(TextColor.Factory.fromString(Globals.textColor));
         s.enableModifiers(SGR.BOLD);
         for (int i= startOfTheLighting; i < Globals.height; i++){
             if (i % 2 == 0)

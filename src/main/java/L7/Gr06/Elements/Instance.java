@@ -2,18 +2,12 @@ package L7.Gr06.Elements;
 
 import com.googlecode.lanterna.graphics.TextGraphics;
 
-/*
-    Generic instance
- */
 public abstract class Instance {
     private Position position;
-    private String color;
 
-    //constructor
     protected Instance(Position pos) {
         position = pos;
     }
-    //getters and setters
     public Position getPosition(){
         return position;
     }

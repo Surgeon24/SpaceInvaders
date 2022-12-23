@@ -22,7 +22,7 @@ public class Prolog {
             musicPlayer.prologMusic();
             for (; firstRow > 19; firstRow--) {
                 screen.clear();
-                draw1(screen.newTextGraphics());
+                drawBefore(screen.newTextGraphics());
                 screen.refresh();
                 Thread.sleep(1000);
                 if (screen.pollInput() != null) {
@@ -38,7 +38,7 @@ public class Prolog {
             soundPlayer.playStop();
             Thread.sleep(2000);
             screen.clear();
-            draw2(screen.newTextGraphics());
+            drawAfter(screen.newTextGraphics());
             screen.refresh();
             Thread.sleep(3000);
         } catch(InterruptedException | IOException e){
@@ -46,7 +46,7 @@ public class Prolog {
         }
     }
 
-    public void draw1(TextGraphics graphics){
+    public void drawBefore(TextGraphics graphics){
         graphics.setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(Globals.width, Globals.height), ' ');
         graphics.enableModifiers(SGR.BOLD);
@@ -58,7 +58,7 @@ public class Prolog {
         graphics.putString(new TerminalPosition(Globals.width/2-20, firstRow+16), "LEAVING  NO CHANCE  FOR  THE  ORDINARY...");
     }
 
-    public void draw2(TextGraphics graphics){
+    public void drawAfter(TextGraphics graphics){
         graphics.setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(Globals.width, Globals.height), ' ');
         graphics.enableModifiers(SGR.BOLD);

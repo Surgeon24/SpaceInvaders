@@ -9,12 +9,6 @@ import java.util.Objects;
 
 public class MusicPlayer {
     private Clip backgroundMusic;
-    private String file;
-/*
-    public MusicPlayer(String fileName) {
-        this.file = fileName;
-        this.backgroundMusic = loadMusic(fileName, );
-    }*/
 
     private Clip loadMusic(String fileName, float vol) throws NullPointerException{
         try {
@@ -34,7 +28,7 @@ public class MusicPlayer {
     }
 
     public void setMusic(String fileName, float vol) {
-        this.backgroundMusic = loadMusic(fileName, -5);
+        this.backgroundMusic = loadMusic(fileName, vol);
     }
 
     public void startInGameMusic() {

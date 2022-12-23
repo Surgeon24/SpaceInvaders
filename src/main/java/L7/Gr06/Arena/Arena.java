@@ -1,6 +1,6 @@
 package L7.Gr06.Arena;
 
-import L7.Gr06.Elements.Bullet;
+import L7.Gr06.Elements.Shots.Bullet;
 import L7.Gr06.Elements.Enemies.Enemy;
 import L7.Gr06.Elements.Hero;
 import L7.Gr06.Elements.Position;
@@ -19,13 +19,17 @@ import java.util.Random;
 import static java.util.Collections.emptyList;
 
 public abstract class Arena {
+    protected long moveEnemyTimer;
+    protected long moveEnemySpeed = 700;
     Random rand = new Random();
-    public Hero hero = new Hero(new Position(Globals.width/2, Globals.height-2));
+    Hero hero = Hero.getHero();
     public List<Enemy> enemies = new ArrayList<>();
     public List<Wall> walls = new ArrayList<>();
 
     public Arena(){}
 
+    protected List<Enemy> createEnemies(){return new ArrayList<>();}
+    protected List<Wall> createWalls(){return new ArrayList<>();}
     public void changePositions(){
         for (Enemy enemy : enemies) {
             int randomNum = rand.nextInt(100);

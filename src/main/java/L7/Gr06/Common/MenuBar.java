@@ -1,6 +1,5 @@
-package L7.Gr06.Elements;
+package L7.Gr06.Common;
 
-import L7.Gr06.Common.Globals;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;

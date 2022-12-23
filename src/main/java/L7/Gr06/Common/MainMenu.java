@@ -35,7 +35,7 @@ public class MainMenu {
                 screen.clear();
                 draw(screen.newTextGraphics(), status);
                 screen.refresh();
-                // while loop delete all keys, that was pressed at the current level
+                // while loop delete all keys, that were pressed at the current level
                 while (screen.pollInput() != null)
                     screen.pollInput();
                 KeyStroke key = screen.readInput();

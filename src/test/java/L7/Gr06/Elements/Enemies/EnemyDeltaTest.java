@@ -1,12 +1,11 @@
 package L7.Gr06.Elements.Enemies;
 
 import L7.Gr06.Common.Globals;
-import L7.Gr06.Elements.Bullet;
+import L7.Gr06.Elements.Shots.Bullet;
 import L7.Gr06.Elements.Position;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

@@ -1,8 +1,8 @@
 package L7.Gr06.Elements.Enemies;
 
 import L7.Gr06.Common.Globals;
-import L7.Gr06.Elements.Bullet;
-import L7.Gr06.Elements.Lightning;
+import L7.Gr06.Elements.Shots.Bullet;
+import L7.Gr06.Elements.Shots.Lightning;
 import L7.Gr06.Elements.Position;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;

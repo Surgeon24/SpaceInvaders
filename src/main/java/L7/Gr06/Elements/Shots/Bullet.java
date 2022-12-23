@@ -1,12 +1,12 @@
-package L7.Gr06.Elements;
+package L7.Gr06.Elements.Shots;
 
 import L7.Gr06.Common.Globals;
+import L7.Gr06.Elements.Instance;
+import L7.Gr06.Elements.Position;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
-
-import java.util.Objects;
 
 public class Bullet extends Instance {
     int direction;

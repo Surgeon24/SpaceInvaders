@@ -2,7 +2,7 @@ package L7.Gr06.Elements.Enemies;
 
 import L7.Gr06.Audio.SoundPlayer;
 import L7.Gr06.Common.Globals;
-import L7.Gr06.Elements.Lightning;
+import L7.Gr06.Elements.Shots.Lightning;
 import L7.Gr06.Elements.Position;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
@@ -16,7 +16,6 @@ public class EnemyTeta extends Enemy {
     Integer value = 100;
     Boolean ready = true;
     Lightning lightning;
-    Position lightPos;
     Integer counter = 0;
     Random rand = new Random();
 
@@ -54,7 +53,7 @@ public class EnemyTeta extends Enemy {
             counter = 5;
             lightning = null;
             ready = true;
-            removeAllshots();
+            removeAllShots();
         }
     }
 
