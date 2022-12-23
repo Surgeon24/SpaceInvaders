@@ -30,6 +30,7 @@ also disappears.
 - **Upgrade spaceship** - During the game, player can go to the upgrade menu (using TAB) and spend points
 to upgrade the GC.
 - **Sound** - Background music and in-game sounds are implemented.
+- **Pause** - Player can pause and resume the game. 
 
 ![screenshot1](/docs/images/screenshot1.png "main menu")
 ![screenshot2](/docs/images/screenshot2.png "gameplay")
