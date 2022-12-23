@@ -2,27 +2,24 @@ plugins {
     id 'java'
     id 'info.solidsoft.pitest' version '1.6.0'
 }
-
 pitest {
     targetClasses = ['src.main.java.*']
     junit5PluginVersion = '0.12'
 }
-
 group 'L7.Gr06'
 version '1.0-SNAPSHOT'
-
 repositories {
     mavenCentral()
 }
-
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testImplementation 'net.jqwik:jqwik:1.7.1'
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '2.1.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-    implementation group: 'com.googlecode.lanterna', name: 'lanterna', version: '3.1.1'
     implementation 'org.javatuples:javatuples:1.2'
-}
+    implementation group: 'com.googlecode.lanterna', name: 'lanterna', version: '3.1.1'
 
+}
 test {
     useJUnitPlatform {
         includeEngines ('junit-jupiter', 'jqwik')

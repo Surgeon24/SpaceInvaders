@@ -25,7 +25,6 @@ public class Wall extends Instance{
 @Override
     public void draw(TextGraphics s){
         s.setBackgroundColor(TextColor.Factory.fromString(color));
-        s.enableModifiers(SGR.BOLD);
         s.putString(new TerminalPosition(getX(), getY()), "     ");
     }
 }
