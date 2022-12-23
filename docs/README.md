@@ -89,11 +89,10 @@ code after:
 
 ### TESTING
 
-Testing with coverage shows us weak results, mostly because
+Testing with coverage shows us solid results, but not perfect. Mostly because
 there are many primitive getters and setters that weren't tested,
-also as constructors.\
-(more tests will be implemented in future updates, 
-also TDD methodology will be represented)
+as well as constructors, music libraries that are difficult to test.\
+
 ![Test coverage](/docs/images/testResults.png "Test with coverage")
 
 
