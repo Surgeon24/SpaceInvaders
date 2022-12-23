@@ -12,13 +12,11 @@ import java.util.Random;
 
 
 public class EnemyTeta extends Enemy {
-    SoundPlayer soundPlayer = new SoundPlayer();
-    Integer value = 100;
-    Boolean ready = true;
-    Lightning lightning;
-    Position lightPos;
-    Integer counter = 0;
-    Random rand = new Random();
+    public SoundPlayer soundPlayer = new SoundPlayer();
+    public Integer value = 100;
+    public Boolean ready = true;
+    public Lightning lightning;
+    public Integer counter = 0;
 
     public EnemyTeta(Position pos, int vector) {
         super(pos, vector);

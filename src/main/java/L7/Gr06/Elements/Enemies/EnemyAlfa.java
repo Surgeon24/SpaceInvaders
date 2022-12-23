@@ -11,11 +11,11 @@ public class EnemyAlfa extends Enemy {
         super(pos, vector);
     }
 
-@Override
-    public void draw(TextGraphics s){
+    @Override
+    public void draw(TextGraphics s) {
         s.setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));
         s.setForegroundColor(TextColor.Factory.fromString(Globals.textColor));
         s.putString(new TerminalPosition(getX(), getY()), "ab");
-        s.putString(new TerminalPosition(getX(), getY()+1), "cd");
+        s.putString(new TerminalPosition(getX(), getY() + 1), "cd");
     }
 }

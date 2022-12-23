@@ -12,10 +12,9 @@ import java.util.Random;
 
 
 public class EnemyBeta extends Enemy {
-    SoundPlayer soundPlayer = new SoundPlayer();
-    Integer value = 20;
-    Integer health = 2;
-    Random rand = new Random();
+    public SoundPlayer soundPlayer = new SoundPlayer();
+    public Integer value = 20;
+    public Integer health = 2;
 
     public EnemyBeta(Position pos, int vector) {
         super(pos, vector);

@@ -19,18 +19,19 @@ import java.util.Random;
 import static java.util.Collections.emptyList;
 
 public abstract class Arena {
-    Random rand = new Random();
-    public Hero hero = new Hero(new Position(Globals.width/2, Globals.height-2));
+    public Random rand = new Random();
+    public Hero hero = new Hero(new Position(Globals.width / 2, Globals.height - 2));
     public List<Enemy> enemies = new ArrayList<>();
     public List<Wall> walls = new ArrayList<>();
 
-    public Arena(){}
+    public Arena() {
+    }
 
-    public void changePositions(){
+    public void changePositions() {
         for (Enemy enemy : enemies) {
             int randomNum = rand.nextInt(100);
-            if ((enemy.getVector() == 1 && enemy.getX() >= Globals.width-4)
-                || (enemy.getVector() == -1 && enemy.getX() <= 2)) {
+            if ((enemy.getVector() == 1 && enemy.getX() >= Globals.width - 4)
+                    || (enemy.getVector() == -1 && enemy.getX() <= 2)) {
                 enemy.setY(enemy.getY() + 3);
                 enemy.setVector(enemy.getVector() * (-1));
             } else {
@@ -39,7 +40,8 @@ public abstract class Arena {
             enemy.shoot(randomNum);
         }
     }
-    public void checkCollisions(){
+
+    public void checkCollisions() {
         List<Enemy> deadEnemies = new ArrayList<>();
         List<Bullet> goodPlayerShots = new ArrayList<>();
         List<Bullet> goodEnemyShots = new ArrayList<>();
@@ -54,20 +56,19 @@ public abstract class Arena {
             walls.remove(wall);
     }
 
-    private void heroShotsCollision(List<Enemy> deadEnemies, List<Bullet> goodPlayerShots, List<Wall> brokenWalls){
-        for (Bullet shot : hero.getShots()){
-            for (Enemy enemy: enemies){
-                if (enemy.collide(shot.getPosition())){
+    private void heroShotsCollision(List<Enemy> deadEnemies, List<Bullet> goodPlayerShots, List<Wall> brokenWalls) {
+        for (Bullet shot : hero.getShots()) {
+            for (Enemy enemy : enemies) {
+                if (enemy.collide(shot.getPosition())) {
                     if (enemy.getHealth() <= hero.getGunPower()) {
                         deadEnemies.add(enemy);
                         Globals.score += enemy.getValue();
-                    }
-                    else enemy.setHealth(enemy.getHealth() - hero.getGunPower());
+                    } else enemy.setHealth(enemy.getHealth() - hero.getGunPower());
                     goodPlayerShots.add(shot);
                 }
             }
-            for (Wall wall : walls){
-                if (wall.collide(shot.getPosition())){
+            for (Wall wall : walls) {
+                if (wall.collide(shot.getPosition())) {
                     if (wall.getStrength() == 0)
                         brokenWalls.add(wall);
                     goodPlayerShots.add(shot);
@@ -78,41 +79,44 @@ public abstract class Arena {
         }
     }
 
-    private void enemyShotsCollision(List<Bullet> goodEnemyShots, List<Wall> brokenWalls){
-        for(Enemy enemy : enemies){
-            for (Bullet shot : enemy.getShots()){
-                if (hero.collide(shot.getPosition())){
+    private void enemyShotsCollision(List<Bullet> goodEnemyShots, List<Wall> brokenWalls) {
+        for (Enemy enemy : enemies) {
+            for (Bullet shot : enemy.getShots()) {
+                if (hero.collide(shot.getPosition())) {
                     hero.changeLives(-1);
                     goodEnemyShots.add(shot);
                 }
-                for (Wall wall : walls){
-                    if (wall.collide(shot.getPosition())){
+                for (Wall wall : walls) {
+                    if (wall.collide(shot.getPosition())) {
                         goodEnemyShots.add(shot);
                         if (wall.getStrength() == 0)
                             brokenWalls.add(wall);
                     }
                 }
-                if (shot.getY() > Globals.height+10)
+                if (shot.getY() > Globals.height + 10)
                     goodEnemyShots.add(shot);
             }
-            for (Bullet shot : goodEnemyShots){
+            for (Bullet shot : goodEnemyShots) {
                 enemy.getShots().remove(shot);
             }
             goodEnemyShots.clear();
         }
     }
-    public boolean enemiesReachedFinish(){
+
+    public boolean enemiesReachedFinish() {
         for (Enemy enemy : enemies) {
-            if (enemy.getY() > Globals.height-8){
+            if (enemy.getY() > Globals.height - 8) {
                 return true;
             }
         }
         return false;
     }
-    public boolean nextLevel(){
+
+    public boolean nextLevel() {
         return enemies.equals(emptyList());
     }
-    public void draw(TextGraphics graphics){
+
+    public void draw(TextGraphics graphics) {
         graphics.setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(Globals.width, Globals.height), ' ');
         graphics.enableModifiers(SGR.BOLD);
