@@ -84,7 +84,7 @@ also allowing testing our program without forcing to implement those methods.
 **Problem in Context**
 
 As we added upgrades of the GC, it became necessary to use the same object in every 
-level and not create new one every time. Since we needed one and only one object of the Hero class, 
+level and not create new one every time. Since we need one and only one object of the Hero class, 
 we decided to use Singleton pattern.
 
 **The Pattern**
@@ -118,6 +118,16 @@ code before:
 code after:
 ![codeSmell1b](/docs/images/codeSmell1b.png "1st code smell (after)")
 
+2nd code smell:
+
+After we added the ability to win and lose the game, as well as pause the game at 
+any time, the main method of the game became excessively large. 
+Separating it into several smaller methods made the code more readable.\
+structure before:
+![codeSmell2a](/docs/images/codeSmell2a.png "2nd code smell (before)")
+
+structure after:
+![codeSmell2b](/docs/images/codeSmell2b.png "2nd code smell (after)")
 
 ### TESTING
 
