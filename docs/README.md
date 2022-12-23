@@ -24,7 +24,6 @@ that will show progress in the game.
 the Game Over screen appears.
 - **Levels difficulty** - Next level is more difficult than the previous, and the difficulty is balanced. The game is not too easy and not too hard to play.
 - **Complex enemies** - different types of enemies are introduced.
-- **Upgrades** - The GC can upgrade his gun to shoot faster or increase damage. Upgrades cost score.
 - **Destroying walls** - When the bullet hits wall, bullet disappears
 and wall loses its strength. After losing all the strength wall 
 also disappears.
