@@ -95,7 +95,7 @@ there are many primitive getters and setters that weren't tested,
 also as constructors.\
 (more tests will be implemented in future updates, 
 also TDD methodology will be represented)
-![Test coverage](/docs/images/coverage.png "Test with coverage")
+![Test coverage](/docs/images/testResults.png "Test with coverage")
 
 
 
