@@ -10,7 +10,7 @@ This project was developed by *Mikhail Ermolaev* and *David Burchakov* for LDTS 
 ### IMPLEMENTED FEATURES
 
 All implemented classes and their relations are shown on the diagram:
-![UML diagram](/docs/images/SpaceInvadersClassDiagram.jpg "UML diagram")
+![UML diagram](/docs/images/SpaceInvadersDiagram.jpeg "UML diagram")
 
 - **Moving** - The player can move the game character (hereinafter referred to as GC) 
 left and right by pressing *A* and *D* buttons.
