@@ -3,31 +3,38 @@ package L7.Gr06.Elements.Enemies;
 import L7.Gr06.Common.Globals;
 import L7.Gr06.Elements.Bullet;
 import L7.Gr06.Elements.Position;
+import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.graphics.TextGraphics;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class EnemyDeltaTest {
-    public static Position pos;
-    public static Position pos2;
-    public static EnemyDelta enemyDelta;
-    public static EnemyDelta enemyDeltaWrong;
+    private Position pos;
+    private Position pos2;
+    private EnemyDelta enemyDelta;
+    private EnemyDelta enemyDeltaWrong;
+    private TextGraphics tg;
 
-    @BeforeAll
-    public static void setUp() {
+    @BeforeEach
+    public void setUp() {
         pos = new Position(Globals.width / 2, -3);
         enemyDelta = new EnemyDelta(pos, 1);
         pos2 = new Position(30, -2);
         enemyDeltaWrong = new EnemyDelta(new Position(40, 40), 1);
+        tg = Mockito.mock(TextGraphics.class);
     }
 
     @Test
     public void shootTest() {
 
-        Bullet expectedShot = new Bullet(pos2, 1); // stub
+        Bullet expectedShot = new Bullet(pos2, 1);
 
         int shoot = 100;    // set probability to shoot
         enemyDelta.shoot(shoot);
@@ -39,11 +46,19 @@ public class EnemyDeltaTest {
 
     @Test
     public void collideTest() {
-        assert (pos.getX() <= enemyDelta.getX() && pos.getX() + 2 >= enemyDelta.getX()) &&
-                (pos.getY() <= enemyDelta.getY() && pos.getY() + 2 >= enemyDelta.getY());
+        assertTrue(enemyDelta.collide(pos));
+        assertTrue(enemyDelta.collide(pos2));
+        assertFalse(enemyDelta.collide(new Position(0,0)));
+    }
+    @Test
+    public void drawTest(){
 
-        assert !((pos.getX() <= enemyDeltaWrong.getX() && pos.getX() + 2 >= enemyDeltaWrong.getX()) &&
-                (pos.getY() <= enemyDeltaWrong.getY() && pos.getY() + 2 >= enemyDeltaWrong.getY()));
+        enemyDelta.draw(tg);
+        Mockito.verify(tg, Mockito.times(1)).setBackgroundColor(TextColor.Factory.fromString(Globals.bgColor));
+        enemyDelta.setHealth(1);
+        Mockito.verify(tg, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString("#db7e46"));
+        Mockito.verify(tg, Mockito.times(1)).putString(new TerminalPosition(enemyDelta.getX(),enemyDelta.getY()), "vwx");
+        Mockito.verify(tg, Mockito.times(1)).putString(new TerminalPosition(enemyDelta.getX(), enemyDelta.getY() +1), "yz{");
+        Mockito.verify(tg, Mockito.times(1)).putString(new TerminalPosition(enemyDelta.getX(), enemyDelta.getY() +2), "|}~");
     }
 }
-

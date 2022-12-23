@@ -22,7 +22,7 @@ public class Wall extends Instance{
         }
         return false;
     }
-@Override
+    @Override
     public void draw(TextGraphics s){
         s.setBackgroundColor(TextColor.Factory.fromString(color));
         s.enableModifiers(SGR.BOLD);

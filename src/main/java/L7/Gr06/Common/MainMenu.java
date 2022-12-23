@@ -14,9 +14,6 @@ import java.io.IOException;
 import java.util.Random;
 
 public class MainMenu {
-
-
-
     private Boolean buttonPressed = false;
     private int options = 0;
     String selectedColor = "#ede9dd";
