@@ -31,6 +31,7 @@ also disappears.
 to upgrade the GC.
 - **Sound** - Background music and in-game sounds are implemented.
 - **Pause** - Player can pause and resume the game. 
+- **Hints** - During pause the Player is given hints. There are shown in the hint bar.
 
 ![screenshot1](/docs/images/screenshot1.png "main menu")
 ![screenshot2](/docs/images/screenshot2.png "gameplay")
