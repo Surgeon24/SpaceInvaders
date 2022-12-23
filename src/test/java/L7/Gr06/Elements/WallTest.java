@@ -32,7 +32,6 @@ public class WallTest {
         Wall wall = new Wall(new Position(5, Globals.height - 8));
         wall.draw(tg);
         Mockito.verify(tg, Mockito.times(1)).setBackgroundColor(TextColor.Factory.fromString("#8c92ac"));
-        Mockito.verify(tg, Mockito.times(1)).enableModifiers(SGR.BOLD);
         Mockito.verify(tg, Mockito.times(1)).putString(new TerminalPosition(5, 32), "     ");
     }
 }
