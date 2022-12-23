@@ -64,7 +64,9 @@ These classes can be found in the following files:
 
 Another using of this pattern is between  Arena (Prototype) and Levels (objects)\
 These classes can be found in the following files:
-
+- [Arena](https://github.com/FEUP-LDTS-2022/project-l07gr06/blob/master/src/main/java/L7/Gr06/Arena/Arena.java)
+- [Level1](https://github.com/FEUP-LDTS-2022/project-l07gr06/blob/master/src/main/java/L7/Gr06/Arena/Level1.java)
+- [Level2](https://github.com/FEUP-LDTS-2022/project-l07gr06/blob/master/src/main/java/L7/Gr06/Arena/Level2.java)
 
 **Consequences**
 
@@ -74,7 +76,33 @@ The use of the Prototype Pattern in the current design allows the following bene
 - We make program more stable, by overriding prototype's methods,  
 also allowing testing our program without forcing to implement those methods.
 
-#### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
+#### Using one GC in the hole game
+
+**Problem in Context**
+
+As we added upgrades of the GC, it became necessary to use the same object in every 
+level and not create new one every time. Since we needed one and only one object of the Hero class, 
+we decided to use Singleton pattern.
+
+**The Pattern**
+
+We have applied the Singleton pattern, which is used when we need to make sure, 
+that we have only one object of the class.
+
+**Implementation**
+
+UML, that was represented above shows dependency (one to many) between Hero and Arena\
+These classes can be found in the following files:
+- [Arena](https://github.com/FEUP-LDTS-2022/project-l07gr06/blob/master/src/main/java/L7/Gr06/Arena/Arena.java)
+- [Hero](https://github.com/FEUP-LDTS-2022/project-l07gr06/blob/master/src/main/java/L7/Gr06/Elements/Hero.java)
+
+**Consequences**
+
+The use of the Singleton Pattern in the current design allows the following benefits:
+- Guarantee, that there is only one object of the Class.
+- Much easier addressing to the hero, since we don't have to give it as a variable in every method.
+
+### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
 1st code smell:
 
