@@ -91,7 +91,7 @@ code after:
 
 Testing with coverage shows us solid results, but not perfect. Mostly because
 there are many primitive getters and setters that weren't tested,
-as well as constructors, music libraries that are difficult to test.\
+as well as constructors, music libraries that are difficult to test.
 
 ![Test coverage](/docs/images/testResults.png "Test with coverage")
 
