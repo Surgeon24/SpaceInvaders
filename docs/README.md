@@ -29,6 +29,7 @@ and wall loses its strength. After losing all the strength wall
 also disappears.
 - **Upgrade spaceship** - During the game, player can go to the upgrade menu (using TAB) and spend points
 to upgrade the GC.
+- **Sound** - Background music and in-game sounds are implemented.
 
 ![screenshot1](/docs/images/screenshot1.png "main menu")
 ![screenshot2](/docs/images/screenshot2.png "gameplay")
