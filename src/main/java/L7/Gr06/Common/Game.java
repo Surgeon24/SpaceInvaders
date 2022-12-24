@@ -25,7 +25,7 @@ public class Game {
     List<Arena> allLevels = new ArrayList<>();
     Prolog prolog = new Prolog();
     MenuBar menuBar = new MenuBar();
-    int currentLevel = 0;
+    int currentLevel = 5;
     int lastLevel = 5;
     int FPS = 20;
     int frameTime = 1000 / FPS;
@@ -112,9 +112,11 @@ public class Game {
         if (allLevels.get(currentLevel).enemiesReachedFinish()
                 || Hero.getHero().getLives() < 1){
             try {
+                System.out.println("test!");
                 showGameOverScreen();
                 Globals.maxLives = Globals.startLives;
                 allLevels.clear();
+                Hero.resetHero();
                 upgradesMenu.resetAll();
                 createListOfAllLevels();
                 musicPlayer.startInGameMusic();
@@ -128,6 +130,7 @@ public class Game {
                     showWinScreen();
                     Globals.maxLives = Globals.startLives;
                     allLevels.clear();
+                    Hero.resetHero();
                     upgradesMenu.resetAll();
                     createListOfAllLevels();
                     musicPlayer.startInGameMusic();

@@ -27,6 +27,10 @@ public class Hero extends Instance {
         }
         return hero;
     }
+    public static Hero resetHero(){
+        hero = new Hero(new Position(Globals.width/2, Globals.height-2));
+        return hero;
+    }
 
     public List<Bullet> getShots(){
         return shots;
