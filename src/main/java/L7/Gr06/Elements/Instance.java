@@ -12,7 +12,6 @@ public abstract class Instance {
         return position;
     }
     public void setPosition(Position pos){ this.position = pos;}
-
     public int getX() {
         return position.getX();
     }
