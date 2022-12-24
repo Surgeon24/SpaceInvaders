@@ -25,7 +25,7 @@ public class Game {
     List<Arena> allLevels = new ArrayList<>();
     Prolog prolog = new Prolog();
     MenuBar menuBar = new MenuBar();
-    int currentLevel = 5;
+    int currentLevel = 0;
     int lastLevel = 5;
     int FPS = 20;
     int frameTime = 1000 / FPS;

@@ -141,6 +141,6 @@ Tests were implemented using Junit and Mockito framework.
 
 ### SELF-EVALUATION
 
-- Mikhail Ermolaev: still in progress%
-- David Burchakov:  still in progress%
+- Mikhail Ermolaev: 55%
+- David  Burchakov: 45%
 
