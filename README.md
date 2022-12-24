@@ -18,12 +18,35 @@ For a more detailed version of this description click [here](./docs/README.md).
 
 The following screenshots illustrate the general look of our game, as well as the divergent functionalities:
 
+### Game preview
+
+![gamePreview](/docs/gifs/lvl3.gif)
+    `Figure 1. level3 - gun upgrade`
+
 ### Main menu
 ![screenshot1](/docs/images/screenshot1.png "main menu")
+    `Figure 2. Main menu`
 
 ### One of the levels of the game
 ![screenshot2](/docs/images/screenshot2.png "gameplay")
-
+    `Figure 3. Gameplay`
 ### Upgrade menu
 ![screenshot3](/docs/images/screenshot3.png "upgrade menu")
+    `Figure 4. Upgrade shop menu`
+### Animations
+
+![level1](/docs/gifs/lvl1.gif)
+    `Figure 5. level1 gameplay` 
+    
+    
+![level4](/docs/gifs/lvl4.gif)
+    `Figure 6. level4 pause menu` 
+
+
+![level5](/docs/gifs/lvl5.gif)
+    `Figure 7. level5 gameplay` 
+
+
+![level6](/docs/gifs/lvl6.gif)
+    `Figure 8. level6 gameplay. final Boss. Game over`
 
