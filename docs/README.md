@@ -5,7 +5,7 @@ that make a reference to the game series of
 the same title, taking best moment from those games
 and adapting it to modern realities.
 
-This project was developed by *Mikhail Ermolaev* for LDTS 2022⁄2023 course.
+This project was developed by *Mikhail Ermolaev* and *David Burchakov* for LDTS 2022⁄2023 course.
 
 ### IMPLEMENTED FEATURES
 
