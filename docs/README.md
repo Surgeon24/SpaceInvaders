@@ -5,7 +5,7 @@ that make a reference to the game series of
 the same title, taking best moment from those games
 and adapting it to modern realities.
 
-This project was developed by *Mikhail Ermolaev* and *David Burchakov* for LDTS 2022⁄2023.
+This project was developed by *Mikhail Ermolaev* for LDTS 2022⁄2023 course.
 
 ### IMPLEMENTED FEATURES
 
@@ -137,10 +137,4 @@ as well as constructors, music libraries that are difficult to test.
 Tests were implemented using Junit and Mockito framework.
 ![Test coverage](/docs/images/testResults.png "Test with coverage")
 
-
-
-### SELF-EVALUATION
-
-- Mikhail Ermolaev: 55%
-- David  Burchakov: 45%
 
