@@ -1,4 +1,4 @@
-# LDTS L07 Gr06 - SPACE INVADERS
+# SPACE INVADERS
 
 ## Game Description
 
@@ -9,7 +9,7 @@ and adapting it to modern realities.\
 5 types of enemies, 6 different levels and plenty possible ways to upgrade you ship 
 will not leave you indifferent!
 
-This project was developed by *Mikhail Ermolaev* and *David Burchakov* for LDTS 2022⁄2023.
+This project was developed by *Mikhail Ermolaev* and *David Burchakov* for LDTS 2023.
 
 For a more detailed version of this description click [here](./docs/README.md).
 
